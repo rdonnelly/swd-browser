@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGray,
     alignItems: 'center',
     borderBottomColor: colors.lightGrayDark,
-    borderBottomWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: 'column',
     justifyContent: 'center',
   },

@@ -4,6 +4,7 @@ import { StatusBar, StyleSheet, View } from 'react-native';
 
 import CardListScreen from '../screens/CardListScreen';
 import CardDetailScreen from '../screens/CardDetailScreen';
+import { colors } from '../styles';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,6 +12,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   containerLeft: {
+    borderRightColor: colors.lightGrayDark,
+    borderRightWidth: StyleSheet.hairlineWidth,
     width: 320,
   },
   containerRight: {

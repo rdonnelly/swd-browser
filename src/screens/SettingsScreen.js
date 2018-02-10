@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   information: {
     borderColor: colors.lightGrayDark,
-    borderTopWidth: 1,
+    borderTopWidth: StyleSheet.hairlineWidth,
     marginBottom: 24,
     paddingTop: 24,
   },
