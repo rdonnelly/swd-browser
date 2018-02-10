@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -34,7 +35,6 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* SWDBrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SWDBrowserTests.m */; };
-		442A7EFE861D4176A4556BFB /* libRealmReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 544BA509791F478FB4E02468 /* libRealmReact.a */; };
 		49DB0B2B9EF84802801FEEAE /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B51A5D51DF374C5F86053B38 /* libc++.tbd */; };
 		525A1A6BC33C4FBE82EBB6FF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C07921A2E47F4047BF14D631 /* libz.tbd */; };
 		56CA912E85954A59BBA87F0C /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 821210B82F9C4192A3DCB96F /* SimpleLineIcons.ttf */; };
@@ -396,7 +396,6 @@
 		3393447A95F74283A886FBF2 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 		4482795C385A4AA2A933B1EE /* RealmReact.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RealmReact.xcodeproj; path = "../node_modules/realm/react-native/ios/RealmReact.xcodeproj"; sourceTree = "<group>"; };
 		4ACD19C921D5407F80B4D5E9 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		544BA509791F478FB4E02468 /* libRealmReact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRealmReact.a; sourceTree = "<group>"; };
 		5D088DA9EAA346679C674F98 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		61A265A688934B288B535058 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -446,7 +445,6 @@
 				C54585B6C6F7475DB8B65AF4 /* libRNDeviceInfo.a in Frameworks */,
 				F17B2FF1635047D395755D66 /* libSafariViewManager.a in Frameworks */,
 				EDFADE69FA754A32A2FE9836 /* libRNVectorIcons.a in Frameworks */,
-				442A7EFE861D4176A4556BFB /* libRealmReact.a in Frameworks */,
 				49DB0B2B9EF84802801FEEAE /* libc++.tbd in Frameworks */,
 				525A1A6BC33C4FBE82EBB6FF /* libz.tbd in Frameworks */,
 			);
@@ -686,7 +684,6 @@
 				3393447A95F74283A886FBF2 /* libRNDeviceInfo.a */,
 				E6A8DD31B34E40D58E61F2CE /* libSafariViewManager.a */,
 				E0561F49C4E6419AB3EFEC8B /* libRNVectorIcons.a */,
-				544BA509791F478FB4E02468 /* libRealmReact.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
