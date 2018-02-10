@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { FlatList, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native';
 
-import CardListItem from '../components/CardListItem';
+import CardListItem, { ITEM_HEIGHT } from '../components/CardListItem';
 import { colors } from '../styles';
 
 import { cardDatabase } from '../data';
@@ -128,6 +128,14 @@ class CardListScreen extends Component {
     }
   }
 
+  getItemLayout(data, index) {
+    return {
+      offset: ITEM_HEIGHT * index,
+      length: ITEM_HEIGHT,
+      index,
+    };
+  }
+
   renderListView() {
     const keyExtractor = item => item.id;
 
@@ -137,6 +145,7 @@ class CardListScreen extends Component {
         data={ this.state.cards }
         renderItem={ this.renderItem }
         keyExtractor={ keyExtractor }
+        getItemLayout={ this.getItemLayout }
         ListHeaderComponent={ this.renderHeader }
         ListFooterComponent={ this.renderFooter }
         ListEmptyComponent={ this.renderEmpty }

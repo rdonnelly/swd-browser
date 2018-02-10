@@ -5,6 +5,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import SWDIcon from './SWDIcon';
 import { colors } from '../styles';
 
+export const ITEM_HEIGHT = 56;
 
 const styles = StyleSheet.create({
   row: {
@@ -13,6 +14,7 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.lightGrayDark,
     borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: 'column',
+    height: ITEM_HEIGHT,
     justifyContent: 'center',
   },
   rowTappable: {
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
 
 class CardListItem extends Component {
   shouldComponentUpdate(nextProps) {
-    if (this.props.card.code === nextProps.card.code) {
+    if (this.props.card.id === nextProps.card.id) {
       return false;
     }
 
