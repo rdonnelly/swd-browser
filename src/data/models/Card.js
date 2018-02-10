@@ -36,7 +36,7 @@ class Card {
   }
 
   get subtype() {
-    return this.card.subtype_code;
+    return this.card.subtype_code || '';
   }
 
   get text() {

@@ -130,6 +130,11 @@ class SettingsScreen extends Component {
     // eslint-disable-next-line global-require
     const subtypeOptions = require('swdestinydb-json-data/subtypes.json');
 
+    subtypeOptions.push({
+      code: '',
+      name: 'No Subtype',
+    });
+
     const subtypeCloud = (
       <FilterCloud
         label={ 'Subtypes' }
