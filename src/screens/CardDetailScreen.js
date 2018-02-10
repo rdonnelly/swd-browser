@@ -20,6 +20,8 @@ class CardDetailScreen extends Component {
 
     this.state = this.initState(props);
 
+    console.log(this.state);
+
     const deviceWidth = Dimensions.get('window').width;
     this.state.viewWidth = deviceWidth;
 
@@ -68,7 +70,7 @@ class CardDetailScreen extends Component {
 
     const cardId = navigationCardId || selectedCardId;
 
-    const cardIndex = cardDatabase.findIndex(card => card.id === cardId);
+    const cardIndex = cardDatabase.findIndex(cardId);
     const minIndex = 0;
     const maxIndex = cardDatabase.count() - 1;
 

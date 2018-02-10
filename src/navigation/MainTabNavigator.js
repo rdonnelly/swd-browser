@@ -18,7 +18,7 @@ const MainTabNavigator = TabNavigator(
       navigationOptions: ({ navigation }) => ({
         title: 'Cards',
         tabBarLabel: 'Cards',
-        tabBarIcon: ({ tintColor }) => {
+        tabBarIcon: ({ tintColor }) => { // eslint-disable-line react/prop-types
           const majorVersion = parseInt(Platform.Version, 10);
           const isIos = Platform.OS === 'ios';
           const useHorizontalTabs = majorVersion >= 11 && isIos;
@@ -33,7 +33,7 @@ const MainTabNavigator = TabNavigator(
               color={ tintColor }
               style={{ marginTop: useHorizontalTabs && isLandscape ? 0 : 4 }}
             />
-          )
+          );
         },
         tabBarOnPress: ({ scene, jumpToIndex }) => {
           const { index, focused } = scene;
@@ -60,7 +60,7 @@ const MainTabNavigator = TabNavigator(
       navigationOptions: {
         title: 'Settings',
         tabBarLabel: 'Settings',
-        tabBarIcon: ({ tintColor }) => {
+        tabBarIcon: ({ tintColor }) => { // eslint-disable-line react/prop-types
           const majorVersion = parseInt(Platform.Version, 10);
           const isIos = Platform.OS === 'ios';
           const useHorizontalTabs = majorVersion >= 11 && isIos;
@@ -75,7 +75,7 @@ const MainTabNavigator = TabNavigator(
               color={ tintColor }
               style={{ marginTop: useHorizontalTabs && isLandscape ? 0 : 4 }}
             />
-          )
+          );
         },
       },
     },

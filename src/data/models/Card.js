@@ -1,43 +1,87 @@
 class Card {
-  get color() {
-    return this.faction.toLowerCase();
+  constructor(card) {
+    this.card = card;
   }
 
-  get hasDie() {
-    return this.has_die;
+  get id() {
+    return this.card.code;
+  }
+
+  get name() {
+    return this.card.name;
+  }
+
+  get title() {
+    return this.card.name;
+  }
+
+  get subtitle() {
+    return this.card.subtitle;
+  }
+
+  get set() {
+    return this.card.set_code;
+  }
+
+  get affiliation() {
+    return this.card.affiliation_code;
+  }
+
+  get faction() {
+    return this.card.faction_code;
+  }
+
+  get type() {
+    return this.card.type_code;
+  }
+
+  get subtype() {
+    return this.card.subtype_code;
+  }
+
+  get text() {
+    return this.card.text;
+  }
+
+  get health() {
+    return this.card.health;
+  }
+
+  get cost() {
+    return this.card.cost;
+  }
+
+  get points() {
+    return this.card.points;
+  }
+
+  get position() {
+    return this.card.position;
+  }
+
+  get rarity() {
+    return this.card.rarity_code;
   }
 
   get isUnique() {
-    return this.is_unique;
+    return this.card.is_unique;
+  }
+
+  get hasDie() {
+    return this.card.has_die;
+  }
+
+  get sides() {
+    return this.card.sides;
+  }
+
+  get hasErrata() {
+    return this.card.has_errata;
+  }
+
+  get reprintOf() {
+    return this.card.reprint_of;
   }
 }
-
-Card.schema = {
-  name: 'Card',
-  primaryKey: 'id',
-  properties: {
-    id: { type: 'string' },
-    name: { type: 'string' },
-    subtitle: { type: 'string', optional: true },
-    set: { type: 'string', indexed: true },
-
-    affiliation: { type: 'string', indexed: true },
-    faction: { type: 'string', indexed: true },
-    type: { type: 'string', indexed: true },
-    subtype: { type: 'string', indexed: true, optional: true },
-
-    text: { type: 'string' },
-
-    has_die: { type: 'bool' },
-    health: { type: 'int', optional: true },
-    is_unique: { type: 'bool' },
-    cost: { type: 'int', optional: true },
-    points: { type: 'string', optional: true },
-    position: { type: 'int' },
-    rarity: { type: 'string' },
-
-    sides: { type: 'string[]', optional: true },
-  },
-};
 
 export default Card;

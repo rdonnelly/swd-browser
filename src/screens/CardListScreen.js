@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { ScrollView, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native';
-import { ListView } from 'realm/react-native';
+import { FlatList, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import CardListItem from '../components/CardListItem';
 import { colors } from '../styles';
@@ -34,23 +33,21 @@ class CardListScreen extends Component {
   constructor(props) {
     super(props);
 
-    const dataSource = new ListView.DataSource({ rowHasChanged: (a, b) => a.id !== b.id });
-    const cards = cardDatabase.all();
-
     this.state = {
+      cards: cardDatabase.all(),
       showEmpty: false,
-      cardDataSource: dataSource.cloneWithRows(cards),
     };
 
     this.onPressItem = this.onPressItem.bind(this);
     this.handleBlurFromSearch = this.handleBlurFromSearch.bind(this);
     this.handleSubmitFromSearch = this.handleSubmitFromSearch.bind(this);
     this.handleChangeFromSearch = this.handleChangeFromSearch.bind(this);
-    this.renderRow = this.renderRow.bind(this);
+    this.renderItem = this.renderItem.bind(this);
+    this.renderSearch = this.renderSearch.bind(this);
 
     cardDatabase.addFilterListener((results) => {
       this.setState({
-        cardDataSource: dataSource.cloneWithRows(results),
+        cards: results,
         showEmpty: !results.length,
       });
     });
@@ -58,7 +55,7 @@ class CardListScreen extends Component {
 
   search(query) {
     if (query) {
-      cardDatabase.addFilter('search', 'name CONTAINS[c] $$', query);
+      cardDatabase.addFilter('search', card => card.name.search(new RegExp(query, 'i')) !== -1);
     } else {
       cardDatabase.removeFilter('search');
     }
@@ -118,16 +115,20 @@ class CardListScreen extends Component {
   }
 
   renderListView() {
+    const keyExtractor = item => item.id;
+
     return (
-      <ListView
+      <FlatList
         style={ styles.list }
-        dataSource={ this.state.cardDataSource }
-        renderRow={ this.renderRow }
+        data={ this.state.cards }
+        renderItem={ this.renderItem }
+        keyExtractor={ keyExtractor }
+        ListHeaderComponent={ this.renderSearch }
       />
     );
   }
 
-  renderRow(item) {
+  renderItem({ item }) {
     return (
       <CardListItem card={ item } onPressItem={ this.onPressItem } />
     );
@@ -143,19 +144,16 @@ class CardListScreen extends Component {
 
   render() {
     return (
-      <ScrollView
+      <View
         style={ styles.container }
-        onMomentumScrollBegin={ () => this.searchInput && this.searchInput.blur() }
-        scrollEventThrottle={ 0 }
       >
-        { this.renderSearch() }
         { this.state.showEmpty ?
           this.renderEmpty() :
           this.renderListView()
         }
 
         <StatusBar animated={ true } barStyle="light-content" />
-      </ScrollView>
+      </View>
     );
   }
 }

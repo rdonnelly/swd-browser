@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
 
 class CardListItem extends Component {
   shouldComponentUpdate(nextProps) {
-    if (this.props.card.id === nextProps.card.id) {
+    if (this.props.card.code === nextProps.card.code) {
       return false;
     }
 
@@ -65,7 +65,7 @@ class CardListItem extends Component {
     } = this.props;
 
     const iconGlyphStyles = [styles.cardIconGlyph];
-    iconGlyphStyles.push({ color: colors[card.color] });
+    iconGlyphStyles.push({ color: colors[card.faction] });
 
     return (
       <View style={ styles.row }>

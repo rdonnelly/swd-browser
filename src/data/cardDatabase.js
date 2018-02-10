@@ -1,74 +1,79 @@
-import Database from './Database';
+import _get from 'lodash/get';
+import _findIndex from 'lodash/findIndex';
 
 import Card from './models/Card';
 
+
 class CardDatabase {
   constructor() {
-    this.database = new Database(Card, 'Card');
+    this.cards = [];
+    this.results = [];
+
+    this.filters = {};
     this.filterListeners = [];
-
-    this.reset();
   }
 
-  addFilterListener(callback) {
-    this.filterListeners.push(callback);
+  init() {
+    this.cards = [].concat(
+      require('swdestinydb-json-data/set/AW.json'), // eslint-disable-line global-require
+      require('swdestinydb-json-data/set/SoR.json'), // eslint-disable-line global-require
+      require('swdestinydb-json-data/set/EaW.json'), // eslint-disable-line global-require
+      require('swdestinydb-json-data/set/TPG.json'), // eslint-disable-line global-require
+      require('swdestinydb-json-data/set/LEG.json'), // eslint-disable-line global-require
+      require('swdestinydb-json-data/set/RIV.json'), // eslint-disable-line global-require
+    ).map(card => new Card(card));
+
+    this.results = this.cards;
   }
 
-  get(index) {
-    return this.results[index] || null;
-  }
-
-  count() {
-    return this.results.length;
+  reset() {
+    this.init();
   }
 
   all() {
     return this.results;
   }
 
-  addFilter(key, query, args) {
-    this.filters = this.filters.filter(filter => filter.key !== key);
+  count() {
+    return this.results.length;
+  }
 
-    this.filters.push({
-      key,
-      query,
-      args,
-    });
+  get(index) {
+    return _get(this.results, index, null);
+  }
+
+  findIndex(id) {
+    return _findIndex(this.results, { id });
+  }
+
+  addFilterListener(callback) {
+    this.filterListeners.push(callback);
+  }
+
+  addFilter(key, predicate) {
+    this.filters[key] = predicate;
 
     return this.filter();
   }
 
   removeFilter(key) {
-    this.filters = this.filters.filter(filter => filter.key !== key);
-
+    delete this.filters[key];
     return this.filter();
   }
 
   filter() {
-    if (this.filters.length) {
-      this.results = this.database.query(this.filters);
-    } else {
-      this.reset();
-    }
+    this.results = this.cards.filter(card =>
+      Object.keys(this.filters).every((key) => {
+        if (this.filters[key](card)) {
+          return true;
+        }
+
+        return false;
+      }));
 
     this.filterListeners.forEach(callback => callback(this.results));
 
     return this.results;
-  }
-
-  reset() {
-    this.results = this.database.all();
-    this.filters = [];
-
-    return this.results;
-  }
-
-  findIndex(callback) {
-    return this.results.findIndex(callback);
-  }
-
-  create(properties, update = false) {
-    return this.database.create(properties, update);
   }
 }
 

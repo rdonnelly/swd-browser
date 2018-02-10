@@ -66,7 +66,8 @@ class SettingsScreen extends Component {
 
   addFilter(setting, value) {
     const key = `${setting}_${value}`;
-    cardDatabase.addFilter(key, `${setting} != $$`, value);
+    console.log(setting, value);
+    cardDatabase.addFilter(key, card => card[setting] !== value);
   }
 
   removeFilter(setting, value) {
@@ -107,7 +108,7 @@ class SettingsScreen extends Component {
     const setCloud = (
       <FilterCloud
         label={ 'Sets' }
-        setting={ 'set' }
+        setting={ 'set_code' }
         options={ setOptions }
         onCallback={ this.removeFilter }
         offCallback={ this.addFilter }

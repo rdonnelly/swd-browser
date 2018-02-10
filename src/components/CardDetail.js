@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.yellowDark,
   },
   cardTitleInner: {
+    paddingHorizontal: 8,
   },
   cardTitleIcon: {
     fontSize: 20,
@@ -296,7 +297,7 @@ class CardDetail extends Component {
           <Text style={ styles.cardDetailsTypeText }>
             &nbsp;&nbsp;&middot;&nbsp;&nbsp;
             <SWDIcon type={ cardSet } style={ styles.cardDetailsTypeTextIcon } />
-            { cardPosition }
+            &nbsp;{ cardPosition }
           </Text>) : null
         }
       </View>
