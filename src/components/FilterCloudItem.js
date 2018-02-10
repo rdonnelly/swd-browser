@@ -46,6 +46,12 @@ class FilterCloudItem extends PureComponent {
     this.onValueChange = this.onValueChange.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.state.value !== nextProps.value) {
+      this.setState({ value: nextProps.value });
+    }
+  }
+
   onValueChange() {
     this.setState({ value: !this.state.value });
     this.props.callback(this.props.setting, !this.state.value);
