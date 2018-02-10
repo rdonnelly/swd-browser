@@ -82,6 +82,22 @@ class Card {
   get reprintOf() {
     return this.card.reprint_of;
   }
+
+  get keywords() {
+    const keywords = [];
+
+    if (/Ambush\./.test(this.card.text)) {
+      keywords.push('ambush');
+    }
+    if (/Guardian\./.test(this.card.text)) {
+      keywords.push('guardian');
+    }
+    if (/Redeploy\./.test(this.card.text)) {
+      keywords.push('redeploy');
+    }
+
+    return keywords;
+  }
 }
 
 export default Card;

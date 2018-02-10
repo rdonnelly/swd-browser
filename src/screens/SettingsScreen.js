@@ -69,6 +69,17 @@ class SettingsScreen extends Component {
     cardDatabase.addFilter(key, card => !values.includes(card[setting]));
   }
 
+  updateFilterList(setting, values) {
+    const key = `filter_${setting}`;
+    cardDatabase.addFilter(key, (card) => {
+      if (card[setting].length === 0 && values.includes('none')) {
+        return false;
+      }
+
+      return values.every(value => !card[setting].includes(value));
+    });
+  }
+
   removeFilter(setting) {
     const key = `filter_${setting}`;
     cardDatabase.removeFilter(key);
@@ -145,6 +156,30 @@ class SettingsScreen extends Component {
       />
     );
 
+    const keywordOptions = [{
+      code: 'ambush',
+      name: 'Ambush',
+    }, {
+      code: 'guardian',
+      name: 'Guardian',
+    }, {
+      code: 'redeploy',
+      name: 'Redeploy',
+    }, {
+      code: 'none',
+      name: 'No Keywords',
+    }];
+
+    const keywordCloud = (
+      <FilterCloud
+        label={ 'Keywords' }
+        setting={ 'keywords' }
+        options={ keywordOptions }
+        onCallback={ this.updateFilterList }
+        offCallback={ this.removeFilter }
+      />
+    );
+
     return (
       <View style={ styles.container }>
         <ScrollView
@@ -156,6 +191,7 @@ class SettingsScreen extends Component {
           { setCloud }
           { typeCloud }
           { subtypeCloud }
+          { keywordCloud }
 
           <View style={ styles.information }>
             <Text style={ styles.disclaimerText }>
