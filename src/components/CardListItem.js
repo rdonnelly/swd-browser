@@ -7,12 +7,8 @@ import { colors } from '../styles';
 
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.white,
-    flex: 1,
-    alignItems: 'center',
-  },
   row: {
+    backgroundColor: colors.lightGray,
     alignItems: 'center',
     borderBottomColor: colors.lightGrayDark,
     borderBottomWidth: 1,

@@ -13,6 +13,31 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGray,
     flex: 1,
   },
+  empty: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 128,
+    paddingHorizontal: 8,
+    flex: 1,
+    height: '100%',
+  },
+  emptyHeader: {
+    color: colors.grayDark,
+    fontSize: 18,
+    fontWeight: '800',
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  emptyMessage: {
+    color: colors.grayDark,
+    fontSize: 14,
+    paddingHorizontal: 16,
+    textAlign: 'center',
+  },
+  list: {
+    backgroundColor: colors.lightGrayTranslucent,
+    flex: 1,
+  },
   search: {
     backgroundColor: colors.lightGrayDark,
     padding: 8,
@@ -24,8 +49,18 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 4,
   },
-  list: {
-    flex: 1,
+  footer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 8,
+    paddingTop: 16,
+  },
+  footerText: {
+    color: colors.gray,
+    fontSize: 14,
+    fontWeight: '800',
+    marginBottom: 16,
+    textAlign: 'center',
   },
 });
 
@@ -35,7 +70,6 @@ class CardListScreen extends Component {
 
     this.state = {
       cards: cardDatabase.all(),
-      showEmpty: false,
     };
 
     this.onPressItem = this.onPressItem.bind(this);
@@ -43,12 +77,12 @@ class CardListScreen extends Component {
     this.handleSubmitFromSearch = this.handleSubmitFromSearch.bind(this);
     this.handleChangeFromSearch = this.handleChangeFromSearch.bind(this);
     this.renderItem = this.renderItem.bind(this);
-    this.renderSearch = this.renderSearch.bind(this);
+    this.renderHeader = this.renderHeader.bind(this);
+    this.renderFooter = this.renderFooter.bind(this);
 
     cardDatabase.addFilterListener((results) => {
       this.setState({
         cards: results,
-        showEmpty: !results.length,
       });
     });
   }
@@ -94,7 +128,40 @@ class CardListScreen extends Component {
     }
   }
 
-  renderSearch() {
+  renderListView() {
+    const keyExtractor = item => item.id;
+
+    return (
+      <FlatList
+        style={ styles.list }
+        data={ this.state.cards }
+        renderItem={ this.renderItem }
+        keyExtractor={ keyExtractor }
+        ListHeaderComponent={ this.renderHeader }
+        ListFooterComponent={ this.renderFooter }
+        ListEmptyComponent={ this.renderEmpty }
+      />
+    );
+  }
+
+  renderItem({ item }) {
+    return (
+      <CardListItem card={ item } onPressItem={ this.onPressItem } />
+    );
+  }
+
+  renderEmpty() {
+    return (
+      <View style={ styles.empty }>
+        <Text style={ styles.emptyHeader }>No Cards Found</Text>
+        <Text style={ styles.emptyMessage }>
+          Try changing your search terms or adjusting your settings.
+        </Text>
+      </View>
+    );
+  }
+
+  renderHeader() {
     return (
       <View style={ styles.search }>
         <TextInput
@@ -114,30 +181,16 @@ class CardListScreen extends Component {
     );
   }
 
-  renderListView() {
-    const keyExtractor = item => item.id;
+  renderFooter() {
+    if (this.state.cards.length === 0) {
+      return null;
+    }
 
     return (
-      <FlatList
-        style={ styles.list }
-        data={ this.state.cards }
-        renderItem={ this.renderItem }
-        keyExtractor={ keyExtractor }
-        ListHeaderComponent={ this.renderSearch }
-      />
-    );
-  }
-
-  renderItem({ item }) {
-    return (
-      <CardListItem card={ item } onPressItem={ this.onPressItem } />
-    );
-  }
-
-  renderEmpty() {
-    return (
-      <View>
-        <Text>EMPTY</Text>
+      <View style={ styles.footer }>
+        <Text style={ styles.footerText }>
+          Showing { this.state.cards.length } Card{ this.state.cards.length === 1 ? '' : 's' }
+        </Text>
       </View>
     );
   }
@@ -147,10 +200,7 @@ class CardListScreen extends Component {
       <View
         style={ styles.container }
       >
-        { this.state.showEmpty ?
-          this.renderEmpty() :
-          this.renderListView()
-        }
+        { this.renderListView() }
 
         <StatusBar animated={ true } barStyle="light-content" />
       </View>

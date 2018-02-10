@@ -20,8 +20,6 @@ class CardDetailScreen extends Component {
 
     this.state = this.initState(props);
 
-    console.log(this.state);
-
     const deviceWidth = Dimensions.get('window').width;
     this.state.viewWidth = deviceWidth;
 

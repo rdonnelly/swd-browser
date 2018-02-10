@@ -70,7 +70,7 @@ class FilterCloud extends PureComponent {
     }
 
     timeoutId = setTimeout(() => {
-      if (values.length === this.props.options.length) {
+      if (values.length === 0) {
         this.props.offCallback(this.props.setting);
       } else {
         this.props.onCallback(this.props.setting, values);

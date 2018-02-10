@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   cardDetailsInfoStat: {
-    backgroundColor: 'rgba(189, 195, 199, 0.25)',
+    backgroundColor: colors.lightGrayTranslucent,
     borderRadius: 4,
     alignItems: 'center',
     flexDirection: 'row',
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
     height: DeviceInfo.isTablet() ? 64 : 48,
-    backgroundColor: 'rgba(189, 195, 199, 0.25)',
+    backgroundColor: colors.lightGrayTranslucent,
     padding: 8,
   },
   cardDetailsDiceSideTop: {
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     fontSize: DeviceInfo.isTablet() ? 16 : 14,
   },
   cardDetailsTextWrapper: {
-    backgroundColor: 'rgba(189, 195, 199, 0.25)',
+    backgroundColor: colors.lightGrayTranslucent,
     borderRadius: 4,
     marginBottom: 16,
     paddingHorizontal: 12,
