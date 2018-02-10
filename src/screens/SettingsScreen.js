@@ -53,7 +53,7 @@ class SettingsScreen extends Component {
       },
     );
 
-    this.addFilter = this.addFilter.bind(this);
+    this.updateFilter = this.updateFilter.bind(this);
     this.removeFilter = this.removeFilter.bind(this);
   }
 
@@ -64,14 +64,13 @@ class SettingsScreen extends Component {
     });
   }
 
-  addFilter(setting, value) {
-    const key = `${setting}_${value}`;
-    console.log(setting, value);
-    cardDatabase.addFilter(key, card => card[setting] !== value);
+  updateFilter(setting, values) {
+    const key = `filter_${setting}`;
+    cardDatabase.addFilter(key, card => !values.includes(card[setting]));
   }
 
-  removeFilter(setting, value) {
-    const key = `${setting}_${value}`;
+  removeFilter(setting) {
+    const key = `filter_${setting}`;
     cardDatabase.removeFilter(key);
   }
 
@@ -84,8 +83,8 @@ class SettingsScreen extends Component {
         label={ 'Affiliation' }
         setting={ 'affiliation' }
         options={ affiliationOptions }
-        onCallback={ this.removeFilter }
-        offCallback={ this.addFilter }
+        onCallback={ this.updateFilter }
+        offCallback={ this.removeFilter }
       />
     );
 
@@ -97,8 +96,8 @@ class SettingsScreen extends Component {
         label={ 'Faction' }
         setting={ 'faction' }
         options={ factionOptions }
-        onCallback={ this.removeFilter }
-        offCallback={ this.addFilter }
+        onCallback={ this.updateFilter }
+        offCallback={ this.removeFilter }
       />
     );
 
@@ -108,10 +107,10 @@ class SettingsScreen extends Component {
     const setCloud = (
       <FilterCloud
         label={ 'Sets' }
-        setting={ 'set_code' }
+        setting={ 'set' }
         options={ setOptions }
-        onCallback={ this.removeFilter }
-        offCallback={ this.addFilter }
+        onCallback={ this.updateFilter }
+        offCallback={ this.removeFilter }
       />
     );
 
@@ -123,8 +122,21 @@ class SettingsScreen extends Component {
         label={ 'Types' }
         setting={ 'type' }
         options={ typeOptions }
-        onCallback={ this.removeFilter }
-        offCallback={ this.addFilter }
+        onCallback={ this.updateFilter }
+        offCallback={ this.removeFilter }
+      />
+    );
+
+    // eslint-disable-next-line global-require
+    const subtypeOptions = require('swdestinydb-json-data/subtypes.json');
+
+    const subtypeCloud = (
+      <FilterCloud
+        label={ 'Subtypes' }
+        setting={ 'subtype' }
+        options={ subtypeOptions }
+        onCallback={ this.updateFilter }
+        offCallback={ this.removeFilter }
       />
     );
 
@@ -138,6 +150,7 @@ class SettingsScreen extends Component {
           { factionCloud }
           { setCloud }
           { typeCloud }
+          { subtypeCloud }
 
           <View style={ styles.information }>
             <Text style={ styles.disclaimerText }>

@@ -1,3 +1,5 @@
+import _uniq from 'lodash/uniq';
+import _without from 'lodash/without';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -41,34 +43,53 @@ class FilterCloud extends PureComponent {
 
     const values = [];
 
-    this.props.options.forEach(({ code }) => { values.push(code); });
-
     this.state = {
       values,
+      timeoutId: null,
     };
 
     this.onValueChange = this.onValueChange.bind(this);
   }
 
+  componentDidUpdate() {
+
+  }
+
   onValueChange(code, value) {
-    if (value) {
-      if (this.props.onCallback) {
-        setTimeout(() => {
-          this.props.onCallback(this.props.setting, code);
-        }, 0);
-      }
-    } else if (this.props.offCallback) {
-      setTimeout(() => {
-        this.props.offCallback(this.props.setting, code);
-      }, 0);
+    let { timeoutId, values } = this.state;
+
+    if (timeoutId) {
+      clearTimeout(this.state.timeoutId);
     }
+
+    if (value) {
+      values = _without(values, code);
+    } else {
+      values.push(code);
+      values = _uniq(values);
+    }
+
+    timeoutId = setTimeout(() => {
+      if (values.length === this.props.options.length) {
+        this.props.offCallback(this.props.setting);
+      } else {
+        this.props.onCallback(this.props.setting, values);
+      }
+
+      this.setState({ timeoutId: null });
+    }, 750);
+
+    this.setState({
+      timeoutId,
+      values,
+    });
   }
 
   render() {
     const optionItems = this.props.options.map(option => (
       <FilterCloudItem
         key={ `settingclouditem__${this.props.setting}__${option.code}` }
-        value={ this.state.values.includes(option.code) }
+        value={ !this.state.values.includes(option.code) }
         setting={ option.code }
         label={ option.name }
         callback={ this.onValueChange }
