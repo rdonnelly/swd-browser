@@ -314,31 +314,29 @@ class CardDetail extends Component {
 
     const costText = cardCost !== null ?
       <View style={ styles.cardDetailsInfoStat }>
-        <Text style={ styles.cardDetailsInfoStatTitle }>
-          Cost:&nbsp;
-        </Text>
         <Text style={ styles.cardDetailsInfoStatData }>
-          { cardCost }
+          { cardCost }&nbsp;
         </Text>
+        <SWDIcon type={ 'resource' } style={ styles.cardDetailsInfoStatTitle } />
       </View> : null;
 
     const pointsText = cardPoints !== null ?
       <View style={ styles.cardDetailsInfoStat }>
         <Text style={ styles.cardDetailsInfoStatData }>
-          { cardPoints }
+          { cardPoints }&nbsp;
         </Text>
         <Text style={ styles.cardDetailsInfoStatTitle }>
-          &nbsp;Points
+          Points
         </Text>
       </View> : null;
 
     const healthText = cardHealth !== null ?
       <View style={ styles.cardDetailsInfoStat }>
         <Text style={ styles.cardDetailsInfoStatData }>
-          { cardHealth }
+          { cardHealth }&nbsp;
         </Text>
         <Text style={ styles.cardDetailsInfoStatTitle }>
-          &nbsp;Health
+          Health
         </Text>
       </View> : null;
 

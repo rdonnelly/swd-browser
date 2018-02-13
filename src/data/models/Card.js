@@ -62,7 +62,7 @@ class Card {
   }
 
   get points() {
-    return this.card.points;
+    return this.card.points || null;
   }
 
   get pointsRegular() {
