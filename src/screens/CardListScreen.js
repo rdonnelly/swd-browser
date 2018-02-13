@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { FlatList, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native';
+import { FlatList, StatusBar, StyleSheet, Text, TextInput, View, KeyboardAvoidingView } from 'react-native';
 
 import CardListItem, { ITEM_HEIGHT } from '../components/CardListItem';
 import { colors } from '../styles';
@@ -77,7 +77,7 @@ class CardListScreen extends Component {
     this.handleSubmitFromSearch = this.handleSubmitFromSearch.bind(this);
     this.handleChangeFromSearch = this.handleChangeFromSearch.bind(this);
     this.renderItem = this.renderItem.bind(this);
-    this.renderHeader = this.renderHeader.bind(this);
+    this.renderSearch = this.renderSearch.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
 
     cardDatabase.addFilterListener((results) => {
@@ -146,7 +146,6 @@ class CardListScreen extends Component {
         renderItem={ this.renderItem }
         keyExtractor={ keyExtractor }
         getItemLayout={ this.getItemLayout }
-        ListHeaderComponent={ this.renderHeader }
         ListFooterComponent={ this.renderFooter }
         ListEmptyComponent={ this.renderEmpty }
       />
@@ -170,7 +169,7 @@ class CardListScreen extends Component {
     );
   }
 
-  renderHeader() {
+  renderSearch() {
     return (
       <View style={ styles.search }>
         <TextInput
@@ -206,13 +205,17 @@ class CardListScreen extends Component {
 
   render() {
     return (
-      <View
+      <KeyboardAvoidingView
         style={ styles.container }
+        behavior={ 'padding' }
+        keyboardVerticalOffset={64}
       >
-        { this.renderListView() }
+          { this.renderListView() }
+
+          { this.renderSearch() }
 
         <StatusBar animated={ true } barStyle="light-content" />
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
