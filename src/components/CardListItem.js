@@ -1,11 +1,14 @@
+import _isInteger from 'lodash/isInteger';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Entypo';
 
 import SWDIcon from './SWDIcon';
+import { validate as validateIcon } from '../utils/SWDIconMap';
 import { colors } from '../styles';
 
-export const ITEM_HEIGHT = 56;
+export const ITEM_HEIGHT = 58;
 
 const styles = StyleSheet.create({
   row: {
@@ -23,7 +26,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 8,
-    paddingVertical: 12,
     width: '100%',
   },
   cardIcon: {
@@ -36,13 +38,38 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   cardDetails: {
+    alignItems: 'flex-start',
     flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
     paddingLeft: 8,
   },
   cardDetailsName: {
+    paddingVertical: 1,
+  },
+  cardDetailsNameText: {
     color: colors.darkGray,
     fontSize: 18,
     fontWeight: '600',
+  },
+  cardDetailsInfo: {
+    paddingVertical: 1,
+  },
+  cardDetailsInfoText: {
+    color: colors.gray,
+    fontSize: 13,
+    fontWeight: '500',
+  },
+  cardDetailsInfoTextIcon: {
+    color: colors.lightGrayDark,
+    fontSize: 10,
+    fontWeight: '500',
+  },
+  chevronWrapper: {
+  },
+  chevron: {
+    color: colors.lightGrayDark,
+    marginTop: 2,
   },
 });
 
@@ -62,8 +89,21 @@ class CardListItem extends Component {
       onPressItem,
     } = this.props;
 
+    const colorString = `card${card.faction.charAt(0).toUpperCase() + card.faction.slice(1)}`;
     const iconGlyphStyles = [styles.cardIconGlyph];
-    iconGlyphStyles.push({ color: colors[card.faction] });
+    iconGlyphStyles.push({ color: colors[colorString] });
+
+    const setIcon = validateIcon(card.set) ?
+      (<SWDIcon type={ card.set } font={ 'swdestiny' } style={ styles.cardDetailsInfoTextIcon } />) :
+      null;
+
+    let cardData = '';
+    if (_isInteger(card.cost)) {
+      cardData = card.cost;
+    }
+    if (card.points) {
+      cardData = `${card.points}`;
+    }
 
     return (
       <View style={ styles.row }>
@@ -75,9 +115,24 @@ class CardListItem extends Component {
             <SWDIcon type={ card.type } style={ iconGlyphStyles } />
           </View>
           <View style={ styles.cardDetails }>
-            <Text style={ styles.cardDetailsName }>
-              { card.name }
-            </Text>
+            <View style={ styles.cardDetailsName }>
+              <Text style={ styles.cardDetailsNameText }>
+                { card.name }
+              </Text>
+            </View>
+            <View style={ styles.cardDetailsInfo }>
+              <Text style={ styles.cardDetailsInfoText }>
+                { setIcon}
+                { setIcon && <Text>&nbsp;</Text>}
+                <Text>{ card.set }&nbsp;{ card.position }</Text>
+                <Text>&nbsp;&middot;&nbsp;{ card.displayAffiliation }</Text>
+                <Text>&nbsp;&middot;&nbsp;{ card.displayType }</Text>
+                { <Text>&nbsp;&middot;&nbsp;{ cardData }</Text> }
+              </Text>
+            </View>
+          </View>
+          <View style={ styles.chevronWrapper }>
+            <Icon name={ 'chevron-right' } size={ 20 } style={ styles.chevron } />
           </View>
         </TouchableOpacity>
       </View>

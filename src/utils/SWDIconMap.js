@@ -27,11 +27,13 @@ export const swdestiny = {
   AWAKENINGS: 'e90d',
   LEG: 'e913',
   SoR: 'e90e',
+  SOR: 'e90e',
   SPIRIT_OF_REBELLION: 'e90e',
   TPG: 'e910',
   TWO_PLAYER_GAME: 'e910',
   EaW: 'e90f',
+  EAW: 'e90f',
   EMPIRE_AT_WAR: 'e90f',
 };
 
-export const validate = (font, key) => _has(font, key);
+export const validate = key => _has(swdestiny, key);

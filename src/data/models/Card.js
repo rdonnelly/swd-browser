@@ -27,12 +27,20 @@ class Card {
     return this.card.affiliation_code;
   }
 
+  get displayAffiliation() {
+    return this.card.affiliation_code.charAt(0).toUpperCase() + this.card.affiliation_code.slice(1);
+  }
+
   get faction() {
     return this.card.faction_code;
   }
 
   get type() {
     return this.card.type_code;
+  }
+
+  get displayType() {
+    return this.card.type_code.charAt(0).toUpperCase() + this.card.type_code.slice(1);
   }
 
   get subtype() {

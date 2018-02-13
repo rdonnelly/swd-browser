@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.blueDark,
   },
   cardTitleWrapperGray: {
-    backgroundColor: colors.gray,
-    borderBottomColor: colors.grayDark,
+    backgroundColor: colors.grayDark,
+    borderBottomColor: colors.grayDarkDark,
   },
   cardTitleWrapperRed: {
     backgroundColor: colors.red,
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 8,
   },
   cardImageWrapperGray: {
-    borderTopColor: colors.gray,
+    borderTopColor: colors.grayDarkDark,
     borderTopWidth: 8,
   },
   cardImageWrapperRed: {
