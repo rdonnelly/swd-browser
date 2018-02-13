@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   cardDetailsInfoStatData: {
     color: colors.darkGray,
     fontSize: DeviceInfo.isTablet() ? 18 : 16,
-    fontWeight: '600',
+    fontWeight: '700',
     textAlign: 'center',
   },
   cardDetailsDice: {
