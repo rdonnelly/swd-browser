@@ -1,3 +1,5 @@
+import _isInteger from 'lodash/isInteger';
+
 class Card {
   constructor(card) {
     this.card = card;
@@ -52,15 +54,25 @@ class Card {
   }
 
   get health() {
-    return this.card.health;
+    return _isInteger(this.card.health) ? this.card.health : null;
   }
 
   get cost() {
-    return this.card.cost;
+    return _isInteger(this.card.cost) ? this.card.cost : null;
   }
 
   get points() {
     return this.card.points;
+  }
+
+  get pointsRegular() {
+    const pointsSplit = this.card.points.split('/').map(v => parseInt(v, 10));
+    return pointsSplit[0];
+  }
+
+  get pointsElite() {
+    const pointsSplit = this.card.points.split('/').map(v => parseInt(v, 10));
+    return pointsSplit[1];
   }
 
   get position() {
