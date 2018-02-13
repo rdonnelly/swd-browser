@@ -21,10 +21,11 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     marginBottom: 8,
   },
   labelWrapper: {
+    marginRight: 8,
   },
   label: {
     color: colors.darkGray,
