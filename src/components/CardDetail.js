@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
   cardDetailsInfo: {
     alignItems: 'center',
     flexDirection: 'row',
+    justifyContent: 'center',
     marginBottom: 16,
     width: '100%',
   },
@@ -280,7 +281,14 @@ class CardDetail extends Component {
 
     return (
       <View style={ styles.cardDetailsType }>
+        { cardPosition ? (
+          <Text style={ styles.cardDetailsTypeText }>
+            <SWDIcon type={ cardSet } style={ styles.cardDetailsTypeTextIcon } />
+            &nbsp;{ cardSet }&nbsp;{ cardPosition }
+          </Text>) : null
+        }
         <Text style={ styles.cardDetailsTypeText }>
+          &nbsp;&nbsp;&middot;&nbsp;&nbsp;
           { displayCardType }
         </Text>
         { cardSubtype ? (
@@ -291,13 +299,6 @@ class CardDetail extends Component {
         { cardAffiliation ? (
           <Text style={ styles.cardDetailsTypeText }>
             &nbsp;&nbsp;&middot;&nbsp;&nbsp;{ displayCardAffiliation }
-          </Text>) : null
-        }
-        { cardPosition ? (
-          <Text style={ styles.cardDetailsTypeText }>
-            &nbsp;&nbsp;&middot;&nbsp;&nbsp;
-            <SWDIcon type={ cardSet } style={ styles.cardDetailsTypeTextIcon } />
-            &nbsp;{ cardPosition }
           </Text>) : null
         }
       </View>
@@ -323,21 +324,21 @@ class CardDetail extends Component {
 
     const pointsText = cardPoints !== null ?
       <View style={ styles.cardDetailsInfoStat }>
-        <Text style={ styles.cardDetailsInfoStatTitle }>
-          Points:&nbsp;
-        </Text>
         <Text style={ styles.cardDetailsInfoStatData }>
           { cardPoints }
+        </Text>
+        <Text style={ styles.cardDetailsInfoStatTitle }>
+          &nbsp;Points
         </Text>
       </View> : null;
 
     const healthText = cardHealth !== null ?
       <View style={ styles.cardDetailsInfoStat }>
-        <Text style={ styles.cardDetailsInfoStatTitle }>
-          Health:&nbsp;
-        </Text>
         <Text style={ styles.cardDetailsInfoStatData }>
           { cardHealth }
+        </Text>
+        <Text style={ styles.cardDetailsInfoStatTitle }>
+          &nbsp;Health
         </Text>
       </View> : null;
 

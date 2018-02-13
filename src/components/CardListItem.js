@@ -125,8 +125,8 @@ class CardListItem extends Component {
                 { setIcon}
                 { setIcon && <Text>&nbsp;</Text>}
                 <Text>{ card.set }&nbsp;{ card.position }</Text>
-                <Text>&nbsp;&middot;&nbsp;{ card.displayAffiliation }</Text>
                 <Text>&nbsp;&middot;&nbsp;{ card.displayType }</Text>
+                <Text>&nbsp;&middot;&nbsp;{ card.displayAffiliation }</Text>
                 { <Text>&nbsp;&middot;&nbsp;{ cardData }</Text> }
               </Text>
             </View>
