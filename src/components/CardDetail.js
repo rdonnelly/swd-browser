@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   cardDetailsDiceSideElement: {
-    padding: 1,
+    paddingRight: 1,
   },
   cardDetailsDiceSideIcon: {
     color: colors.darkGray,
