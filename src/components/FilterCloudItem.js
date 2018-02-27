@@ -11,7 +11,7 @@ import { colors } from '../styles';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    backgroundColor: colors.whiteTranslucent,
     borderRadius: 4,
     marginBottom: 8,
     marginRight: 8,
