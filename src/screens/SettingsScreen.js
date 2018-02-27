@@ -99,8 +99,12 @@ class SettingsScreen extends Component {
       />
     );
 
-    // eslint-disable-next-line global-require
-    const factionOptions = require('swdestinydb-json-data/factions.json');
+    const factionOptions =
+      require('swdestinydb-json-data/factions.json') // eslint-disable-line global-require
+        .map(faction => ({
+          code: faction.code,
+          name: faction.code.charAt(0).toUpperCase() + faction.code.slice(1),
+        }));
 
     const factionCloud = (
       <FilterCloud
