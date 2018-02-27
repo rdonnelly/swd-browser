@@ -121,13 +121,13 @@ class Card {
   get keywords() {
     const keywords = [];
 
-    if (/Ambush\./.test(this.card.text)) {
+    if (/Ambush\.|Ambush keyword/gi.test(this.card.text)) {
       keywords.push('ambush');
     }
-    if (/Guardian\./.test(this.card.text)) {
+    if (/Guardian\.|Guardian keyword/gi.test(this.card.text)) {
       keywords.push('guardian');
     }
-    if (/Redeploy\./.test(this.card.text)) {
+    if (/Redeploy\.|Redeploy keyword/gi.test(this.card.text)) {
       keywords.push('redeploy');
     }
 
