@@ -46,6 +46,11 @@ class CardDatabase {
     return _findIndex(this.results, { id });
   }
 
+  find(id) {
+    const index = this.findIndex(id);
+    return this.get(index);
+  }
+
   addFilterListener(callback) {
     this.filterListeners.push(callback);
   }

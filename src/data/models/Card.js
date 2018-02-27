@@ -1,4 +1,8 @@
 import _isInteger from 'lodash/isInteger';
+import formats from 'swdestinydb-json-data/formats.json';
+
+
+const infiniteFormat = formats.filter(format => format.code === 'INF').pop();
 
 class Card {
   constructor(card) {
@@ -62,17 +66,15 @@ class Card {
   }
 
   get points() {
-    return this.card.points || null;
-  }
+    if (!this.card.points) {
+      return null;
+    }
 
-  get pointsRegular() {
-    const pointsSplit = this.card.points.split('/').map(v => parseInt(v, 10));
-    return pointsSplit[0];
-  }
+    if (this.hasBalance) {
+      return infiniteFormat.data.balance[this.card.code];
+    }
 
-  get pointsElite() {
-    const pointsSplit = this.card.points.split('/').map(v => parseInt(v, 10));
-    return pointsSplit[1];
+    return this.card.points;
   }
 
   get position() {
@@ -99,8 +101,12 @@ class Card {
     return this.card.has_errata;
   }
 
+  get hasBalance() {
+    return this.card.code in infiniteFormat.data.balance;
+  }
+
   get reprintOf() {
-    return this.card.reprint_of;
+    return this.card.reprint_of || null;
   }
 
   get keywords() {

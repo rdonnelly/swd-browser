@@ -7,6 +7,7 @@ import DeviceInfo from 'react-native-device-info';
 import SWDIcon from './SWDIcon';
 import { colors } from '../styles';
 
+import { cardDatabase } from '../data';
 import CardParser from '../utils/CardParser';
 
 
@@ -99,20 +100,20 @@ const styles = StyleSheet.create({
   },
   cardDetailsDice: {
     alignItems: 'center',
+    backgroundColor: colors.lightGrayTranslucent,
     borderRadius: 4,
     flexDirection: 'row',
     justifyContent: 'center',
-    overflow: 'hidden',
-    maxWidth: '100%',
     marginBottom: 16,
+    maxWidth: '100%',
+    overflow: 'hidden',
   },
   cardDetailsDiceSide: {
     alignItems: 'center',
-    flexDirection: 'column',
-    justifyContent: 'center',
     flex: 1,
+    flexDirection: 'column',
     height: DeviceInfo.isTablet() ? 64 : 48,
-    backgroundColor: colors.lightGrayTranslucent,
+    justifyContent: 'center',
     padding: 8,
   },
   cardDetailsDiceSideTop: {
@@ -135,19 +136,21 @@ const styles = StyleSheet.create({
   },
   cardDetailsDiceSideBottomIcon: {
     color: colors.yellowDark,
-    fontSize: DeviceInfo.isTablet() ? 12 : 9,
-    lineHeight: DeviceInfo.isTablet() ? 12 : 9,
+    fontSize: DeviceInfo.isTablet() ? 12 : 11,
+    lineHeight: DeviceInfo.isTablet() ? 12 : 11,
   },
   cardDetailsDiceSideText: {
     color: colors.darkGray,
     fontSize: DeviceInfo.isTablet() ? 22 : 16,
-    lineHeight: DeviceInfo.isTablet() ? 24 : 18,
+    lineHeight: DeviceInfo.isTablet() ? 24 : 16,
     fontWeight: '700',
+    marginTop: DeviceInfo.isTablet() ? 2 : 3,
   },
   cardDetailsDiceSideBottomText: {
     color: colors.yellowDark,
-    fontSize: DeviceInfo.isTablet() ? 16 : 12,
-    lineHeight: DeviceInfo.isTablet() ? 18 : 13,
+    fontSize: DeviceInfo.isTablet() ? 16 : 14,
+    lineHeight: DeviceInfo.isTablet() ? 18 : 14,
+    marginTop: DeviceInfo.isTablet() ? 1 : 2,
   },
   cardDetailsDiceSideBlankText: {
     color: colors.red,
@@ -178,6 +181,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 16,
     width: '100%',
+  },
+  cardAdditionalInfoWrapper: {
+    alignItems: 'center',
+    backgroundColor: colors.lightGrayTranslucent,
+    borderRadius: 4,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 16,
+    width: '100%',
+  },
+  cardAdditionalInfoText: {
+    color: colors.darkGray,
   },
   cardImageWrapper: {
     height: 400,
@@ -310,6 +327,7 @@ class CardDetail extends Component {
       cost: cardCost,
       health: cardHealth,
       points: cardPoints,
+      hasBalance: cardHasBalance,
     } = this.props.card;
 
     const costText = cardCost !== null ?
@@ -323,10 +341,15 @@ class CardDetail extends Component {
     const pointsText = cardPoints !== null ?
       <View style={ styles.cardDetailsInfoStat }>
         <Text style={ styles.cardDetailsInfoStatData }>
-          { cardPoints }&nbsp;
+          { cardPoints }
         </Text>
+        { cardHasBalance &&
+          <Text style={ styles.cardDetailsInfoStatTitle }>
+            *
+          </Text>
+        }
         <Text style={ styles.cardDetailsInfoStatTitle }>
-          Points
+          &nbsp;Points
         </Text>
       </View> : null;
 
@@ -438,7 +461,7 @@ class CardDetail extends Component {
             }
             <View style={ styles.cardDetailsDiceSideElement }>
               <Text style={ [textTopStyles, extraTextStyles] }>
-                { isBlank ? '–' : sideValue }
+                { isBlank ? '—' : sideValue }
               </Text>
             </View>
             <View style={ styles.cardDetailsDiceSideElement }>
@@ -492,6 +515,32 @@ class CardDetail extends Component {
     );
   }
 
+  renderAdditionalInfo() {
+    const {
+      reprintOf: cardReprintOf,
+    } = this.props.card;
+
+    const views = [];
+
+    const reprintCard = cardDatabase.find(cardReprintOf);
+    if (reprintCard) {
+      const reprintCardPosition = reprintCard.position;
+      const reprintCardSet = reprintCard.set;
+
+      views.push(<View style={ styles.cardAdditionalInfoWrapper }>
+          <Text style={ styles.cardAdditionalInfoText }>
+            Reprint of&nbsp;
+          </Text>
+          <Text style={ styles.cardAdditionalInfoText }>
+            <SWDIcon type={ reprintCardSet } style={ styles.cardDetailsTypeTextIcon } />
+            &nbsp;{ reprintCardSet }&nbsp;{ reprintCardPosition }
+          </Text>
+        </View>);
+    }
+
+    return views;
+  }
+
   render() {
     const {
       id: cardId,
@@ -527,6 +576,7 @@ class CardDetail extends Component {
             { this.renderCardDetailsInfo() }
             { this.renderCardText() }
             { this.renderDiceSides() }
+            { this.renderAdditionalInfo() }
           </View>
           <View style={ imageWrapperStyles }>
             <Image
