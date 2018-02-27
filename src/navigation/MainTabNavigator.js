@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import React from 'react';
-import { Dimensions, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import { NavigationActions, TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Entypo';
 import DeviceInfo from 'react-native-device-info';
@@ -21,17 +21,14 @@ const MainTabNavigator = TabNavigator(
         tabBarIcon: ({ tintColor }) => { // eslint-disable-line react/prop-types
           const majorVersion = parseInt(Platform.Version, 10);
           const isIos = Platform.OS === 'ios';
-          const useHorizontalTabs = majorVersion >= 11 && isIos;
-
-          const windowDimensions = Dimensions.get('window');
-          const isLandscape = windowDimensions.width > windowDimensions.height;
+          const useHorizontalTabs = DeviceInfo.isTablet() && isIos && majorVersion >= 11;
 
           return (
             <Icon
-              name="documents"
+              name={ 'documents' }
               size={ 24 }
               color={ tintColor }
-              style={{ marginTop: useHorizontalTabs && isLandscape ? 0 : 4 }}
+              style={{ marginTop: useHorizontalTabs ? 0 : 4 }}
             />
           );
         },
@@ -63,17 +60,14 @@ const MainTabNavigator = TabNavigator(
         tabBarIcon: ({ tintColor }) => { // eslint-disable-line react/prop-types
           const majorVersion = parseInt(Platform.Version, 10);
           const isIos = Platform.OS === 'ios';
-          const useHorizontalTabs = majorVersion >= 11 && isIos;
-
-          const windowDimensions = Dimensions.get('window');
-          const isLandscape = windowDimensions.width > windowDimensions.height;
+          const useHorizontalTabs = DeviceInfo.isTablet() && isIos && majorVersion >= 11;
 
           return (
             <Icon
-              name="cog"
+              name={ 'cog' }
               size={ 24 }
               color={ tintColor }
-              style={{ marginTop: useHorizontalTabs && isLandscape ? 0 : 4 }}
+              style={{ marginTop: useHorizontalTabs ? 0 : 4 }}
             />
           );
         },
