@@ -1,5 +1,6 @@
 import _isInteger from 'lodash/isInteger';
 import formats from 'swdestinydb-json-data/formats.json';
+import starterPacks from 'swdestinydb-json-data/starterPacks.json';
 
 
 const infiniteFormat = formats.filter(format => format.code === 'INF').pop();
@@ -107,6 +108,14 @@ class Card {
 
   get reprintOf() {
     return this.card.reprint_of || null;
+  }
+
+  get starterSets() {
+    const starters = starterPacks
+      .filter(starter => this.card.code in starter.slots)
+      .map(starter => starter.name);
+
+    return starters.length ? starters : null;
   }
 
   get keywords() {

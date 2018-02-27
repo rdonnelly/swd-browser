@@ -186,12 +186,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.lightGrayTranslucent,
     borderRadius: 4,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     marginBottom: 16,
     paddingHorizontal: 12,
     paddingVertical: 16,
     width: '100%',
+  },
+  cardAdditionalInfoItem: {
+    flexDirection: 'row',
   },
   cardAdditionalInfoText: {
     color: colors.darkGray,
@@ -518,6 +521,7 @@ class CardDetail extends Component {
   renderAdditionalInfo() {
     const {
       reprintOf: cardReprintOf,
+      starterSets: cardStarterSets,
     } = this.props.card;
 
     const views = [];
@@ -527,15 +531,36 @@ class CardDetail extends Component {
       const reprintCardPosition = reprintCard.position;
       const reprintCardSet = reprintCard.set;
 
-      views.push(<View style={ styles.cardAdditionalInfoWrapper }>
-          <Text style={ styles.cardAdditionalInfoText }>
-            Reprint of&nbsp;
-          </Text>
-          <Text style={ styles.cardAdditionalInfoText }>
-            <SWDIcon type={ reprintCardSet } style={ styles.cardDetailsTypeTextIcon } />
-            &nbsp;{ reprintCardSet }&nbsp;{ reprintCardPosition }
-          </Text>
-        </View>);
+      views.push((
+        <View style={ styles.cardAdditionalInfoWrapper }>
+          <View style={ styles.cardAdditionalInfoItem }>
+            <Text style={ styles.cardAdditionalInfoText }>
+              Reprint of&nbsp;
+            </Text>
+            <Text style={ styles.cardAdditionalInfoText }>
+              <SWDIcon type={ reprintCardSet } style={ styles.cardDetailsTypeTextIcon } />
+              &nbsp;{ reprintCardSet }&nbsp;{ reprintCardPosition }
+            </Text>
+          </View>
+        </View>
+      ));
+    }
+
+    if (cardStarterSets && cardStarterSets.length) {
+      views.push((
+        <View style={ styles.cardAdditionalInfoWrapper }>
+          { cardStarterSets.map(starterName =>
+            <View
+              style={ styles.cardAdditionalInfoItem }
+              key={ `found-in-starter-${starterName}` }
+            >
+              <Text style={ styles.cardAdditionalInfoText }>
+                Found In { starterName }
+              </Text>
+            </View>)
+          }
+        </View>
+      ));
     }
 
     return views;
