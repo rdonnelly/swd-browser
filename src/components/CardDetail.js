@@ -532,7 +532,7 @@ class CardDetail extends Component {
       const reprintCardSet = reprintCard.set;
 
       views.push((
-        <View style={ styles.cardAdditionalInfoWrapper }>
+        <View style={ styles.cardAdditionalInfoWrapper } key={ 'additional-info-reprint' }>
           <View style={ styles.cardAdditionalInfoItem }>
             <Text style={ styles.cardAdditionalInfoText }>
               Reprint of&nbsp;
@@ -548,7 +548,7 @@ class CardDetail extends Component {
 
     if (cardStarterSets && cardStarterSets.length) {
       views.push((
-        <View style={ styles.cardAdditionalInfoWrapper }>
+        <View style={ styles.cardAdditionalInfoWrapper } key={ 'additional-info-starters' }>
           { cardStarterSets.map(starterName =>
             <View
               style={ styles.cardAdditionalInfoItem }
