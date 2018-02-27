@@ -180,6 +180,19 @@ class SettingsScreen extends Component {
       />
     );
 
+    // eslint-disable-next-line global-require
+    const rarityOptions = require('swdestinydb-json-data/rarities.json');
+
+    const rarityCloud = (
+      <FilterCloud
+        label={ 'Rarity' }
+        setting={ 'rarity' }
+        options={ rarityOptions }
+        onCallback={ this.updateFilterList }
+        offCallback={ this.removeFilter }
+      />
+    );
+
     return (
       <View style={ styles.container }>
         <ScrollView
@@ -192,6 +205,7 @@ class SettingsScreen extends Component {
           { typeCloud }
           { subtypeCloud }
           { keywordCloud }
+          { rarityCloud }
 
           <View style={ styles.information }>
             <Text style={ styles.disclaimerText }>
