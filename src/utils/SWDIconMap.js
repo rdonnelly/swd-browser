@@ -25,7 +25,6 @@ export const swdestiny = {
 
   AW: 'e90d',
   AWAKENINGS: 'e90d',
-  LEG: 'e913',
   SoR: 'e90e',
   SOR: 'e90e',
   SPIRIT_OF_REBELLION: 'e90e',
@@ -34,6 +33,10 @@ export const swdestiny = {
   EaW: 'e90f',
   EAW: 'e90f',
   EMPIRE_AT_WAR: 'e90f',
+  LEG: 'e913',
+  LEGACIES: 'e913',
+  RIV: 'e914',
+  RIVALS: 'e914',
 };
 
 export const validate = key => _has(swdestiny, key);
