@@ -66,17 +66,22 @@ class SettingsScreen extends Component {
 
   updateFilter(setting, values) {
     const key = `filter_${setting}`;
-    cardDatabase.addFilter(key, card => !values.includes(card[setting]));
+    cardDatabase.addFilter(key, card => values.includes(card[setting]));
   }
 
   updateFilterList(setting, values) {
     const key = `filter_${setting}`;
+
     cardDatabase.addFilter(key, (card) => {
-      if (card[setting].length === 0 && values.includes('none')) {
+      if (values.length === 0) {
         return false;
       }
 
-      return values.every(value => !card[setting].includes(value));
+      if (card[setting].length === 0 && values.includes('none')) {
+        return true;
+      }
+
+      return values.some(value => card[setting].includes(value));
     });
   }
 
@@ -192,7 +197,7 @@ class SettingsScreen extends Component {
         label={ 'Rarity' }
         setting={ 'rarity' }
         options={ rarityOptions }
-        onCallback={ this.updateFilterList }
+        onCallback={ this.updateFilter }
         offCallback={ this.removeFilter }
       />
     );

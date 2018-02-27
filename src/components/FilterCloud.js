@@ -1,3 +1,4 @@
+import _map from 'lodash/map';
 import _uniq from 'lodash/uniq';
 import _without from 'lodash/without';
 import React, { Component } from 'react';
@@ -12,6 +13,8 @@ import {
 import FilterCloudItem from './FilterCloudItem';
 import { colors } from '../styles';
 
+
+const INTERACTION_DELAY = 750;
 
 const styles = StyleSheet.create({
   container: {
@@ -49,7 +52,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
     textAlign: 'center',
-    // textDecorationLine: 'underline',
   },
   optionsWrapper: {
     alignItems: 'flex-start',
@@ -67,7 +69,7 @@ class FilterCloud extends Component {
   constructor(props) {
     super(props);
 
-    const values = [];
+    const values = _map(this.props.options, 'code');
 
     this.state = {
       values,
@@ -95,21 +97,21 @@ class FilterCloud extends Component {
     }
 
     if (value) {
-      values = _without(values, code);
-    } else {
       values.push(code);
       values = _uniq(values);
+    } else {
+      values = _without(values, code);
     }
 
     const timeoutId = setTimeout(() => {
-      if (values.length === 0) {
+      if (values.length === this.props.options.length) {
         this.props.offCallback(this.props.setting);
       } else {
         this.props.onCallback(this.props.setting, values);
       }
 
       this.setState({ timeoutId: null });
-    }, 750);
+    }, INTERACTION_DELAY);
 
     this.setState({
       timeoutId,
@@ -118,7 +120,7 @@ class FilterCloud extends Component {
   }
 
   selectAll() {
-    const values = [];
+    const values = _map(this.props.options, 'code');
 
     if (this.state.timeoutId) {
       clearTimeout(this.state.timeoutId);
@@ -127,7 +129,7 @@ class FilterCloud extends Component {
     const timeoutId = setTimeout(() => {
       this.props.offCallback(this.props.setting);
       this.setState({ timeoutId: null });
-    }, 750);
+    }, INTERACTION_DELAY);
 
     this.setState({
       timeoutId,
@@ -142,12 +144,10 @@ class FilterCloud extends Component {
       clearTimeout(this.state.timeoutId);
     }
 
-    this.props.options.forEach(({ code }) => { values.push(code); });
-
     const timeoutId = setTimeout(() => {
       this.props.onCallback(this.props.setting, values);
       this.setState({ timeoutId: null });
-    }, 750);
+    }, INTERACTION_DELAY);
 
     this.setState({
       timeoutId,
@@ -158,8 +158,8 @@ class FilterCloud extends Component {
   render() {
     const optionItems = this.props.options.map(option => (
       <FilterCloudItem
-        key={ `settingclouditem__${this.props.setting}__${option.code}` }
-        value={ !this.state.values.includes(option.code) }
+        key={ `settingclouditem-${this.props.setting}-${option.code}` }
+        value={ this.state.values.includes(option.code) }
         setting={ option.code }
         label={ option.name }
         callback={ this.onValueChange }
