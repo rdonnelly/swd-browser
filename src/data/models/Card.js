@@ -130,6 +130,9 @@ class Card {
     if (/Redeploy\.|Redeploy keyword/gi.test(this.card.text)) {
       keywords.push('redeploy');
     }
+    if (this.card.is_unique) {
+      keywords.push('unique');
+    }
 
     return keywords;
   }

@@ -175,6 +175,9 @@ class SettingsScreen extends Component {
       code: 'redeploy',
       name: 'Redeploy',
     }, {
+      code: 'unique',
+      name: 'Unique',
+    }, {
       code: 'none',
       name: 'No Keywords',
     }];
