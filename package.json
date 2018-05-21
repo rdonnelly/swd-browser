@@ -1,5 +1,5 @@
 {
-  "name": "swd-browser",
+  "name": "SWDBrowser",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -28,8 +28,8 @@
   "dependencies": {
     "lodash": "^4.17.5",
     "prop-types": "^15.6.1",
-    "react": "^16.3.0-alpha.1",
-    "react-native": "0.54.3",
+    "react": "16.3.1",
+    "react-native": "0.55.4",
     "react-native-device-info": "^0.21.4",
     "react-native-render-html": "^3.9.3",
     "react-native-safari-view": "^2.1.0",
