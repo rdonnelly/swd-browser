@@ -40,13 +40,18 @@ const styles = StyleSheet.create({
   },
   search: {
     backgroundColor: colors.lightGrayDark,
+    borderRadius: 4,
+    bottom: 8,
+    left: 8,
     padding: 8,
+    position: 'absolute',
+    right: 8,
   },
   searchInput: {
     backgroundColor: colors.white,
     color: colors.darkGray,
     fontSize: 16,
-    padding: 8,
+    padding: 12,
     borderRadius: 4,
   },
   footer: {
@@ -161,6 +166,7 @@ class CardListScreen extends Component {
         getItemLayout={ this.getItemLayout }
         ListFooterComponent={ this.renderFooter }
         ListEmptyComponent={ this.renderEmpty }
+        contentContainerStyle={{ paddingBottom: 72 }}
         initialNumToRender={ 9 }
         maxToRenderPerBatch={ 9 }
         updateCellsBatchingPeriod={ 100 }
