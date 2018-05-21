@@ -167,8 +167,6 @@ class CardListScreen extends Component {
         ListFooterComponent={ this.renderFooter }
         ListEmptyComponent={ this.renderEmpty }
         contentContainerStyle={{ paddingBottom: 72 }}
-        initialNumToRender={ 9 }
-        maxToRenderPerBatch={ 9 }
         updateCellsBatchingPeriod={ 100 }
         windowSize={ 35 }
       />
