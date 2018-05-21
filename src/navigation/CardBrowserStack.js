@@ -1,25 +1,25 @@
-import { StackNavigator } from 'react-navigation';
+import _get from 'lodash/get';
+import { createStackNavigator } from 'react-navigation';
 
 import CardListScreen from '../screens/CardListScreen';
 import CardDetailScreen from '../screens/CardDetailScreen';
 import { colors } from '../styles';
 
-const CardBrowserStack = StackNavigator(
+const cardBrowserStack = createStackNavigator(
   {
-    CardBrowserList: {
+    CardsList: {
       screen: CardListScreen,
     },
-    CardBrowserDetail: {
+    CardsDetail: {
       screen: CardDetailScreen,
       navigationOptions: ({ navigation }) => ({
-        title: 'Card Details',
         headerTitle: `${navigation.state.params.cardName}`,
       }),
     },
   },
   {
     navigationOptions: {
-      title: 'Cards',
+      headerTitle: 'Cards',
       headerTintColor: colors.headerTint,
       headerStyle: {
         backgroundColor: colors.headerBackground,
@@ -28,4 +28,23 @@ const CardBrowserStack = StackNavigator(
   },
 );
 
-export default CardBrowserStack;
+cardBrowserStack.navigationOptions = {
+  tabBarOnPress: ({ navigation }) => {
+    if (navigation.isFocused()) {
+      if (navigation.state.index === 0) {
+        const stackNavigation = _get(navigation, 'state.routes[0]');
+        if (stackNavigation &&
+            stackNavigation.params &&
+            stackNavigation.params.resetScreen) {
+          stackNavigation.params.resetScreen();
+        }
+      }
+
+      if (navigation.state.index === 1) {
+        navigation.navigate('CardsList');
+      }
+    }
+  },
+};
+
+export default cardBrowserStack;

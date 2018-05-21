@@ -53,8 +53,19 @@ class SettingsScreen extends Component {
       },
     );
 
+    this.resetScreen = this.resetScreen.bind(this);
     this.updateFilter = this.updateFilter.bind(this);
     this.removeFilter = this.removeFilter.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.navigation.setParams({
+      resetScreen: this.resetScreen,
+    });
+  }
+
+  resetScreen() {
+    this.scrollView.scrollTo(0);
   }
 
   visitWebpage() {
@@ -209,6 +220,7 @@ class SettingsScreen extends Component {
       <View style={ styles.container }>
         <ScrollView
           style={ styles.scrollView }
+          ref={ (component) => { this.scrollView = component; } }
           contentContainerStyle={ styles.scrollViewContent }
         >
           { affiliationCloud }

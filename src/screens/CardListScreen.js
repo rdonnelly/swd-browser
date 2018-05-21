@@ -72,6 +72,7 @@ class CardListScreen extends Component {
       cards: cardDatabase.all(),
     };
 
+    this.resetScreen = this.resetScreen.bind(this);
     this.onPressItem = this.onPressItem.bind(this);
     this.handleBlurFromSearch = this.handleBlurFromSearch.bind(this);
     this.handleSubmitFromSearch = this.handleSubmitFromSearch.bind(this);
@@ -85,6 +86,16 @@ class CardListScreen extends Component {
         cards: results,
       });
     });
+  }
+
+  componentWillMount() {
+    this.props.navigation.setParams({
+      resetScreen: this.resetScreen,
+    });
+  }
+
+  resetScreen() {
+    this.listView.scrollToOffset(0);
   }
 
   search(query) {
@@ -102,7 +113,7 @@ class CardListScreen extends Component {
 
     if (this.props.navigation) {
       this.props.navigation.navigate(
-        'CardBrowserDetail',
+        'CardsDetail',
         {
           cardId: card.id,
           cardName: card.name,
@@ -141,13 +152,19 @@ class CardListScreen extends Component {
 
     return (
       <FlatList
+        ref={ (component) => { this.listView = component; } }
         style={ styles.list }
         data={ this.state.cards }
+        extraData={ this.state }
         renderItem={ this.renderItem }
         keyExtractor={ keyExtractor }
         getItemLayout={ this.getItemLayout }
         ListFooterComponent={ this.renderFooter }
         ListEmptyComponent={ this.renderEmpty }
+        initialNumToRender={ 9 }
+        maxToRenderPerBatch={ 9 }
+        updateCellsBatchingPeriod={ 100 }
+        windowSize={ 35 }
       />
     );
   }

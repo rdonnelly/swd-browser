@@ -34,7 +34,7 @@
     "react-native-render-html": "^3.9.3",
     "react-native-safari-view": "^2.1.0",
     "react-native-vector-icons": "^4.5.0",
-    "react-navigation": "^1.5.8",
+    "react-navigation": "^2.0.1",
     "swdestinydb-json-data": "https://github.com/rdonnelly/swdestinydb-json-data.git"
   },
   "rnpm": {

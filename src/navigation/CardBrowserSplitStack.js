@@ -1,11 +1,15 @@
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 import CardSplitScreen from '../screens/CardSplitScreen';
 import { colors } from '../styles';
 
-const CardBrowserSplitStack = StackNavigator({
-  CardSplitScreen: {
-    screen: CardSplitScreen,
+const cardBrowserSplitStack = createStackNavigator(
+  {
+    CardSplitScreen: {
+      screen: CardSplitScreen,
+    },
+  },
+  {
     navigationOptions: {
       headerTintColor: colors.headerTint,
       headerStyle: {
@@ -13,6 +17,12 @@ const CardBrowserSplitStack = StackNavigator({
       },
     },
   },
-});
+);
 
-export default CardBrowserSplitStack;
+cardBrowserSplitStack.navigationOptions = {
+  tabBarOnPress: ({ navigation }) => {
+    console.log(navigation);
+  },
+};
+
+export default cardBrowserSplitStack;

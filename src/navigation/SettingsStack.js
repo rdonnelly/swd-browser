@@ -1,13 +1,14 @@
-import { StackNavigator } from 'react-navigation';
+import _get from 'lodash/get';
+import { createStackNavigator } from 'react-navigation';
 
 import SettingsScreen from '../screens/SettingsScreen';
 import { colors } from '../styles';
 
-const SettingsStack = StackNavigator({
+const settingsStackNavigator = createStackNavigator({
   SettingsScreen: {
     screen: SettingsScreen,
     navigationOptions: {
-      title: 'Settings',
+      headerTitle: 'Settings',
       headerTintColor: colors.headerTint,
       headerStyle: {
         backgroundColor: colors.headerBackground,
@@ -16,4 +17,23 @@ const SettingsStack = StackNavigator({
   },
 });
 
-export default SettingsStack;
+settingsStackNavigator.navigationOptions = {
+  tabBarOnPress: ({ navigation }) => {
+    if (navigation.isFocused()) {
+      if (navigation.state.index === 0) {
+        const stackNavigation = _get(navigation, 'state.routes[0]');
+        if (stackNavigation &&
+            stackNavigation.params &&
+            stackNavigation.params.resetScreen) {
+          stackNavigation.params.resetScreen();
+        }
+      }
+
+      if (navigation.state.index === 1) {
+        navigation.navigate('SettingsScreen');
+      }
+    }
+  },
+};
+
+export default settingsStackNavigator;
