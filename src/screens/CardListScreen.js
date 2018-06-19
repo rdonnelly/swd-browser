@@ -13,6 +13,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGray,
     flex: 1,
   },
+  keyboardAvoidingView: {
+    flex: 1,
+  },
+  keyboardAvoidingViewInner: {
+    flex: 1,
+  },
   empty: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -94,9 +100,11 @@ class CardListScreen extends Component {
   }
 
   componentWillMount() {
-    this.props.navigation.setParams({
-      resetScreen: this.resetScreen,
-    });
+    if (this.props.navigation) {
+      this.props.navigation.setParams({
+        resetScreen: this.resetScreen,
+      });
+    }
   }
 
   resetScreen() {
@@ -202,7 +210,6 @@ class CardListScreen extends Component {
           placeholderColor={ colors.lightGrayDark }
           ref={ (component) => { this.searchInput = component; } }
           returnKeyType={ 'search' }
-          // onBlur={ this.handleBlurFromSearch }
           onSubmitEditing={ this.handleSubmitFromSearch }
           onChange={ this.handleChangeFromSearch }
         />
@@ -226,16 +233,19 @@ class CardListScreen extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView
-        style={ styles.container }
-        behavior={ 'padding' }
-        keyboardVerticalOffset={64}
-      >
-          { this.renderListView() }
+      <View style={ styles.container }>
+        <KeyboardAvoidingView
+          style={ styles.keyboardAvoidingView }
+          behavior={ 'padding' }
+          keyboardVerticalOffset={64}
+        >
+          <View style={ styles.keyboardAvoidingViewInner }>
+            { this.renderListView() }
 
-          { this.renderSearch() }
-
-      </KeyboardAvoidingView>
+            { this.renderSearch() }
+          </View>
+        </KeyboardAvoidingView>
+      </View>
     );
   }
 }

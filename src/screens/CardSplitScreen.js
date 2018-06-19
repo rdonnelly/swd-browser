@@ -11,20 +11,47 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
-  containerLeft: {
+  containerList: {
     borderRightColor: colors.lightGrayDark,
     borderRightWidth: StyleSheet.hairlineWidth,
     width: 320,
   },
-  containerRight: {
+  containerDetails: {
     flex: 1,
   },
 });
 
 class CardSplitScreen extends Component {
-  state = {
-    selectedCardId: null,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedCardId: null,
+    };
+
+    this.selectCard = this.selectCard.bind(this);
+    this.resetScreen = this.resetScreen.bind(this);
+  }
+
+  componentWillMount() {
+    if (this.props.navigation) {
+      this.props.navigation.setParams({
+        resetScreen: this.resetScreen,
+      });
+    }
+  }
+
+  resetScreen() {
+    if (this.listScreen && this.listScreen.resetScreen) {
+      this.listScreen.resetScreen();
+    }
+
+    if (this.detailScreen && this.detailScreen.resetScreen) {
+      this.detailView.resetScreen();
+    }
+
+    this.setState({ selectedCardId: null });
+  }
 
   selectCard(cardId) {
     this.setState({
@@ -35,15 +62,17 @@ class CardSplitScreen extends Component {
   render() {
     return (
       <View style={ styles.container }>
-        <View style={ styles.containerLeft }>
+        <View style={ styles.containerList }>
           <CardListScreen
-            selectCard={ this.selectCard.bind(this) }
+            ref={ (component) => { this.listScreen = component; } }
+            selectCard={ this.selectCard }
             selectedCardId={ this.state.selectedCardId }
           />
         </View>
-        <View style={ styles.containerRight }>
+        <View style={ styles.containerDetails }>
           <CardDetailScreen
-            selectCard={ this.selectCard.bind(this) }
+            ref={ (component) => { this.detailScreen = component; } }
+            selectCard={ this.selectCard }
             selectedCardId={ this.state.selectedCardId }
           />
         </View>
