@@ -29,7 +29,7 @@ const cardBrowserStack = createStackNavigator(
 );
 
 cardBrowserStack.navigationOptions = {
-  tabBarOnPress: ({ navigation }) => {
+  tabBarOnPress: ({ navigation, defaultHandler }) => {
     if (navigation.isFocused()) {
       if (navigation.state.index === 0) {
         const stackNavigation = _get(navigation, 'state.routes[0]');
@@ -43,6 +43,8 @@ cardBrowserStack.navigationOptions = {
       if (navigation.state.index === 1) {
         navigation.navigate('CardsList');
       }
+    } else {
+      defaultHandler();
     }
   },
 };

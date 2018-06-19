@@ -47,7 +47,6 @@ export default createBottomTabNavigator(
             name={ iconName }
             size={ 24 }
             color={ tintColor }
-            style={{ marginTop: useHorizontalTabs ? 0 : 4 }}
           />
         );
       },
@@ -57,6 +56,9 @@ export default createBottomTabNavigator(
       inactiveTintColor: colors.tabInactiveTint,
       labelStyle: {
         fontSize: useHorizontalTabs ? 15 : 13,
+      },
+      tabStyle: {
+        paddingTop: useHorizontalTabs ? 0 : 4,
       },
     },
   },

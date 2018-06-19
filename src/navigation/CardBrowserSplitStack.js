@@ -22,12 +22,18 @@ const cardBrowserSplitStack = createStackNavigator(
 );
 
 cardBrowserSplitStack.navigationOptions = {
-  tabBarOnPress: ({ navigation }) => {
-    const stackNavigation = _get(navigation, 'state.routes[0]');
-    if (stackNavigation &&
-        stackNavigation.params &&
-        stackNavigation.params.resetScreen) {
-      stackNavigation.params.resetScreen();
+  tabBarOnPress: ({ navigation, defaultHandler }) => {
+    if (navigation.isFocused()) {
+      if (navigation.state.index === 0) {
+        const stackNavigation = _get(navigation, 'state.routes[0]');
+        if (stackNavigation &&
+            stackNavigation.params &&
+            stackNavigation.params.resetScreen) {
+          stackNavigation.params.resetScreen();
+        }
+      }
+    } else {
+      defaultHandler();
     }
   },
 };
