@@ -36,7 +36,7 @@ export default {
   replaceIconPlaceholders(text) {
     let newText = text;
     Object.keys(ICON_REPLACEMENTS).forEach((key) => {
-      newText = newText.replace(key, ICON_REPLACEMENTS[key]);
+      newText = newText.replace(new RegExp(key, 'gi'), ICON_REPLACEMENTS[key]);
     });
 
     return newText;
