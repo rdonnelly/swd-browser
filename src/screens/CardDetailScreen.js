@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Dimensions, SafeAreaView, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import { Dimensions, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import _get from 'lodash/get';
 
 import { cardDatabase } from '../data';
@@ -278,7 +278,6 @@ class CardDetailScreen extends Component {
             { this.state.list.map(this.renderCard) }
           </ScrollView>
         }
-        <StatusBar animated={ true } barStyle="light-content" />
       </SafeAreaView>
     );
   }

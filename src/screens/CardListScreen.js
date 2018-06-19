@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { FlatList, StatusBar, StyleSheet, Text, TextInput, View, KeyboardAvoidingView } from 'react-native';
+import { FlatList, StyleSheet, Text, TextInput, View, KeyboardAvoidingView } from 'react-native';
 
 import CardListItem, { ITEM_HEIGHT } from '../components/CardListItem';
 import { colors } from '../styles';
@@ -235,7 +235,6 @@ class CardListScreen extends Component {
 
           { this.renderSearch() }
 
-        <StatusBar animated={ true } barStyle="light-content" />
       </KeyboardAvoidingView>
     );
   }

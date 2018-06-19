@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { StatusBar, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import CardListScreen from '../screens/CardListScreen';
 import CardDetailScreen from '../screens/CardDetailScreen';
@@ -47,7 +47,6 @@ class CardSplitScreen extends Component {
             selectedCardId={ this.state.selectedCardId }
           />
         </View>
-        <StatusBar animated={ true } barStyle="light-content" />
       </View>
     );
   }
