@@ -55,6 +55,7 @@ class SettingsScreen extends Component {
 
     this.resetScreen = this.resetScreen.bind(this);
     this.updateFilter = this.updateFilter.bind(this);
+    this.updateFilterList = this.updateFilterList.bind(this);
     this.removeFilter = this.removeFilter.bind(this);
   }
 
@@ -169,9 +170,9 @@ class SettingsScreen extends Component {
     const subtypeCloud = (
       <FilterCloud
         label={ 'Subtypes' }
-        setting={ 'subtype' }
+        setting={ 'subtypes' }
         options={ subtypeOptions }
-        onCallback={ this.updateFilter }
+        onCallback={ this.updateFilterList }
         offCallback={ this.removeFilter }
       />
     );
@@ -251,7 +252,6 @@ class SettingsScreen extends Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
-        <StatusBar animated={ true } barStyle="light-content" />
       </View>
     );
   }

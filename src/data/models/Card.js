@@ -50,8 +50,8 @@ class Card {
     return this.card.type_code.charAt(0).toUpperCase() + this.card.type_code.slice(1);
   }
 
-  get subtype() {
-    return this.card.subtype_code || '';
+  get subtypes() {
+    return this.card.subtypes || [];
   }
 
   get text() {

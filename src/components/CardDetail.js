@@ -286,7 +286,7 @@ class CardDetail extends Component {
       affiliation: cardAffiliation,
       position: cardPosition,
       set: cardSet,
-      subtype: cardSubtype,
+      subtypes: cardSubtypes,
       type: cardType,
     } = this.props.card;
 
@@ -294,9 +294,11 @@ class CardDetail extends Component {
       cardAffiliation.charAt(0).toUpperCase() + cardAffiliation.slice(1);
     const displayCardType = cardType.charAt(0).toUpperCase() + cardType.slice(1);
 
-    let displayCardSubtype;
-    if (cardSubtype) {
-      displayCardSubtype = cardSubtype.charAt(0).toUpperCase() + cardSubtype.slice(1);
+    let displayCardSubtypes;
+    if (cardSubtypes) {
+      displayCardSubtypes = cardSubtypes
+        .map(subtype => subtype.charAt(0).toUpperCase() + subtype.slice(1))
+        .join('&nbsp;&nbsp;&middot;&nbsp;&nbsp;');
     }
 
     return (
@@ -311,9 +313,9 @@ class CardDetail extends Component {
           &nbsp;&nbsp;&middot;&nbsp;&nbsp;
           { displayCardType }
         </Text>
-        { cardSubtype ? (
+        { cardSubtypes ? (
           <Text style={ styles.cardDetailsTypeText }>
-            &nbsp;&nbsp;&middot;&nbsp;&nbsp;{ displayCardSubtype }
+            &nbsp;&nbsp;&middot;&nbsp;&nbsp;{ displayCardSubtypes }
           </Text>) : null
         }
         { cardAffiliation ? (
