@@ -88,6 +88,7 @@ class CardListScreen extends Component {
     this.handleBlurFromSearch = this.handleBlurFromSearch.bind(this);
     this.handleSubmitFromSearch = this.handleSubmitFromSearch.bind(this);
     this.handleChangeFromSearch = this.handleChangeFromSearch.bind(this);
+    this.handleScrollBeginDrag = this.handleScrollBeginDrag.bind(this);
     this.renderItem = this.renderItem.bind(this);
     this.renderSearch = this.renderSearch.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
@@ -152,6 +153,10 @@ class CardListScreen extends Component {
     }
   }
 
+  handleScrollBeginDrag() {
+    this.searchInput.blur();
+  }
+
   getItemLayout(data, index) {
     return {
       offset: ITEM_HEIGHT * index,
@@ -177,6 +182,7 @@ class CardListScreen extends Component {
         contentContainerStyle={{ paddingBottom: 72 }}
         updateCellsBatchingPeriod={ 100 }
         windowSize={ 35 }
+        onScrollBeginDrag={ this.handleScrollBeginDrag }
       />
     );
   }
