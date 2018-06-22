@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   cardTitleSubtitle: {
     fontSize: 14,
     fontWeight: '700',
-    color: colors.lightGray,
+    color: colors.whiteTranslucentDark,
     textAlign: 'center',
     lineHeight: 14,
   },
@@ -295,10 +295,12 @@ class CardDetail extends Component {
     const displayCardType = cardType.charAt(0).toUpperCase() + cardType.slice(1);
 
     let displayCardSubtypes;
-    if (cardSubtypes) {
+    if (cardSubtypes && cardSubtypes.length) {
       displayCardSubtypes = cardSubtypes
-        .map(subtype => subtype.charAt(0).toUpperCase() + subtype.slice(1))
-        .join('&nbsp;&nbsp;&middot;&nbsp;&nbsp;');
+        .map(subtype =>
+          <Text key={ `subtype_${subtype}`}>
+            &nbsp;&nbsp;&middot;  { subtype.charAt(0).toUpperCase() + subtype.slice(1) }
+          </Text>);
     }
 
     return (
@@ -310,17 +312,16 @@ class CardDetail extends Component {
           </Text>) : null
         }
         <Text style={ styles.cardDetailsTypeText }>
-          &nbsp;&nbsp;&middot;&nbsp;&nbsp;
-          { displayCardType }
+          &nbsp;&nbsp;&middot;  { displayCardType }
         </Text>
-        { cardSubtypes ? (
+        { displayCardSubtypes ? (
           <Text style={ styles.cardDetailsTypeText }>
-            &nbsp;&nbsp;&middot;&nbsp;&nbsp;{ displayCardSubtypes }
+            { displayCardSubtypes }
           </Text>) : null
         }
-        { cardAffiliation ? (
+        { displayCardAffiliation ? (
           <Text style={ styles.cardDetailsTypeText }>
-            &nbsp;&nbsp;&middot;&nbsp;&nbsp;{ displayCardAffiliation }
+            &nbsp;&nbsp;&middot;  { displayCardAffiliation }
           </Text>) : null
         }
       </View>
