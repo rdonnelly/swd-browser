@@ -62,10 +62,6 @@ const styles = StyleSheet.create({
 });
 
 class FilterCloud extends Component {
-  static defaultProps = {
-    value: true,
-  };
-
   constructor(props) {
     super(props);
 
@@ -87,6 +83,10 @@ class FilterCloud extends Component {
     }
 
     return true;
+  }
+
+  reset() {
+    this.selectAll();
   }
 
   onValueChange(code, value) {

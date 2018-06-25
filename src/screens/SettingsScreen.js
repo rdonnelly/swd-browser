@@ -123,7 +123,20 @@ class SettingsScreen extends Component {
       'This will clear all settings and filters. Are you sure you want to continue?',
       [
         { text: 'Cancel' },
-        { text: 'Reset', onPress: () => cardDatabase.removeAllFilters(), style: 'destructive' },
+        {
+          text: 'Reset',
+          onPress: () => {
+            this.affiliationCloud.reset();
+            this.factionCloud.reset();
+            this.setCloud.reset();
+            this.typeCloud.reset();
+            this.subtypeCloud.reset();
+            this.keywordCloud.reset();
+            this.rarityCloud.reset();
+            cardDatabase.removeAllFilters();
+          },
+          style: 'destructive',
+        },
       ],
     );
   }
@@ -152,6 +165,7 @@ class SettingsScreen extends Component {
         options={ affiliationOptions }
         onCallback={ this.updateFilter }
         offCallback={ this.removeFilter }
+        ref={ (component) => { this.affiliationCloud = component; } }
       />
     );
 
@@ -169,6 +183,7 @@ class SettingsScreen extends Component {
         options={ factionOptions }
         onCallback={ this.updateFilter }
         offCallback={ this.removeFilter }
+        ref={ (component) => { this.factionCloud = component; } }
       />
     );
 
@@ -182,6 +197,7 @@ class SettingsScreen extends Component {
         options={ setOptions }
         onCallback={ this.updateFilter }
         offCallback={ this.removeFilter }
+        ref={ (component) => { this.setCloud = component; } }
       />
     );
 
@@ -195,6 +211,7 @@ class SettingsScreen extends Component {
         options={ typeOptions }
         onCallback={ this.updateFilter }
         offCallback={ this.removeFilter }
+        ref={ (component) => { this.typeCloud = component; } }
       />
     );
 
@@ -213,6 +230,7 @@ class SettingsScreen extends Component {
         options={ subtypeOptions }
         onCallback={ this.updateFilterList }
         offCallback={ this.removeFilter }
+        ref={ (component) => { this.subtypeCloud = component; } }
       />
     );
 
@@ -240,6 +258,7 @@ class SettingsScreen extends Component {
         options={ keywordOptions }
         onCallback={ this.updateFilterList }
         offCallback={ this.removeFilter }
+        ref={ (component) => { this.keywordCloud = component; } }
       />
     );
 
@@ -253,6 +272,7 @@ class SettingsScreen extends Component {
         options={ rarityOptions }
         onCallback={ this.updateFilter }
         offCallback={ this.removeFilter }
+        ref={ (component) => { this.rarityCloud = component; } }
       />
     );
 
