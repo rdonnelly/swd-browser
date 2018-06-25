@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import SafariView from 'react-native-safari-view';
 
 import FilterCloud from '../components/FilterCloud';
@@ -23,6 +23,17 @@ const styles = StyleSheet.create({
     borderTopWidth: StyleSheet.hairlineWidth,
     marginBottom: 24,
     paddingTop: 24,
+  },
+  resetButton: {
+    backgroundColor: colors.brand,
+    borderRadius: 4,
+    padding: 12,
+  },
+  resetButtonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontWeight: '700',
+    textAlign: 'center',
   },
   disclaimerText: {
     color: colors.gray,
@@ -54,9 +65,13 @@ class SettingsScreen extends Component {
     );
 
     this.resetScreen = this.resetScreen.bind(this);
+
     this.updateFilter = this.updateFilter.bind(this);
     this.updateFilterList = this.updateFilterList.bind(this);
     this.removeFilter = this.removeFilter.bind(this);
+    this.removeAllFilters = this.removeAllFilters.bind(this);
+
+    this.renderReset = this.renderReset.bind(this);
   }
 
   componentWillMount() {
@@ -100,6 +115,30 @@ class SettingsScreen extends Component {
   removeFilter(setting) {
     const key = `filter_${setting}`;
     cardDatabase.removeFilter(key);
+  }
+
+  removeAllFilters() {
+    Alert.alert(
+      'Reset Settings?',
+      'This will clear all settings and filters. Are you sure you want to continue?',
+      [
+        { text: 'Cancel' },
+        { text: 'Reset', onPress: () => cardDatabase.removeAllFilters(), style: 'destructive' },
+      ],
+    );
+  }
+
+  renderReset() {
+    return (
+      <View style={ styles.information }>
+        <TouchableOpacity
+          onPress={ this.removeAllFilters }
+          style={ styles.resetButton }
+        >
+          <Text style={ styles.resetButtonText }>Reset Settings</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 
   render() {
@@ -231,6 +270,8 @@ class SettingsScreen extends Component {
           { subtypeCloud }
           { keywordCloud }
           { rarityCloud }
+
+          { this.renderReset() }
 
           <View style={ styles.information }>
             <Text style={ styles.disclaimerText }>
