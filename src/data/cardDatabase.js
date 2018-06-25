@@ -67,6 +67,11 @@ class CardDatabase {
     return this.filter();
   }
 
+  removeAllFilters() {
+    this.filters = {};
+    return this.filter();
+  }
+
   filter() {
     this.results = this.cards.filter(card =>
       Object.keys(this.filters).every((key) => {
