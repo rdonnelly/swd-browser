@@ -119,13 +119,15 @@ class SettingsScreen extends Component {
 
   removeAllFilters() {
     Alert.alert(
-      'Reset Settings?',
-      'This will clear all settings and filters. Are you sure you want to continue?',
+      'Reset Filters?',
+      'This will reset all filters. Are you sure you want to continue?',
       [
         { text: 'Cancel' },
         {
           text: 'Reset',
           onPress: () => {
+            cardDatabase.removeAllFilters();
+
             this.affiliationCloud.reset();
             this.factionCloud.reset();
             this.setCloud.reset();
@@ -133,7 +135,6 @@ class SettingsScreen extends Component {
             this.subtypeCloud.reset();
             this.keywordCloud.reset();
             this.rarityCloud.reset();
-            cardDatabase.removeAllFilters();
           },
           style: 'destructive',
         },
@@ -148,7 +149,7 @@ class SettingsScreen extends Component {
           onPress={ this.removeAllFilters }
           style={ styles.resetButton }
         >
-          <Text style={ styles.resetButtonText }>Reset Settings</Text>
+          <Text style={ styles.resetButtonText }>Reset Filters</Text>
         </TouchableOpacity>
       </View>
     );
