@@ -116,7 +116,10 @@ class CardListItem extends Component {
           </View>
           <View style={ styles.cardDetails }>
             <View style={ styles.cardDetailsName }>
-              <Text style={ styles.cardDetailsNameText }>
+              <Text
+                style={ styles.cardDetailsNameText }
+                numberOfLines={ 1 }
+              >
                 { card.name }
               </Text>
             </View>
