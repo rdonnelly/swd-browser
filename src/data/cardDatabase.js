@@ -22,6 +22,7 @@ class CardDatabase {
       require('swdestinydb-json-data/set/LEG.json'), // eslint-disable-line global-require
       require('swdestinydb-json-data/set/RIV.json'), // eslint-disable-line global-require
       require('swdestinydb-json-data/set/WotF.json'), // eslint-disable-line global-require
+      require('swdestinydb-json-data/set/AtG.json'), // eslint-disable-line global-require
     ).map(card => new Card(card));
 
     this.results = this.cards;

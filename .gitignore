@@ -52,15 +52,11 @@ buck-out/
 */fastlane/Preview.html
 */fastlane/screenshots
 
-<<<<<<< ours
-
 # react-native-bundle-visualizer
 # https://github.com/IjzerenHein/react-native-bundle-visualizer
 dist/
 .happypack/
 haul-debug.log
 
-=======
->>>>>>> theirs
 # Bundle artifact
 *.jsbundle
