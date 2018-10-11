@@ -444,6 +444,13 @@ class CardDetail extends Component {
       }
 
       const isBlank = sideType === '-';
+      const isX = sideValue === '0';
+      let displayValue = sideValue;
+      if (isBlank) {
+        displayValue = '—';
+      } else if (isX) {
+        displayValue = 'X';
+      }
 
       let extraIconStyles = null;
       let extraTextStyles = null;
@@ -467,7 +474,7 @@ class CardDetail extends Component {
             }
             <View style={ styles.cardDetailsDiceSideElement }>
               <Text style={ [textTopStyles, extraTextStyles] }>
-                { isBlank ? '—' : sideValue }
+                { displayValue }
               </Text>
             </View>
             <View style={ styles.cardDetailsDiceSideElement }>
