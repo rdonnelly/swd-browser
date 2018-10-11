@@ -45,20 +45,21 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   search: {
-    backgroundColor: colors.lightGrayDark,
-    borderRadius: 4,
-    bottom: 8,
-    left: 8,
+    backgroundColor: colors.lightGrayTranslucent,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    bottom: 0,
+    left: 0,
     padding: 8,
     position: 'absolute',
-    right: 8,
+    right: 0,
   },
   searchInput: {
     backgroundColor: colors.white,
+    borderRadius: 4,
     color: colors.darkGray,
     fontSize: 16,
     padding: 12,
-    borderRadius: 4,
   },
   footer: {
     alignItems: 'center',
@@ -179,7 +180,7 @@ class CardListScreen extends Component {
         getItemLayout={ this.getItemLayout }
         ListFooterComponent={ this.renderFooter }
         ListEmptyComponent={ this.renderEmpty }
-        contentContainerStyle={{ paddingBottom: 72 }}
+        contentContainerStyle={{ paddingBottom: 60 }}
         updateCellsBatchingPeriod={ 100 }
         windowSize={ 35 }
         onScrollBeginDrag={ this.handleScrollBeginDrag }

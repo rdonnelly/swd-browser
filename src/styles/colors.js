@@ -26,6 +26,7 @@ const lightGrayTranslucent = 'rgba(189, 195, 199, 0.25)';
 const gray = 'rgba(149, 165, 166, 1.0)';
 const grayDark = 'rgba(127, 140, 141, 1.0)';
 const grayDarkDark = 'rgba(93, 102, 103, 1.0)';
+const grayTranslucent = 'rgba(149, 165, 166, 0.75)';
 
 const darkGray = 'rgba(52, 73, 94, 1.0)';
 const darkGrayDark = 'rgba(44, 62, 80, 1.0)';
@@ -63,6 +64,7 @@ export default {
   gray,
   grayDark,
   grayDarkDark,
+  grayTranslucent,
 
   darkGray,
   darkGrayDark,

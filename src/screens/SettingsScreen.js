@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
   scrollViewContent: {
     paddingHorizontal: 24,
     paddingTop: 24,
+    paddingBottom: 64,
   },
   information: {
     borderColor: colors.lightGrayDark,
@@ -24,12 +25,22 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     paddingTop: 24,
   },
-  resetButton: {
+  floatingControls: {
+    backgroundColor: colors.lightGrayTranslucent,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    bottom: 0,
+    left: 0,
+    padding: 8,
+    position: 'absolute',
+    right: 0,
+  },
+  floatingControlsButton: {
     backgroundColor: colors.brand,
     borderRadius: 4,
     padding: 12,
   },
-  resetButtonText: {
+  floatingControlsButtonText: {
     color: colors.white,
     fontSize: 16,
     fontWeight: '700',
@@ -144,12 +155,12 @@ class SettingsScreen extends Component {
 
   renderReset() {
     return (
-      <View style={ styles.information }>
+      <View style={ styles.floatingControls }>
         <TouchableOpacity
           onPress={ this.removeAllFilters }
-          style={ styles.resetButton }
+          style={ styles.floatingControlsButton }
         >
-          <Text style={ styles.resetButtonText }>Reset Filters</Text>
+          <Text style={ styles.floatingControlsButtonText }>Reset Filters</Text>
         </TouchableOpacity>
       </View>
     );
@@ -292,8 +303,6 @@ class SettingsScreen extends Component {
           { keywordCloud }
           { rarityCloud }
 
-          { this.renderReset() }
-
           <View style={ styles.information }>
             <Text style={ styles.disclaimerText }>
               The information presented in this app about Star Wars Destiny,
@@ -314,6 +323,7 @@ class SettingsScreen extends Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
+        { this.renderReset() }
       </View>
     );
   }
