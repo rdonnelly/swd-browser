@@ -131,7 +131,8 @@ class CardListScreen extends Component {
         'CardsDetail',
         {
           cardId: card.id,
-          cardName: card.name,
+          cardPosition: card.position,
+          cardSet: card.set,
         },
       );
     }

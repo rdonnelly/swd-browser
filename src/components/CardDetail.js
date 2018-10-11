@@ -284,8 +284,6 @@ class CardDetail extends Component {
   renderCardType() {
     const {
       affiliation: cardAffiliation,
-      position: cardPosition,
-      set: cardSet,
       subtypes: cardSubtypes,
       type: cardType,
     } = this.props.card;
@@ -305,14 +303,8 @@ class CardDetail extends Component {
 
     return (
       <View style={ styles.cardDetailsType }>
-        { cardPosition ? (
-          <Text style={ styles.cardDetailsTypeText }>
-            <SWDIcon type={ cardSet } style={ styles.cardDetailsTypeTextIcon } />
-            &nbsp;{ cardSet }&nbsp;{ cardPosition }
-          </Text>) : null
-        }
         <Text style={ styles.cardDetailsTypeText }>
-          &nbsp;&nbsp;&middot;  { displayCardType }
+          { displayCardType }
         </Text>
         { displayCardSubtypes ? (
           <Text style={ styles.cardDetailsTypeText }>

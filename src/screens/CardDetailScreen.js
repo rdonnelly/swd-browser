@@ -116,7 +116,8 @@ class CardDetailScreen extends Component {
     if (this.props.navigation) {
       this.props.navigation.setParams({
         cardId: selectedCard.id,
-        cardName: selectedCard.name,
+        cardPosition: selectedCard.position,
+        cardSet: selectedCard.set,
       });
     }
   }

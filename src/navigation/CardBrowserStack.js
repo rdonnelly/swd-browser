@@ -1,9 +1,25 @@
 import _get from 'lodash/get';
+import React from 'react';
+import { StyleSheet, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
+import SWDIcon from '../components/SWDIcon';
 import CardListScreen from '../screens/CardListScreen';
 import CardDetailScreen from '../screens/CardDetailScreen';
 import { colors } from '../styles';
+
+const styles = StyleSheet.create({
+  headerTitle: {
+    color: colors.headerTint,
+    fontSize: 17,
+    fontWeight: '700',
+    marginHorizontal: 16,
+    textAlign: 'center',
+  },
+  headerTitleIcon: {
+    fontSize: 15,
+  },
+});
 
 const cardBrowserStack = createStackNavigator(
   {
@@ -13,7 +29,17 @@ const cardBrowserStack = createStackNavigator(
     CardsDetail: {
       screen: CardDetailScreen,
       navigationOptions: ({ navigation }) => ({
-        headerTitle: `${navigation.state.params.cardName}`,
+        headerTitle: (
+          <Text style={styles.headerTitle}>
+            <SWDIcon type={ navigation.state.params.cardSet } style={ styles.headerTitleIcon } />
+            &nbsp;
+            <Text>
+              { navigation.state.params.cardSet }
+              &nbsp;
+              { navigation.state.params.cardPosition }
+            </Text>
+          </Text>
+        ),
       }),
     },
   },
