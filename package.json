@@ -14,8 +14,8 @@
   "dependencies": {
     "lodash": "4.17.x",
     "prop-types": "15.6.x",
-    "react": "16.5.0",
-    "react-native": "0.57.2",
+    "react": "16.6.0-alpha.8af6728",
+    "react-native": "0.57.3",
     "react-native-device-info": "0.24.x",
     "react-native-render-html": "3.9.x",
     "react-native-safari-view": "2.1.x",
@@ -33,13 +33,7 @@
     "eslint-plugin-react-native": "3.3.x",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.48.1",
-    "react-test-renderer": "16.5.0"
-  },
-  "resolutions": {
-    "metro": "^0.48.1",
-    "metro-babel-register": "^0.48.1",
-    "metro-core": "^0.48.1",
-    "metro-memory-fs": "^0.48.1"
+    "react-test-renderer": "16.6.0-alpha.8af6728"
   },
   "jest": {
     "preset": "react-native"
