@@ -7,7 +7,7 @@ import {
 import Icon from 'react-native-vector-icons/Entypo';
 
 import SWDIcon from './SWDIcon';
-import { validate as validateIcon } from '../utils/SWDIconMap';
+import { validateCode } from '../lib/SWDIconCodes';
 import { colors } from '../styles';
 
 export const ITEM_HEIGHT = 58;
@@ -95,7 +95,7 @@ class CardListItem extends Component {
     const iconGlyphStyles = [styles.cardIconGlyph];
     iconGlyphStyles.push({ color: colors[colorString] });
 
-    const setIcon = validateIcon(card.set) ?
+    const setIcon = validateCode(card.set) ?
       (<SWDIcon type={ card.set } font={ 'swdestiny' } style={ styles.cardDetailsInfoTextIcon } />) :
       null;
 
