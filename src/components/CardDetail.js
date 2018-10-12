@@ -398,6 +398,7 @@ class CardDetail extends Component {
       const parts = dieSide.match(/(\+)?([0-9]*)([A-Za-z-]*)([0-9]*)/);
 
       const [
+        , // eslint-disable-line comma-style
         isModifier,
         sideValue,
         sideType,
