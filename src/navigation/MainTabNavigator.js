@@ -17,8 +17,10 @@ export default createBottomTabNavigator(
   {
     Cards: {
       screen: DeviceInfo.isTablet() ?
-        require('./CardBrowserSplitStack').default : // eslint-disable-line global-require
-        require('./CardBrowserStack').default, // eslint-disable-line global-require
+        // eslint-disable-next-line global-require
+        require('./CardBrowserSplitStack').default :
+        // eslint-disable-next-line global-require
+        require('./CardBrowserStack').default,
       navigationOptions: {
         tabBarLabel: 'Cards',
       },

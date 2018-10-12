@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { FlatList, StyleSheet, Text, TextInput, View, KeyboardAvoidingView } from 'react-native';
+import {
+  FlatList, KeyboardAvoidingView, StyleSheet, Text, TextInput, View,
+} from 'react-native';
 
 import CardListItem, { ITEM_HEIGHT } from '../components/CardListItem';
 import { colors } from '../styles';

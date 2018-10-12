@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Dimensions, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import {
+  Dimensions, SafeAreaView, ScrollView, StyleSheet, View,
+} from 'react-native';
 import _get from 'lodash/get';
 
 import { cardDatabase } from '../data';

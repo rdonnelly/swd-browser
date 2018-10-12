@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import CardListScreen from '../screens/CardListScreen';
-import CardDetailScreen from '../screens/CardDetailScreen';
+import CardListScreen from './CardListScreen';
+import CardDetailScreen from './CardDetailScreen';
 import { colors } from '../styles';
 
 const styles = StyleSheet.create({

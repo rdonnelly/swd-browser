@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import _get from 'lodash/get';
 import _findIndex from 'lodash/findIndex';
 
@@ -15,14 +16,14 @@ class CardDatabase {
 
   init() {
     this.cards = [].concat(
-      require('swdestinydb-json-data/set/AW.json'), // eslint-disable-line global-require
-      require('swdestinydb-json-data/set/SoR.json'), // eslint-disable-line global-require
-      require('swdestinydb-json-data/set/EaW.json'), // eslint-disable-line global-require
-      require('swdestinydb-json-data/set/TPG.json'), // eslint-disable-line global-require
-      require('swdestinydb-json-data/set/LEG.json'), // eslint-disable-line global-require
-      require('swdestinydb-json-data/set/RIV.json'), // eslint-disable-line global-require
-      require('swdestinydb-json-data/set/WotF.json'), // eslint-disable-line global-require
-      require('swdestinydb-json-data/set/AtG.json'), // eslint-disable-line global-require
+      require('swdestinydb-json-data/set/AW.json'),
+      require('swdestinydb-json-data/set/SoR.json'),
+      require('swdestinydb-json-data/set/EaW.json'),
+      require('swdestinydb-json-data/set/TPG.json'),
+      require('swdestinydb-json-data/set/LEG.json'),
+      require('swdestinydb-json-data/set/RIV.json'),
+      require('swdestinydb-json-data/set/WotF.json'),
+      require('swdestinydb-json-data/set/AtG.json'),
     ).map(card => new Card(card));
 
     this.results = this.cards;
@@ -74,14 +75,13 @@ class CardDatabase {
   }
 
   filter() {
-    this.results = this.cards.filter(card =>
-      Object.keys(this.filters).every((key) => {
-        if (this.filters[key](card)) {
-          return true;
-        }
+    this.results = this.cards.filter(card => Object.keys(this.filters).every((key) => {
+      if (this.filters[key](card)) {
+        return true;
+      }
 
-        return false;
-      }));
+      return false;
+    }));
 
     this.filterListeners.forEach(callback => callback(this.results));
 

@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  Image, ScrollView, StyleSheet, Text, View,
+} from 'react-native';
 import Html from 'react-native-render-html';
 import DeviceInfo from 'react-native-device-info';
 
@@ -182,6 +184,10 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     width: '100%',
   },
+  cardDetailsText: {
+    color: colors.darkGray,
+    fontSize: DeviceInfo.isTablet() ? 20 : 17,
+  },
   cardAdditionalInfoWrapper: {
     alignItems: 'center',
     backgroundColor: colors.lightGrayTranslucent,
@@ -295,8 +301,7 @@ class CardDetail extends Component {
     let displayCardSubtypes;
     if (cardSubtypes && cardSubtypes.length) {
       displayCardSubtypes = cardSubtypes
-        .map(subtype =>
-          <Text key={ `subtype_${subtype}`}>
+        .map(subtype => <Text key={ `subtype_${subtype}`}>
             &nbsp;&nbsp;&middot;  { subtype.charAt(0).toUpperCase() + subtype.slice(1) }
           </Text>);
     }
@@ -393,7 +398,6 @@ class CardDetail extends Component {
       const parts = dieSide.match(/(\+)?([0-9]*)([A-Za-z-]*)([0-9]*)/);
 
       const [
-        ,
         isModifier,
         sideValue,
         sideType,
@@ -512,7 +516,7 @@ class CardDetail extends Component {
       <View style={ styles.cardDetailsTextWrapper }>
         <Html
           html={ cardText }
-          baseFontStyle={{ fontSize: DeviceInfo.isTablet() ? 20 : 17, color: colors.darkGray }}
+          baseFontStyle={ styles.cardDetailsText }
           tagsStyles={{ p: { marginTop: 0, marginBottom: 0 } }}
           renderers={ customRenderers }
         />
@@ -551,8 +555,7 @@ class CardDetail extends Component {
     if (cardStarterSets && cardStarterSets.length) {
       views.push((
         <View style={ styles.cardAdditionalInfoWrapper } key={ 'additional-info-starters' }>
-          { cardStarterSets.map(starterName =>
-            <View
+          { cardStarterSets.map(starterName => <View
               style={ styles.cardAdditionalInfoItem }
               key={ `found-in-starter-${starterName}` }
             >

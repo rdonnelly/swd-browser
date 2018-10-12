@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Alert, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Alert, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View,
+} from 'react-native';
 import SafariView from 'react-native-safari-view';
 
 import FilterCloud from '../components/FilterCloud';
@@ -182,7 +184,8 @@ class SettingsScreen extends Component {
     );
 
     const factionOptions =
-      require('swdestinydb-json-data/factions.json') // eslint-disable-line global-require
+      // eslint-disable-next-line global-require
+      require('swdestinydb-json-data/factions.json')
         .map(faction => ({
           code: faction.code,
           name: faction.code.charAt(0).toUpperCase() + faction.code.slice(1),
