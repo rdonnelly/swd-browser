@@ -21,19 +21,21 @@ const redDark = 'rgba(192, 57, 43, 1.0)';
 
 const lightGray = 'rgba(236, 240, 241, 1.0)';
 const lightGrayDark = 'rgba(189, 195, 199, 1.0)';
+const lightGray95 = 'rgba(189, 195, 199, 0.95)';
 const lightGrayTranslucent = 'rgba(189, 195, 199, 0.25)';
 
 const gray = 'rgba(149, 165, 166, 1.0)';
 const grayDark = 'rgba(127, 140, 141, 1.0)';
 const grayDarkDark = 'rgba(93, 102, 103, 1.0)';
-const grayTranslucent = 'rgba(149, 165, 166, 0.75)';
+const grayTranslucent = 'rgba(149, 165, 166, 0.4)';
 
 const darkGray = 'rgba(52, 73, 94, 1.0)';
 const darkGrayDark = 'rgba(44, 62, 80, 1.0)';
+const darkGrayTranslucent90 = 'rgba(52, 73, 94, 0.9)';
 
 const white = 'rgba(255, 255, 255, 1.0)';
 const whiteTranslucent = 'rgba(255, 255, 255, 0.5)';
-const whiteTranslucentDark = 'rgba(255, 255, 255, 0.75)';
+const whiteTranslucent75 = 'rgba(255, 255, 255, 0.75)';
 
 export default {
   turquoise,
@@ -60,6 +62,7 @@ export default {
   lightGray,
   lightGrayDark,
   lightGrayTranslucent,
+  lightGray95,
 
   gray,
   grayDark,
@@ -68,10 +71,13 @@ export default {
 
   darkGray,
   darkGrayDark,
+  darkGrayTranslucent90,
 
   white,
   whiteTranslucent,
-  whiteTranslucentDark,
+  whiteTranslucent75,
+
+  primary: darkGray,
 
   brand: turquoise,
   brandDark: turquoiseDark,

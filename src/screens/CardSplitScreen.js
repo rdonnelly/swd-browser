@@ -4,20 +4,21 @@ import { StyleSheet, View } from 'react-native';
 
 import CardListScreen from './CardListScreen';
 import CardDetailScreen from './CardDetailScreen';
-import { colors } from '../styles';
+import { base, colors } from '../styles';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    ...base.container,
     flexDirection: 'row',
   },
   containerList: {
+    ...base.container,
     borderRightColor: colors.lightGrayDark,
     borderRightWidth: StyleSheet.hairlineWidth,
     width: 320,
   },
   containerDetails: {
-    flex: 1,
+    ...base.container,
   },
 });
 
@@ -29,19 +30,14 @@ class CardSplitScreen extends Component {
       selectedCardId: null,
     };
 
-    this.selectCard = this.selectCard.bind(this);
-    this.resetScreen = this.resetScreen.bind(this);
-  }
-
-  componentWillMount() {
-    if (this.props.navigation) {
-      this.props.navigation.setParams({
+    if (props.navigation) {
+      props.navigation.setParams({
         resetScreen: this.resetScreen,
       });
     }
   }
 
-  resetScreen() {
+  resetScreen = () => {
     if (this.listScreen && this.listScreen.resetScreen) {
       this.listScreen.resetScreen();
     }
@@ -53,7 +49,7 @@ class CardSplitScreen extends Component {
     this.setState({ selectedCardId: null });
   }
 
-  selectCard(cardId) {
+  selectCard = (cardId) => {
     this.setState({
       selectedCardId: cardId,
     });

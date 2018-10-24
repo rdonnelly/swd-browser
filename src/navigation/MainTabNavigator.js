@@ -1,16 +1,11 @@
 /* eslint-disable react/display-name */
 import React from 'react';
-import { Platform } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Entypo';
 import DeviceInfo from 'react-native-device-info';
 
 import SettingsStack from './SettingsStack';
 import { colors } from '../styles';
-
-const majorVersion = parseInt(Platform.Version, 10);
-const isIos = Platform.OS === 'ios';
-const useHorizontalTabs = DeviceInfo.isTablet() && isIos && majorVersion >= 11;
 
 
 export default createBottomTabNavigator(
@@ -35,7 +30,8 @@ export default createBottomTabNavigator(
   {
     backBehavior: 'none',
     navigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ tintColor }) => { // eslint-disable-line react/prop-types
+      // eslint-disable-next-line react/prop-types
+      tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === 'Cards') {
@@ -57,10 +53,10 @@ export default createBottomTabNavigator(
       activeTintColor: colors.tabActiveTint,
       inactiveTintColor: colors.tabInactiveTint,
       labelStyle: {
-        fontSize: useHorizontalTabs ? 15 : 13,
+        fontSize: 13,
       },
       tabStyle: {
-        paddingTop: useHorizontalTabs ? 0 : 4,
+        paddingTop: 4,
       },
     },
   },

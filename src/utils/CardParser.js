@@ -1,5 +1,8 @@
 import React from 'react';
+
 import SWDIcon from '../components/SWDIcon';
+import { colors } from '../styles';
+
 
 const ICON_REPLACEMENTS = Object.freeze({
   blank: '<icon name="blank"></icon>',
@@ -19,6 +22,8 @@ const ICON_REPLACEMENTS = Object.freeze({
   TPG: '<icon name="tpg"></icon>',
   LEG: '<icon name="leg"></icon>',
   RIV: '<icon name="riv"></icon>',
+  WotF: '<icon name="wotf"></icon>',
+  AtG: '<icon name="atg"></icon>',
 });
 
 export default {
@@ -28,8 +33,14 @@ export default {
     // TODO hacky way to generate a key
     const rand = Math.floor(Math.random() * 1000);
 
+    const style = { color: colors.primary };
+
     return (
-      <SWDIcon type={ iconName } key={ `html-icon-${rand}` } />
+      <SWDIcon
+        type={ iconName }
+        key={ `html-icon-${rand}` }
+        style={ style }
+      />
     );
   },
 

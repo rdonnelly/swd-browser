@@ -1,17 +1,19 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
-  Dimensions, SafeAreaView, ScrollView, StyleSheet, View,
+  Dimensions, ScrollView, StyleSheet, View,
 } from 'react-native';
 import _get from 'lodash/get';
 
-import { cardDatabase } from '../data';
 import CardDetail from '../components/CardDetail';
+import { base } from '../styles';
+
+import { cardDatabase } from '../data';
 
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    ...base.container,
   },
 });
 
@@ -28,14 +30,9 @@ class CardDetailScreen extends Component {
     if (this.state.listIndex !== -1) {
       this.state.scrollOffset = this.state.listIndex * this.state.viewWidth;
     }
-
-    this.handleLayout = this.handleLayout.bind(this);
-    this.handleMomentumScrollEnd = this.handleMomentumScrollEnd.bind(this);
-    this.handleContentSizeChange = this.handleContentSizeChange.bind(this);
-    this.renderCard = this.renderCard.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const navigationCardId = _get(nextProps, 'navigation.state.params.cardId');
     const selectedCardId = _get(nextProps, 'selectedCardId');
 
@@ -108,7 +105,7 @@ class CardDetailScreen extends Component {
     };
   }
 
-  updateSelectedCard(cardIndex) {
+  updateSelectedCard = (cardIndex) => {
     const selectedCard = cardDatabase.get(cardIndex);
 
     if (this.props.selectCard) {
@@ -124,15 +121,17 @@ class CardDetailScreen extends Component {
     }
   }
 
-  handleLayout(event) {
-    const { width } = event.nativeEvent.layout;
+  handleLayout = (event) => {
+    const width = _get(event, 'nativeEvent.layout.width', null);
 
-    this.setState({
-      viewWidth: width,
-    });
+    if (width !== null) {
+      this.setState({
+        viewWidth: width,
+      });
+    }
   }
 
-  handleMomentumScrollEnd(event) {
+  handleMomentumScrollEnd = (event) => {
     const scrollOffset = event.nativeEvent.contentOffset.x;
 
     if (this.state.scrollOffset === scrollOffset) {
@@ -201,7 +200,7 @@ class CardDetailScreen extends Component {
     }
   }
 
-  handleContentSizeChange(contentWidth) {
+  handleContentSizeChange = (contentWidth) => {
     const newList = this.state.list;
 
     const contentWidthDiff = contentWidth - this.state.scrollContentWidth;
@@ -242,7 +241,7 @@ class CardDetailScreen extends Component {
     });
   }
 
-  renderCard(cardIndex, listIndex) {
+  renderCard = (cardIndex, listIndex) => {
     const card = cardDatabase.get(cardIndex);
 
     return (
@@ -257,10 +256,9 @@ class CardDetailScreen extends Component {
 
   render() {
     return (
-      <SafeAreaView
-        style={ styles.container }
-        forceInset={{ horizontal: 'always' }}
+      <View
         onLayout={ this.handleLayout }
+        style={ styles.container }
       >
         { this.state.cardId &&
           <ScrollView
@@ -281,7 +279,7 @@ class CardDetailScreen extends Component {
             { this.state.list.map(this.renderCard) }
           </ScrollView>
         }
-      </SafeAreaView>
+      </View>
     );
   }
 }

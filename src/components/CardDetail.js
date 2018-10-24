@@ -7,21 +7,27 @@ import Html from 'react-native-render-html';
 import DeviceInfo from 'react-native-device-info';
 
 import SWDIcon from './SWDIcon';
-import { colors } from '../styles';
+import { base, colors } from '../styles';
 
 import { cardDatabase } from '../data';
 import CardParser from '../utils/CardParser';
 
 
+const isTablet = DeviceInfo.isTablet();
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.white,
-    flex: 1,
+    ...base.container,
+    backgroundColor: colors.lightGray,
+  },
+  scrollView: {
+    width: '100%',
   },
   cardTitleWrapper: {
     alignItems: 'center',
     backgroundColor: colors.gray,
     borderBottomWidth: 8,
+    flex: 1,
     height: 84,
     justifyContent: 'center',
   },
@@ -59,13 +65,12 @@ const styles = StyleSheet.create({
   cardTitleSubtitle: {
     fontSize: 14,
     fontWeight: '700',
-    color: colors.whiteTranslucentDark,
+    color: colors.whiteTranslucent75,
     textAlign: 'center',
     lineHeight: 14,
   },
   cardDetails: {
-    backgroundColor: colors.lightGray,
-    paddingHorizontal: DeviceInfo.isTablet() ? 24 : 16,
+    paddingHorizontal: isTablet ? 24 : 16,
     paddingTop: 16,
     width: '100%',
     alignItems: 'center',
@@ -90,13 +95,13 @@ const styles = StyleSheet.create({
   },
   cardDetailsInfoStatTitle: {
     color: colors.darkGray,
-    fontSize: DeviceInfo.isTablet() ? 18 : 16,
+    fontSize: isTablet ? 18 : 16,
     fontWeight: '600',
     textAlign: 'center',
   },
   cardDetailsInfoStatData: {
     color: colors.darkGray,
-    fontSize: DeviceInfo.isTablet() ? 18 : 16,
+    fontSize: isTablet ? 18 : 16,
     fontWeight: '700',
     textAlign: 'center',
   },
@@ -114,7 +119,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     flexDirection: 'column',
-    height: DeviceInfo.isTablet() ? 64 : 48,
+    height: isTablet ? 64 : 48,
     justifyContent: 'center',
     padding: 8,
   },
@@ -133,26 +138,26 @@ const styles = StyleSheet.create({
   },
   cardDetailsDiceSideIcon: {
     color: colors.darkGray,
-    fontSize: DeviceInfo.isTablet() ? 18 : 14,
-    lineHeight: DeviceInfo.isTablet() ? 18 : 14,
+    fontSize: isTablet ? 18 : 14,
+    lineHeight: isTablet ? 18 : 14,
   },
   cardDetailsDiceSideBottomIcon: {
     color: colors.yellowDark,
-    fontSize: DeviceInfo.isTablet() ? 12 : 11,
-    lineHeight: DeviceInfo.isTablet() ? 12 : 11,
+    fontSize: isTablet ? 12 : 11,
+    lineHeight: isTablet ? 12 : 11,
   },
   cardDetailsDiceSideText: {
     color: colors.darkGray,
-    fontSize: DeviceInfo.isTablet() ? 22 : 16,
-    lineHeight: DeviceInfo.isTablet() ? 24 : 16,
+    fontSize: isTablet ? 22 : 16,
+    lineHeight: isTablet ? 24 : 16,
     fontWeight: '700',
-    marginTop: DeviceInfo.isTablet() ? 2 : 3,
+    marginTop: isTablet ? 2 : 3,
   },
   cardDetailsDiceSideBottomText: {
     color: colors.yellowDark,
-    fontSize: DeviceInfo.isTablet() ? 16 : 14,
-    lineHeight: DeviceInfo.isTablet() ? 18 : 14,
-    marginTop: DeviceInfo.isTablet() ? 1 : 2,
+    fontSize: isTablet ? 16 : 14,
+    lineHeight: isTablet ? 18 : 14,
+    marginTop: isTablet ? 1 : 2,
   },
   cardDetailsDiceSideBlankText: {
     color: colors.red,
@@ -170,11 +175,11 @@ const styles = StyleSheet.create({
   },
   cardDetailsTypeText: {
     color: colors.darkGray,
-    fontSize: DeviceInfo.isTablet() ? 20 : 16,
+    fontSize: isTablet ? 20 : 16,
     fontWeight: '700',
   },
   cardDetailsTypeTextIcon: {
-    fontSize: DeviceInfo.isTablet() ? 16 : 14,
+    fontSize: isTablet ? 16 : 14,
   },
   cardDetailsTextWrapper: {
     backgroundColor: colors.lightGrayTranslucent,
@@ -186,7 +191,7 @@ const styles = StyleSheet.create({
   },
   cardDetailsText: {
     color: colors.darkGray,
-    fontSize: DeviceInfo.isTablet() ? 20 : 17,
+    fontSize: isTablet ? 20 : 17,
   },
   cardAdditionalInfoWrapper: {
     alignItems: 'center',
@@ -206,29 +211,48 @@ const styles = StyleSheet.create({
     color: colors.darkGray,
   },
   cardImageWrapper: {
+    backgroundColor: colors.white,
     height: 400,
     padding: 16,
     width: '100%',
   },
   cardImageWrapperBlue: {
+    borderBottomColor: colors.blue,
+    borderBottomWidth: 8,
     borderTopColor: colors.blue,
     borderTopWidth: 8,
   },
   cardImageWrapperGray: {
+    borderBottomColor: colors.grayDarkDark,
+    borderBottomWidth: 8,
     borderTopColor: colors.grayDarkDark,
     borderTopWidth: 8,
   },
   cardImageWrapperRed: {
+    borderBottomColor: colors.red,
+    borderBottomWidth: 8,
     borderTopColor: colors.red,
     borderTopWidth: 8,
   },
   cardImageWrapperYellow: {
+    borderBottomColor: colors.yellow,
+    borderBottomWidth: 8,
     borderTopColor: colors.yellow,
     borderTopWidth: 8,
   },
   cardImage: {
     height: '100%',
     width: '100%',
+  },
+  cardAdditionalInfoContainer: {
+    ...base.container,
+    backgroundColor: colors.lightGray,
+    paddingHorizontal: isTablet ? 24 : 16,
+    paddingTop: 16,
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
 });
 
@@ -569,7 +593,11 @@ class CardDetail extends Component {
       ));
     }
 
-    return views;
+    return views.length ? (
+      <View style={ styles.cardAdditionalInfoContainer }>
+        { views }
+      </View>
+    ) : null;
   }
 
   render() {
@@ -600,14 +628,13 @@ class CardDetail extends Component {
 
     return (
       <View style={ styles.container }>
-        <ScrollView>
+        <ScrollView style={ styles.scrollView }>
           { this.renderCardName() }
           <View style={ styles.cardDetails }>
             { this.renderCardType() }
             { this.renderCardDetailsInfo() }
             { this.renderCardText() }
             { this.renderDiceSides() }
-            { this.renderAdditionalInfo() }
           </View>
           <View style={ imageWrapperStyles }>
             <Image
@@ -617,6 +644,7 @@ class CardDetail extends Component {
               defaultSource={ defaultImageSrc }
             />
           </View>
+          { this.renderAdditionalInfo() }
         </ScrollView>
       </View>
     );

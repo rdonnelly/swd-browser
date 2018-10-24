@@ -71,10 +71,6 @@ class FilterCloud extends Component {
       values,
       timeoutId: null,
     };
-
-    this.onValueChange = this.onValueChange.bind(this);
-    this.selectAll = this.selectAll.bind(this);
-    this.selectNone = this.selectNone.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -85,11 +81,11 @@ class FilterCloud extends Component {
     return true;
   }
 
-  reset() {
+  reset = () => {
     this.selectAll();
   }
 
-  onValueChange(code, value) {
+  onValueChange = (code, value) => {
     let { values } = this.state;
 
     if (this.state.timeoutId) {
@@ -119,7 +115,7 @@ class FilterCloud extends Component {
     });
   }
 
-  selectAll() {
+  selectAll = () => {
     const values = _map(this.props.options, 'code');
 
     if (this.state.timeoutId) {
@@ -137,7 +133,7 @@ class FilterCloud extends Component {
     });
   }
 
-  selectNone() {
+  selectNone = () => {
     const values = [];
 
     if (this.state.timeoutId) {

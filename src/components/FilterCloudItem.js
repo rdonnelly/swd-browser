@@ -40,19 +40,13 @@ class FilterCloudItem extends PureComponent {
     value: this.props.value,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.onValueChange = this.onValueChange.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.state.value !== nextProps.value) {
       this.setState({ value: nextProps.value });
     }
   }
 
-  onValueChange() {
+  onValueChange = () => {
     this.setState({ value: !this.state.value });
     this.props.callback(this.props.setting, !this.state.value);
   }

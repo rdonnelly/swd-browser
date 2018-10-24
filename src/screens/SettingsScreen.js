@@ -8,45 +8,33 @@ import SafariView from 'react-native-safari-view';
 import FilterCloud from '../components/FilterCloud';
 
 import { cardDatabase } from '../data';
-import { colors } from '../styles';
+import { base, colors } from '../styles';
 
 
 const styles = StyleSheet.create({
   container: {
+    ...base.container,
     backgroundColor: colors.lightGray,
-    flex: 1,
   },
   scrollViewContent: {
+    paddingBottom: 76,
     paddingHorizontal: 24,
     paddingTop: 24,
-    paddingBottom: 64,
+  },
+  floatingControls: {
+    ...base.floatingControls,
+  },
+  floatingControlsButton: {
+    ...base.button,
+  },
+  floatingControlsButtonText: {
+    ...base.buttonText,
   },
   information: {
     borderColor: colors.lightGrayDark,
     borderTopWidth: StyleSheet.hairlineWidth,
     marginBottom: 24,
     paddingTop: 24,
-  },
-  floatingControls: {
-    backgroundColor: colors.lightGrayTranslucent,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    bottom: 0,
-    left: 0,
-    padding: 8,
-    position: 'absolute',
-    right: 0,
-  },
-  floatingControlsButton: {
-    backgroundColor: colors.brand,
-    borderRadius: 4,
-    padding: 12,
-  },
-  floatingControlsButtonText: {
-    color: colors.white,
-    fontSize: 16,
-    fontWeight: '700',
-    textAlign: 'center',
   },
   disclaimerText: {
     color: colors.gray,
@@ -77,39 +65,32 @@ class SettingsScreen extends Component {
       },
     );
 
-    this.resetScreen = this.resetScreen.bind(this);
-
-    this.updateFilter = this.updateFilter.bind(this);
-    this.updateFilterList = this.updateFilterList.bind(this);
-    this.removeFilter = this.removeFilter.bind(this);
-    this.removeAllFilters = this.removeAllFilters.bind(this);
-
-    this.renderReset = this.renderReset.bind(this);
+    if (props.navigation) {
+      props.navigation.setParams({
+        resetScreen: this.resetScreen,
+      });
+    }
   }
 
-  componentWillMount() {
-    this.props.navigation.setParams({
-      resetScreen: this.resetScreen,
-    });
-  }
-
-  resetScreen() {
-    this.scrollView.scrollTo(0);
-  }
-
-  visitWebpage() {
+  static visitWebpage() {
     SafariView.show({
       tintColor: colors.headerBackground,
       url: 'http://rdonnelly.com',
     });
   }
 
-  updateFilter(setting, values) {
+  resetScreen = () => {
+    if (this.scrollView) {
+      this.scrollView.scrollTo({ y: 0 });
+    }
+  }
+
+  updateFilter = (setting, values) => {
     const key = `filter_${setting}`;
     cardDatabase.addFilter(key, card => values.includes(card[setting]));
   }
 
-  updateFilterList(setting, values) {
+  updateFilterList = (setting, values) => {
     const key = `filter_${setting}`;
 
     cardDatabase.addFilter(key, (card) => {
@@ -125,12 +106,12 @@ class SettingsScreen extends Component {
     });
   }
 
-  removeFilter(setting) {
+  removeFilter = (setting) => {
     const key = `filter_${setting}`;
     cardDatabase.removeFilter(key);
   }
 
-  removeAllFilters() {
+  removeAllFilters = () => {
     Alert.alert(
       'Reset Filters?',
       'This will reset all filters. Are you sure you want to continue?',
@@ -148,6 +129,8 @@ class SettingsScreen extends Component {
             this.subtypeCloud.reset();
             this.keywordCloud.reset();
             this.rarityCloud.reset();
+
+            this.resetScreen();
           },
           style: 'destructive',
         },
@@ -155,18 +138,16 @@ class SettingsScreen extends Component {
     );
   }
 
-  renderReset() {
-    return (
-      <View style={ styles.floatingControls }>
-        <TouchableOpacity
-          onPress={ this.removeAllFilters }
-          style={ styles.floatingControlsButton }
-        >
-          <Text style={ styles.floatingControlsButtonText }>Reset Filters</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+  renderReset = () => (
+    <View style={ styles.floatingControls }>
+      <TouchableOpacity
+        onPress={ this.removeAllFilters }
+        style={ styles.floatingControlsButton }
+      >
+        <Text style={ styles.floatingControlsButtonText }>Reset Filters</Text>
+      </TouchableOpacity>
+    </View>
+  );
 
   render() {
     // eslint-disable-next-line global-require
@@ -294,7 +275,6 @@ class SettingsScreen extends Component {
     return (
       <View style={ styles.container }>
         <ScrollView
-          style={ styles.scrollView }
           ref={ (component) => { this.scrollView = component; } }
           contentContainerStyle={ styles.scrollViewContent }
         >
@@ -316,7 +296,7 @@ class SettingsScreen extends Component {
           </View>
 
           <View style={ styles.information }>
-            <TouchableOpacity onPress={ this.visitWebpage }>
+            <TouchableOpacity onPress={ SettingsScreen.visitWebpage }>
               <Text style={ styles.linkText }>
                 Designed and Developed by
               </Text>
@@ -326,6 +306,7 @@ class SettingsScreen extends Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
+
         { this.renderReset() }
       </View>
     );

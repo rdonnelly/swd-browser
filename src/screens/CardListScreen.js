@@ -5,15 +5,15 @@ import {
 } from 'react-native';
 
 import CardListItem, { ITEM_HEIGHT } from '../components/CardListItem';
-import { colors } from '../styles';
+import { base, colors } from '../styles';
 
 import { cardDatabase } from '../data';
 
 
 const styles = StyleSheet.create({
   container: {
+    ...base.container,
     backgroundColor: colors.lightGray,
-    flex: 1,
   },
   keyboardAvoidingView: {
     flex: 1,
@@ -46,22 +46,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGrayTranslucent,
     flex: 1,
   },
-  search: {
-    backgroundColor: colors.lightGrayTranslucent,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    bottom: 0,
-    left: 0,
-    padding: 8,
-    position: 'absolute',
-    right: 0,
+  listContent: {
+    paddingBottom: 60,
   },
-  searchInput: {
-    backgroundColor: colors.white,
-    borderRadius: 4,
-    color: colors.darkGray,
-    fontSize: 16,
-    padding: 12,
+  floatingControls: {
+    ...base.floatingControls,
+  },
+  floatingControlsInput: {
+    ...base.input,
   },
   footer: {
     alignItems: 'center',
@@ -86,36 +78,28 @@ class CardListScreen extends Component {
       cards: cardDatabase.all(),
     };
 
-    this.resetScreen = this.resetScreen.bind(this);
-    this.onPressItem = this.onPressItem.bind(this);
-    this.handleBlurFromSearch = this.handleBlurFromSearch.bind(this);
-    this.handleSubmitFromSearch = this.handleSubmitFromSearch.bind(this);
-    this.handleChangeFromSearch = this.handleChangeFromSearch.bind(this);
-    this.handleScrollBeginDrag = this.handleScrollBeginDrag.bind(this);
-    this.renderItem = this.renderItem.bind(this);
-    this.renderSearch = this.renderSearch.bind(this);
-    this.renderFooter = this.renderFooter.bind(this);
-
     cardDatabase.addFilterListener((results) => {
       this.setState({
         cards: results,
       });
     });
-  }
 
-  componentWillMount() {
-    if (this.props.navigation) {
-      this.props.navigation.setParams({
+    if (props.navigation) {
+      props.navigation.setParams({
         resetScreen: this.resetScreen,
       });
     }
   }
 
-  resetScreen() {
-    this.listView.scrollToOffset(0);
+  static getItemLayout(data, index) {
+    return {
+      offset: ITEM_HEIGHT * index,
+      length: ITEM_HEIGHT,
+      index,
+    };
   }
 
-  search(query) {
+  static search(query) {
     if (query) {
       cardDatabase.addFilter('search', card => card.name.search(new RegExp(query, 'i')) !== -1);
     } else {
@@ -123,7 +107,13 @@ class CardListScreen extends Component {
     }
   }
 
-  onPressItem(card) {
+  resetScreen = () => {
+    if (this.listView) {
+      this.listView.scrollToOffset(0);
+    }
+  }
+
+  handlePressItem = (card) => {
     if (this.props.selectCard) {
       this.props.selectCard(card.id);
     }
@@ -140,36 +130,28 @@ class CardListScreen extends Component {
     }
   }
 
-  handleBlurFromSearch(event) {
+  handleBlurFromSearch = (event) => {
     const query = event.nativeEvent.text;
     this.setUpDataSource(query);
   }
 
-  handleSubmitFromSearch(event) {
+  handleSubmitFromSearch = (event) => {
     const query = event.nativeEvent.text;
-    this.search(query);
+    CardListScreen.search(query);
   }
 
-  handleChangeFromSearch(event) {
+  handleChangeFromSearch = (event) => {
     const query = event.nativeEvent.text;
     if (!query) {
-      this.search(query);
+      CardListScreen.search(query);
     }
   }
 
-  handleScrollBeginDrag() {
+  handleScrollBeginDrag = () => {
     this.searchInput.blur();
   }
 
-  getItemLayout(data, index) {
-    return {
-      offset: ITEM_HEIGHT * index,
-      length: ITEM_HEIGHT,
-      index,
-    };
-  }
-
-  renderListView() {
+  renderListView = () => {
     const keyExtractor = item => item.id;
 
     return (
@@ -180,10 +162,10 @@ class CardListScreen extends Component {
         extraData={ this.state }
         renderItem={ this.renderItem }
         keyExtractor={ keyExtractor }
-        getItemLayout={ this.getItemLayout }
+        getItemLayout={ CardListScreen.getItemLayout }
         ListFooterComponent={ this.renderFooter }
         ListEmptyComponent={ this.renderEmpty }
-        contentContainerStyle={{ paddingBottom: 60 }}
+        contentContainerStyle={ styles.listContent }
         updateCellsBatchingPeriod={ 100 }
         windowSize={ 35 }
         onScrollBeginDrag={ this.handleScrollBeginDrag }
@@ -191,43 +173,37 @@ class CardListScreen extends Component {
     );
   }
 
-  renderItem({ item }) {
-    return (
-      <CardListItem card={ item } onPressItem={ this.onPressItem } />
-    );
-  }
+  renderItem = ({ item }) => (
+    <CardListItem card={ item } onPressItem={ this.handlePressItem } />
+  );
 
-  renderEmpty() {
-    return (
-      <View style={ styles.empty }>
-        <Text style={ styles.emptyHeader }>No Cards Found</Text>
-        <Text style={ styles.emptyMessage }>
-          Try changing your search terms or adjusting your settings.
-        </Text>
-      </View>
-    );
-  }
+  renderEmpty = () => (
+    <View style={ styles.empty }>
+      <Text style={ styles.emptyHeader }>No Cards Found</Text>
+      <Text style={ styles.emptyMessage }>
+        Try changing your search terms or adjusting your settings.
+      </Text>
+    </View>
+  );
 
-  renderSearch() {
-    return (
-      <View style={ styles.search }>
-        <TextInput
-          style={ styles.searchInput }
-          autoCapitalize={ 'none' }
-          autoCorrect={ false }
-          clearButtonMode={ 'always' }
-          placeholder={ 'Search' }
-          placeholderColor={ colors.lightGrayDark }
-          ref={ (component) => { this.searchInput = component; } }
-          returnKeyType={ 'search' }
-          onSubmitEditing={ this.handleSubmitFromSearch }
-          onChange={ this.handleChangeFromSearch }
-        />
-      </View>
-    );
-  }
+  renderSearch = () => (
+    <View style={ styles.floatingControls }>
+      <TextInput
+        style={ styles.floatingControlsInput }
+        autoCapitalize={ 'none' }
+        autoCorrect={ false }
+        clearButtonMode={ 'always' }
+        placeholder={ 'Search' }
+        placeholderColor={ colors.lightGrayDark }
+        ref={ (component) => { this.searchInput = component; } }
+        returnKeyType={ 'search' }
+        onSubmitEditing={ this.handleSubmitFromSearch }
+        onChange={ this.handleChangeFromSearch }
+      />
+    </View>
+  );
 
-  renderFooter() {
+  renderFooter = () => {
     if (this.state.cards.length === 0) {
       return null;
     }
