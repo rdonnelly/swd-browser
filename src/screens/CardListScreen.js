@@ -15,12 +15,6 @@ const styles = StyleSheet.create({
     ...base.container,
     backgroundColor: colors.lightGray,
   },
-  keyboardAvoidingView: {
-    flex: 1,
-  },
-  keyboardAvoidingViewInner: {
-    flex: 1,
-  },
   empty: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -47,7 +41,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listContent: {
-    paddingBottom: 60,
+    paddingBottom: 76,
   },
   floatingControls: {
     ...base.floatingControls,
@@ -219,19 +213,16 @@ class CardListScreen extends Component {
 
   render() {
     return (
-      <View style={ styles.container }>
-        <KeyboardAvoidingView
-          style={ styles.keyboardAvoidingView }
-          behavior={ 'padding' }
-          keyboardVerticalOffset={64}
-        >
-          <View style={ styles.keyboardAvoidingViewInner }>
-            { this.renderListView() }
+      <KeyboardAvoidingView
+        style={ styles.container }
+        behavior={ 'padding' }
+      >
+        <View>
+          { this.renderListView() }
 
-            { this.renderSearch() }
-          </View>
-        </KeyboardAvoidingView>
-      </View>
+          { this.renderSearch() }
+        </View>
+      </KeyboardAvoidingView>
     );
   }
 }
