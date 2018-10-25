@@ -31,12 +31,12 @@ const cardBrowserStack = createStackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerTitle: (
           <Text style={styles.headerTitle}>
-            <SWDIcon type={ navigation.state.params.cardSet } style={ styles.headerTitleIcon } />
+            <SWDIcon type={ navigation.getParam('cardSet') } style={ styles.headerTitleIcon } />
             &nbsp;
             <Text>
-              { navigation.state.params.cardSet }
+              { navigation.getParam('cardSet') }
               &nbsp;
-              { navigation.state.params.cardPosition }
+              { navigation.getParam('cardPosition') }
             </Text>
           </Text>
         ),
