@@ -11,6 +11,7 @@ import { base, colors } from '../styles';
 
 import { cardDatabase } from '../data';
 import CardParser from '../utils/CardParser';
+import defaultImageSrc from '../../assets/images/swd-texture.png';
 
 
 const isTablet = DeviceInfo.isTablet();
@@ -622,9 +623,6 @@ class CardDetail extends Component {
       default:
         imageWrapperStyles.push(styles.cardImageWrapperGray);
     }
-
-    // eslint-disable-next-line global-require
-    const defaultImageSrc = require('../../assets/images/swd-texture.png');
 
     return (
       <View style={ styles.container }>
