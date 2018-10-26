@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
   },
   cardImageWrapper: {
     backgroundColor: colors.white,
-    height: 400,
+    height: 440,
     padding: 16,
     width: '100%',
   },
