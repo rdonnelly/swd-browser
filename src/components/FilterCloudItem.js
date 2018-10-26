@@ -6,25 +6,24 @@ import {
   Text,
 } from 'react-native';
 
-import { colors } from '../styles';
+import { base as baseStyles, colors } from '../styles';
 
 
 const styles = StyleSheet.create({
-  container: {
+  button: {
+    ...baseStyles.button,
     backgroundColor: colors.whiteTranslucent,
-    borderRadius: 4,
     marginBottom: 8,
     marginRight: 8,
     paddingHorizontal: 8,
-    paddingVertical: 12,
   },
-  containerOn: {
+  buttonOn: {
     backgroundColor: colors.white,
   },
   text: {
+    ...baseStyles.buttonText,
     color: colors.grayDark,
     fontSize: 15,
-    fontWeight: '700',
   },
   textOn: {
     color: colors.brand,
