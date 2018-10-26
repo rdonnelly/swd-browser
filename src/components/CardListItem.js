@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
     height: ITEM_HEIGHT,
     justifyContent: 'center',
   },
+  rowSelected: {
+    backgroundColor: colors.whiteTranslucent75,
+  },
   rowTappable: {
     alignItems: 'center',
     flex: 1,
@@ -73,27 +76,31 @@ const styles = StyleSheet.create({
     color: colors.lightGrayDark,
     marginTop: 2,
   },
+  chevronSelected: {
+    color: colors.brand,
+  },
 });
 
 
 class CardListItem extends Component {
   shouldComponentUpdate(nextProps) {
-    if (this.props.card.id === nextProps.card.id) {
-      return false;
+    if (this.props.card.id !== nextProps.card.id) {
+      return true;
     }
 
-    return true;
+    if (this.props.isSelected !== nextProps.isSelected) {
+      return true;
+    }
+
+    return false;
   }
 
   render() {
     const {
       card,
+      isSelected,
       onPressItem,
     } = this.props;
-
-    const colorString = `card${card.faction.charAt(0).toUpperCase() + card.faction.slice(1)}`;
-    const iconGlyphStyles = [styles.cardIconGlyph];
-    iconGlyphStyles.push({ color: colors[colorString] });
 
     const setIcon = validateCode(card.set) ?
       (<SWDIcon type={ card.set } font={ 'swdestiny' } style={ styles.cardDetailsInfoTextIcon } />) :
@@ -104,11 +111,22 @@ class CardListItem extends Component {
       cardData = card.cost;
     }
     if (card.points) {
-      cardData = `${card.points}`;
+      cardData = card.points;
     }
 
+    const rowStyles = [styles.row];
+    const chevronStyles = [styles.chevron];
+    if (isSelected) {
+      rowStyles.push(styles.rowSelected);
+      chevronStyles.push(styles.chevronSelected);
+    }
+
+    const iconGlyphStyles = [styles.cardIconGlyph];
+    const colorString = `card${card.faction.charAt(0).toUpperCase() + card.faction.slice(1)}`;
+    iconGlyphStyles.push({ color: colors[colorString] });
+
     return (
-      <View style={ styles.row }>
+      <View style={ rowStyles }>
         <TouchableOpacity
           onPress={ () => onPressItem(card) }
           style={ styles.rowTappable }
@@ -137,7 +155,7 @@ class CardListItem extends Component {
             </View>
           </View>
           <View style={ styles.chevronWrapper }>
-            <Icon name={ 'chevron-right' } size={ 20 } style={ styles.chevron } />
+            <Icon name={ 'chevron-right' } size={ 20 } style={ chevronStyles } />
           </View>
         </TouchableOpacity>
       </View>
@@ -147,6 +165,7 @@ class CardListItem extends Component {
 
 CardListItem.propTypes = {
   card: PropTypes.object.isRequired,
+  isSelected: PropTypes.bool.isRequired,
   onPressItem: PropTypes.func.isRequired,
 };
 

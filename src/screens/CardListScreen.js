@@ -145,6 +145,19 @@ class CardListScreen extends Component {
     this.searchInput.blur();
   }
 
+  renderItem = ({ item }) => {
+    const { selectedCardId } = this.props;
+    const isSelected = item.id === selectedCardId;
+
+    return (
+      <CardListItem
+        card={ item }
+        isSelected={ isSelected }
+        onPressItem={ this.handlePressItem }
+      />
+    );
+  }
+
   renderListView = () => {
     const keyExtractor = item => item.id;
 
@@ -169,10 +182,6 @@ class CardListScreen extends Component {
       />
     );
   }
-
-  renderItem = ({ item }) => (
-    <CardListItem card={ item } onPressItem={ this.handlePressItem } />
-  );
 
   renderEmpty = () => (
     <View style={ styles.empty }>
