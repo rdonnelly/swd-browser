@@ -33,7 +33,7 @@ class CardDetailScreen extends Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    const navigationCardId = nextProps.navigation.getParam('cardId');
+    const navigationCardId = _get(nextProps, 'navigation.state.params.cardId');
     const selectedCardId = _get(nextProps, 'selectedCardId');
 
     const cardId = navigationCardId || selectedCardId;
