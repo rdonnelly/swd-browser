@@ -31,40 +31,23 @@ const styles = StyleSheet.create({
 });
 
 class FilterCloudItem extends PureComponent {
-  static defaultProps = {
-    value: true,
-  };
-
-  state = {
-    value: this.props.value,
-  };
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.state.value !== nextProps.value) {
-      this.setState({ value: nextProps.value });
-    }
-  }
-
   onValueChange = () => {
-    this.setState({ value: !this.state.value });
-    this.props.callback(this.props.setting, !this.state.value);
+    this.props.callback(this.props.setting, !this.props.value);
   }
 
   render() {
-    const containerStyles = [styles.container];
-    if (this.state.value) {
-      containerStyles.push(styles.containerOn);
-    }
-
+    const buttonStyles = [styles.button];
     const textStyles = [styles.text];
-    if (this.state.value) {
+
+    if (this.props.value) {
+      buttonStyles.push(styles.buttonOn);
       textStyles.push(styles.textOn);
     }
 
     return (
       <TouchableOpacity
         onPress={ this.onValueChange }
-        style={ containerStyles }
+        style={ buttonStyles }
       >
         <Text style={ textStyles }>
           { this.props.label }
