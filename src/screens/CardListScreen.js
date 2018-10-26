@@ -153,7 +153,10 @@ class CardListScreen extends Component {
         ref={ (component) => { this.listView = component; } }
         style={ styles.list }
         data={ this.state.cards }
-        extraData={ this.state }
+        extraData={{
+          cards: this.state.cards,
+          selectedCardId: this.props.selectedCardId,
+        }}
         renderItem={ this.renderItem }
         keyExtractor={ keyExtractor }
         getItemLayout={ CardListScreen.getItemLayout }
