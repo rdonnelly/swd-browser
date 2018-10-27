@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     ...base.container,
     borderRightColor: colors.lightGrayDark,
     borderRightWidth: StyleSheet.hairlineWidth,
+    flex: 0,
     width: 320,
   },
   containerDetails: {
