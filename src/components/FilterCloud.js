@@ -1,5 +1,4 @@
 import _difference from 'lodash/difference';
-import _uniq from 'lodash/uniq';
 import _without from 'lodash/without';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -9,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 import FilterCloudItem from './FilterCloudItem';
 import { colors } from '../styles';
@@ -62,13 +62,22 @@ const styles = StyleSheet.create({
 });
 
 class FilterCloud extends Component {
+  static defaultProps = {
+    radio: false,
+    values: null,
+  };
+
   constructor(props) {
     super(props);
 
     this.timeoutId = null;
 
+    const initialValues = props.values !== null ?
+      props.values : this.props.options.map(option => option.code);
+
     this.state = {
-      values: this.props.options.map(option => option.code),
+      initialValues,
+      values: initialValues,
     };
   }
 
@@ -82,98 +91,74 @@ class FilterCloud extends Component {
     return false;
   }
 
-  reset = () => {
-    this.selectAll();
-  }
-
-  onPressItem = (code, value) => {
+  updateValues = (nextValues) => {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
     }
 
-    let values = this.state.values.slice(0);
+    this.timeoutId = setTimeout(() => {
+      if (nextValues.length === this.props.options.length) {
+        this.props.offCallback(this.props.setting);
+      } else {
+        this.props.onCallback(this.props.setting, nextValues);
+      }
+    }, INTERACTION_DELAY);
 
+    this.setState({
+      values: nextValues,
+    });
+  }
+
+  handlePressItem = (code, value) => {
+    ReactNativeHapticFeedback.trigger('selection');
+
+    let nextValues = [...this.state.values];
     if (value) {
-      values.push(code);
-      values = _uniq(values);
-    } else {
-      values = _without(values, code);
+      if (this.props.radio) {
+        nextValues = [code];
+      } else {
+        nextValues.push(code);
+      }
+    } else if (!this.props.radio) {
+      nextValues = _without(nextValues, code);
     }
 
-    this.timeoutId = setTimeout(() => {
-      if (values.length === this.props.options.length) {
-        this.props.offCallback(this.props.setting);
-      } else {
-        this.props.onCallback(this.props.setting, values);
-      }
-    }, INTERACTION_DELAY);
-
-    this.setState({
-      values,
-    });
+    this.updateValues(nextValues);
   }
 
-  onLongPressItem = (code) => {
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-    }
-
-    const values = [code];
-
-    this.timeoutId = setTimeout(() => {
-      if (values.length === this.props.options.length) {
-        this.props.offCallback(this.props.setting);
-      } else {
-        this.props.onCallback(this.props.setting, values);
-      }
-    }, INTERACTION_DELAY);
-
-    this.setState({
-      values,
-    });
+  handleLongPressItem = (code) => {
+    ReactNativeHapticFeedback.trigger('impactHeavy');
+    const nextValues = [code];
+    this.updateValues(nextValues);
   }
 
   selectAll = () => {
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-    }
+    ReactNativeHapticFeedback.trigger('selection');
 
-    const values = this.props.options.map(option => option.code);
-
-    this.timeoutId = setTimeout(() => {
-      this.props.offCallback(this.props.setting);
-    }, INTERACTION_DELAY);
-
-    this.setState({
-      values,
-    });
+    const nextValues = [...this.state.initialValues];
+    this.updateValues(nextValues);
   }
 
   selectNone = () => {
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-    }
+    ReactNativeHapticFeedback.trigger('selection');
 
-    const values = [];
+    const nextValues = [];
+    this.updateValues(nextValues);
+  }
 
-    this.timeoutId = setTimeout(() => {
-      this.props.onCallback(this.props.setting, values);
-    }, INTERACTION_DELAY);
-
-    this.setState({
-      values,
-    });
+  reset = () => {
+    this.selectAll();
   }
 
   render() {
     const optionItems = this.props.options.map(option => (
       <FilterCloudItem
-        key={ `settingclouditem-${this.props.setting}-${option.code}` }
+        key={ `filterclouditem-${this.props.setting}-${option.code}` }
         value={ this.state.values.includes(option.code) }
         setting={ option.code }
         label={ option.name }
-        handlePress={ this.onPressItem }
-        handleLongPress={ this.onLongPressItem }
+        handlePress={ this.handlePressItem }
+        handleLongPress={ this.handleLongPressItem }
       />
     ));
 
@@ -213,6 +198,9 @@ FilterCloud.propTypes = {
   setting: PropTypes.string.isRequired,
 
   options: PropTypes.array.isRequired,
+  values: PropTypes.array,
+
+  radio: PropTypes.bool,
 
   onCallback: PropTypes.func,
   offCallback: PropTypes.func,
