@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.whiteTranslucent,
     marginBottom: 8,
     marginRight: 8,
-    paddingHorizontal: 8,
+    paddingHorizontal: 12,
   },
   buttonOn: {
     backgroundColor: colors.white,
@@ -36,7 +36,7 @@ class FilterCloudItem extends PureComponent {
   }
 
   handleLongPress = () => {
-    this.props.handleLongPress(this.props.setting, !this.props.value);
+    this.props.handleLongPress(this.props.setting);
   }
 
   render() {
