@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {
   FlatList, KeyboardAvoidingView, StyleSheet, Text, TextInput, View,
 } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 
 import CardListItem, { ITEM_HEIGHT } from '../components/CardListItem';
 import { base, colors } from '../styles';
@@ -221,17 +222,21 @@ class CardListScreen extends Component {
   }
 
   render() {
-    return (
-      <KeyboardAvoidingView
-        style={ styles.container }
-        behavior={ 'padding' }
-      >
-        <View style={ styles.container }>
-          { this.renderListView() }
+    // keyboard height is not returned correctly for iPad
+    const isPad = DeviceInfo.getModel().indexOf('iPad') > -1;
+    const keyboardVerticalOffset = isPad ? 62 : 0;
 
-          { this.renderSearch() }
-        </View>
-      </KeyboardAvoidingView>
+    return (
+        <KeyboardAvoidingView
+          behavior={ 'padding' }
+          keyboardVerticalOffset={ keyboardVerticalOffset }
+          style={ styles.container }
+        >
+          <View style={ styles.container }>
+            { this.renderListView() }
+            { this.renderSearch() }
+          </View>
+        </KeyboardAvoidingView>
     );
   }
 }
