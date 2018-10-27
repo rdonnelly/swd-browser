@@ -56,7 +56,7 @@ export default createBottomTabNavigator(
         fontSize: 13,
       },
       tabStyle: {
-        paddingTop: 4,
+        paddingTop: 3,
       },
     },
   },
