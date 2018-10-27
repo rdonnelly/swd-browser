@@ -31,8 +31,12 @@ const styles = StyleSheet.create({
 });
 
 class FilterCloudItem extends PureComponent {
-  onValueChange = () => {
-    this.props.callback(this.props.setting, !this.props.value);
+  handlePress = () => {
+    this.props.handlePress(this.props.setting, !this.props.value);
+  }
+
+  handleLongPress = () => {
+    this.props.handleLongPress(this.props.setting, !this.props.value);
   }
 
   render() {
@@ -46,7 +50,8 @@ class FilterCloudItem extends PureComponent {
 
     return (
       <TouchableOpacity
-        onPress={ this.onValueChange }
+        onPress={ this.handlePress }
+        onLongPress={ this.handleLongPress }
         style={ buttonStyles }
       >
         <Text style={ textStyles }>
@@ -62,7 +67,8 @@ FilterCloudItem.propTypes = {
   setting: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
 
-  callback: PropTypes.func,
+  handlePress: PropTypes.func.isRequired,
+  handleLongPress: PropTypes.func.isRequired,
 };
 
 export default FilterCloudItem;

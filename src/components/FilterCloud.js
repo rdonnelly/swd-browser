@@ -86,12 +86,12 @@ class FilterCloud extends Component {
     this.selectAll();
   }
 
-  onValueChange = (code, value) => {
-    let values = this.state.values.slice(0);
-
+  onPressItem = (code, value) => {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
     }
+
+    let values = this.state.values.slice(0);
 
     if (value) {
       values.push(code);
@@ -113,12 +113,32 @@ class FilterCloud extends Component {
     });
   }
 
-  selectAll = () => {
-    const values = this.props.options.map(option => option.code);
-
+  onLongPressItem = (code) => {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
     }
+
+    const values = [code];
+
+    this.timeoutId = setTimeout(() => {
+      if (values.length === this.props.options.length) {
+        this.props.offCallback(this.props.setting);
+      } else {
+        this.props.onCallback(this.props.setting, values);
+      }
+    }, INTERACTION_DELAY);
+
+    this.setState({
+      values,
+    });
+  }
+
+  selectAll = () => {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
+
+    const values = this.props.options.map(option => option.code);
 
     this.timeoutId = setTimeout(() => {
       this.props.offCallback(this.props.setting);
@@ -130,11 +150,11 @@ class FilterCloud extends Component {
   }
 
   selectNone = () => {
-    const values = [];
-
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
     }
+
+    const values = [];
 
     this.timeoutId = setTimeout(() => {
       this.props.onCallback(this.props.setting, values);
@@ -152,7 +172,8 @@ class FilterCloud extends Component {
         value={ this.state.values.includes(option.code) }
         setting={ option.code }
         label={ option.name }
-        callback={ this.onValueChange }
+        handlePress={ this.onPressItem }
+        handleLongPress={ this.onLongPressItem }
       />
     ));
 
