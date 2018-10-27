@@ -16,12 +16,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGray,
   },
   empty: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 128,
-    paddingHorizontal: 8,
     flex: 1,
-    height: '100%',
+    paddingHorizontal: 24,
+    paddingTop: '40%',
   },
   emptyHeader: {
     color: colors.grayDark,
@@ -33,12 +30,12 @@ const styles = StyleSheet.create({
   emptyMessage: {
     color: colors.grayDark,
     fontSize: 14,
-    paddingHorizontal: 16,
     textAlign: 'center',
   },
   list: {
     backgroundColor: colors.lightGrayTranslucent,
     flex: 1,
+    width: '100%',
   },
   listContent: {
     paddingBottom: 76,
@@ -187,7 +184,7 @@ class CardListScreen extends Component {
     <View style={ styles.empty }>
       <Text style={ styles.emptyHeader }>No Cards Found</Text>
       <Text style={ styles.emptyMessage }>
-        Try changing your search terms or adjusting your settings.
+        Try changing your search term or adjusting your settings
       </Text>
     </View>
   );
@@ -229,7 +226,7 @@ class CardListScreen extends Component {
         style={ styles.container }
         behavior={ 'padding' }
       >
-        <View>
+        <View style={ styles.container }>
           { this.renderListView() }
 
           { this.renderSearch() }
