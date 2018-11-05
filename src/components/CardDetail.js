@@ -420,7 +420,7 @@ class CardDetail extends Component {
       styles.cardDetailsDiceSideIcon, styles.cardDetailsDiceSideBottomIcon];
 
     const sides = cardSides.map((dieSide, index) => {
-      const parts = dieSide.match(/(\+)?([0-9]*)([A-Za-z-]*)([0-9]*)/);
+      const parts = dieSide.match(/(?:(\+)?([0-9]|X)?(MD|RD|ID|F|Dr|Dc|Sh|R|Sp|\*|-)([0-9]?))/);
 
       const [
         , // eslint-disable-line comma-style
@@ -466,12 +466,9 @@ class CardDetail extends Component {
       }
 
       const isBlank = sideType === '-';
-      const isX = sideValue === '0';
       let displayValue = sideValue;
       if (isBlank) {
         displayValue = '—';
-      } else if (isX) {
-        displayValue = 'X';
       }
 
       let extraIconStyles = null;
