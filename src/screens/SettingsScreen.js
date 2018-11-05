@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {
   Alert, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import SafariView from 'react-native-safari-view';
 
 import FilterCloud from '../components/FilterCloud';
@@ -120,6 +121,8 @@ class SettingsScreen extends Component {
         {
           text: 'Reset',
           onPress: () => {
+            ReactNativeHapticFeedback.trigger('impactHeavy');
+
             cardDatabase.removeAllFilters();
 
             this.affiliationCloud.reset();

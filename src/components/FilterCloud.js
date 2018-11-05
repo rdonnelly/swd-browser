@@ -135,8 +135,7 @@ class FilterCloud extends Component {
   selectAll = () => {
     ReactNativeHapticFeedback.trigger('selection');
 
-    const nextValues = [...this.state.initialValues];
-    this.updateValues(nextValues);
+    this.reset();
   }
 
   selectNone = () => {
@@ -147,7 +146,8 @@ class FilterCloud extends Component {
   }
 
   reset = () => {
-    this.selectAll();
+    const nextValues = [...this.state.initialValues];
+    this.updateValues(nextValues);
   }
 
   render() {
