@@ -54,6 +54,6 @@ export default {
   },
 
   replaceLineBreaks(text) {
-    return text.replace(/[\r\n]+/, '<br><br>', 'gi');
+    return text.replace(/[\r\n]+/gi, '<br><br>');
   },
 };
