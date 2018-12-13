@@ -535,12 +535,17 @@ class CardDetail extends Component {
       icon: { renderer: CardParser.iconRenderer, wrapper: 'Text' },
     };
 
+    const customTagStyles = {
+      i: { fontStyle: 'italic', fontWeight: '700' },
+      p: { marginTop: 0, marginBottom: 0 },
+    };
+
     return (
       <View style={ styles.cardDetailsTextWrapper }>
         <Html
           html={ cardText }
           baseFontStyle={ styles.cardDetailsText }
-          tagsStyles={{ p: { marginTop: 0, marginBottom: 0 } }}
+          tagsStyles={ customTagStyles }
           renderers={ customRenderers }
         />
       </View>
