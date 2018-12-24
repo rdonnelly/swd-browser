@@ -193,6 +193,8 @@ const styles = StyleSheet.create({
   cardDetailsText: {
     color: colors.darkGray,
     fontSize: isTablet ? 20 : 17,
+    fontWeight: '500',
+    letterSpacing: isTablet ? -0.54 : -0.408,
   },
   cardAdditionalInfoWrapper: {
     alignItems: 'center',
