@@ -24,6 +24,7 @@ const ICON_REPLACEMENTS = Object.freeze({
   RIV: '<icon name="riv"></icon>',
   WotF: '<icon name="wotf"></icon>',
   AtG: '<icon name="atg"></icon>',
+  CONV: '<icon name="conv"></icon>',
 });
 
 export default {
