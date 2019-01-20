@@ -14,28 +14,28 @@
   "dependencies": {
     "lodash": "4.17.x",
     "prop-types": "15.6.x",
-    "react": "16.6.0-alpha.8af6728",
-    "react-native": "0.57.3",
-    "react-native-device-info": "0.24.x",
+    "react": "16.6.3",
+    "react-native": "0.57.8",
+    "react-native-device-info": "0.25.x",
     "react-native-haptic-feedback": "^1.4.0",
     "react-native-render-html": "3.10.x",
     "react-native-safari-view": "2.1.x",
-    "react-native-screens": "^1.0.0-alpha.15",
-    "react-native-vector-icons": "6.0.x",
+    "react-native-screens": "^1.0.0-alpha.22",
+    "react-native-vector-icons": "6.1.x",
     "react-navigation": "2.18.x",
     "swdestinydb-json-data": "https://github.com/rdonnelly/swdestinydb-json-data.git"
   },
   "devDependencies": {
     "babel-eslint": "10.0.x",
     "babel-jest": "23.6.0",
-    "eslint": "5.8.x",
+    "eslint": "5.12.x",
     "eslint-config-airbnb-base": "13.1.x",
     "eslint-plugin-import": "2.14.x",
-    "eslint-plugin-react": "7.11.x",
-    "eslint-plugin-react-native": "3.5.x",
+    "eslint-plugin-react": "7.12.x",
+    "eslint-plugin-react-native": "3.6.x",
     "jest": "23.6.0",
-    "metro-react-native-babel-preset": "0.48.1",
-    "react-test-renderer": "16.6.0-alpha.8af6728"
+    "metro-react-native-babel-preset": "0.51.1",
+    "react-test-renderer": "16.6.x"
   },
   "jest": {
     "preset": "react-native"
