@@ -48,4 +48,4 @@ export const iconCodes = {
   CONVERGENCE: 'e918',
 };
 
-export const validateCode = code => _has(iconCodes, code);
+export const validateCode = (code) => _has(iconCodes, code);

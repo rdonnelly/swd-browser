@@ -1,17 +1,19 @@
-import _get from 'lodash/get';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import { KeyboardAvoidingView } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 import CardSplitScreen from '../screens/CardSplitScreen';
 import { colors } from '../styles';
 
-const cardBrowserSplitStack = createStackNavigator(
+const CardBrowserSplitStack = createStackNavigator(
   {
     CardSplitScreen: {
       screen: CardSplitScreen,
     },
   },
   {
-    navigationOptions: {
+    defaultNavigationOptions: {
       headerTitle: 'Cards',
       headerTintColor: colors.headerTint,
       headerStyle: {
@@ -21,21 +23,25 @@ const cardBrowserSplitStack = createStackNavigator(
   },
 );
 
-cardBrowserSplitStack.navigationOptions = {
-  tabBarOnPress: ({ navigation, defaultHandler }) => {
-    if (navigation.isFocused()) {
-      if (navigation.state.index === 0) {
-        const stackNavigation = _get(navigation, 'state.routes[0]');
-        if (stackNavigation &&
-            stackNavigation.params &&
-            stackNavigation.params.resetScreen) {
-          stackNavigation.params.resetScreen();
-        }
-      }
-    } else {
-      defaultHandler();
-    }
-  },
+class KeyboardAvoidingCharacterStackNavigator extends PureComponent {
+  static router = CardBrowserSplitStack.router;
+
+  render() {
+    const { navigation } = this.props;
+    const keyboardAvoidingViewStyle = { flex: 1 };
+    return (
+      <KeyboardAvoidingView
+        behavior={ 'padding' }
+        style={ keyboardAvoidingViewStyle }
+      >
+        <CardBrowserSplitStack navigation={navigation} />
+      </KeyboardAvoidingView>
+    );
+  }
+}
+
+KeyboardAvoidingCharacterStackNavigator.propTypes = {
+  navigation: PropTypes.object.isRequired,
 };
 
-export default cardBrowserSplitStack;
+export default KeyboardAvoidingCharacterStackNavigator;

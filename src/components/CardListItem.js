@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import {
   StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Entypo';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 import SWDIcon from './SWDIcon';
 import { validateCode } from '../lib/SWDIconCodes';
@@ -155,7 +155,7 @@ class CardListItem extends Component {
             </View>
           </View>
           <View style={ styles.chevronWrapper }>
-            <Icon name={ 'chevron-right' } size={ 20 } style={ chevronStyles } />
+            <FontAwesome5Icon name={ 'chevron-right' } size={ 16 } style={ chevronStyles } />
           </View>
         </TouchableOpacity>
       </View>

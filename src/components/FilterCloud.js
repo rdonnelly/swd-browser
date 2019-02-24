@@ -151,7 +151,7 @@ class FilterCloud extends Component {
   }
 
   render() {
-    const optionItems = this.props.options.map(option => (
+    const optionItems = this.props.options.map((option) => (
       <FilterCloudItem
         key={ `filterclouditem-${this.props.setting}-${option.code}` }
         value={ this.state.values.includes(option.code) }

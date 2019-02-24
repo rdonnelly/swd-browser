@@ -1,6 +1,6 @@
-import _get from 'lodash/get';
-import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import { KeyboardAvoidingView, StyleSheet, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 import SWDIcon from '../components/SWDIcon';
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const cardBrowserStack = createStackNavigator(
+const CardBrowserStack = createStackNavigator(
   {
     CardsList: {
       screen: CardListScreen,
@@ -44,7 +44,7 @@ const cardBrowserStack = createStackNavigator(
     },
   },
   {
-    navigationOptions: {
+    defaultNavigationOptions: {
       headerTitle: 'Cards',
       headerTintColor: colors.headerTint,
       headerStyle: {
@@ -54,25 +54,25 @@ const cardBrowserStack = createStackNavigator(
   },
 );
 
-cardBrowserStack.navigationOptions = {
-  tabBarOnPress: ({ navigation, defaultHandler }) => {
-    if (navigation.isFocused()) {
-      if (navigation.state.index === 0) {
-        const stackNavigation = _get(navigation, 'state.routes[0]');
-        if (stackNavigation &&
-            stackNavigation.params &&
-            stackNavigation.params.resetScreen) {
-          stackNavigation.params.resetScreen();
-        }
-      }
+class KeyboardAvoidingCharacterStackNavigator extends PureComponent {
+  static router = CardBrowserStack.router;
 
-      if (navigation.state.index === 1) {
-        navigation.navigate('CardsList');
-      }
-    } else {
-      defaultHandler();
-    }
-  },
+  render() {
+    const { navigation } = this.props;
+    const keyboardAvoidingViewStyle = { flex: 1 };
+    return (
+      <KeyboardAvoidingView
+        behavior={ 'padding' }
+        style={ keyboardAvoidingViewStyle }
+      >
+        <CardBrowserStack navigation={navigation} />
+      </KeyboardAvoidingView>
+    );
+  }
+}
+
+KeyboardAvoidingCharacterStackNavigator.propTypes = {
+  navigation: PropTypes.object.isRequired,
 };
 
-export default cardBrowserStack;
+export default KeyboardAvoidingCharacterStackNavigator;

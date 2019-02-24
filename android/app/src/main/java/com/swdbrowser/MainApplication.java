@@ -3,6 +3,8 @@ package com.swdbrowser;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.mkuczera.RNReactNativeHapticFeedbackPackage;
 import com.swmansion.rnscreens.RNScreensPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -27,6 +29,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFetchBlobPackage(),
+            new RNGestureHandlerPackage(),
             new RNReactNativeHapticFeedbackPackage(),
             new RNScreensPackage(),
             new VectorIconsPackage(),

@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StatusBar } from 'react-native';
-import { useScreens } from 'react-native-screens';
 
-import MainTabNavigator from './navigation/MainTabNavigator';
+import TabNavigator from './navigation/TabNavigator';
 
-useScreens();
 
-export default class App extends React.Component {
+export default class App extends Component {
   componentDidMount() {
     setTimeout(() => {
       StatusBar.setBarStyle('light-content');
@@ -15,7 +13,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <MainTabNavigator />
+      <TabNavigator />
     );
   }
 }

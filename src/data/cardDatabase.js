@@ -25,7 +25,8 @@ class CardDatabase {
       require('swdestinydb-json-data/set/WotF.json'),
       require('swdestinydb-json-data/set/AtG.json'),
       require('swdestinydb-json-data/set/CONV.json'),
-    ).map(card => new Card(card));
+      require('swdestinydb-json-data/set/AoN.json'),
+    ).map((card) => new Card(card));
 
     this.results = this.cards;
   }
@@ -76,7 +77,7 @@ class CardDatabase {
   }
 
   filter() {
-    this.results = this.cards.filter(card => Object.keys(this.filters).every((key) => {
+    this.results = this.cards.filter((card) => Object.keys(this.filters).every((key) => {
       if (this.filters[key](card)) {
         return true;
       }
@@ -84,7 +85,7 @@ class CardDatabase {
       return false;
     }));
 
-    this.filterListeners.forEach(callback => callback(this.results));
+    this.filterListeners.forEach((callback) => callback(this.results));
 
     return this.results;
   }

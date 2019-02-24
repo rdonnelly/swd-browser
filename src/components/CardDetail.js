@@ -9,7 +9,12 @@ import DeviceInfo from 'react-native-device-info';
 import SWDIcon from './SWDIcon';
 import { base, colors } from '../styles';
 
-import { cardDatabase } from '../data';
+import {
+  cardDatabase,
+  affiliations,
+  subtypes,
+  types,
+} from '../data';
 import CardParser from '../utils/CardParser';
 import defaultImageSrc from '../../assets/images/swd-texture.png';
 
@@ -322,15 +327,21 @@ class CardDetail extends Component {
     } = this.props.card;
 
     const displayCardAffiliation =
-      cardAffiliation.charAt(0).toUpperCase() + cardAffiliation.slice(1);
-    const displayCardType = cardType.charAt(0).toUpperCase() + cardType.slice(1);
+      affiliations.find((affiliation) => affiliation.code === cardAffiliation).name;
+    const displayCardType = types.find((type) => type.code === cardType).name;
 
     let displayCardSubtypes;
     if (cardSubtypes && cardSubtypes.length) {
       displayCardSubtypes = cardSubtypes
-        .map(subtype => <Text key={ `subtype_${subtype}`}>
-            &nbsp;&nbsp;&middot;  { subtype.charAt(0).toUpperCase() + subtype.slice(1) }
-          </Text>);
+        .map((cardSubtype) => {
+          const displayCardSubtype = subtypes.find((subtype) => subtype.code === cardSubtype).name;
+
+          return (
+            <Text key={ `subtype_${cardSubtype}`}>
+              &nbsp;&nbsp;&middot;  { displayCardSubtype }
+            </Text>
+          );
+        });
     }
 
     return (
@@ -585,7 +596,7 @@ class CardDetail extends Component {
     if (cardStarterSets && cardStarterSets.length) {
       views.push((
         <View style={ styles.cardAdditionalInfoWrapper } key={ 'additional-info-starters' }>
-          { cardStarterSets.map(starterName => <View
+          { cardStarterSets.map((starterName) => <View
               style={ styles.cardAdditionalInfoItem }
               key={ `found-in-starter-${starterName}` }
             >
@@ -639,12 +650,17 @@ class CardDetail extends Component {
             { this.renderDiceSides() }
           </View>
           <View style={ imageWrapperStyles }>
-            <Image
-              style={ styles.cardImage }
-              resizeMode='contain'
-              source={{ uri: imageSrc }}
-              defaultSource={ defaultImageSrc }
-            />
+            <TouchableOpacity
+              activeOpacity={ 0.8 }
+              onLongPress={ this.handleImageLongPress }
+            >
+              <Image
+                style={ styles.cardImage }
+                resizeMode='contain'
+                source={{ uri: imageSrc }}
+                defaultSource={ defaultImageSrc }
+              />
+            </TouchableOpacity>
           </View>
           { this.renderAdditionalInfo() }
         </ScrollView>

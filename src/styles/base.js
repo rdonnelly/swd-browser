@@ -16,24 +16,27 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.brand,
     borderRadius: 8,
+    flexDirection: 'row',
     justifyContent: 'center',
     minWidth: 48,
-    padding: 16,
+    padding: 12,
   },
   buttonText: {
     color: colors.white,
     fontSize: 16,
     fontWeight: '700',
-    lineHeight: 20,
+    lineHeight: 24,
     textAlign: 'center',
   },
 
   input: {
     backgroundColor: colors.white,
     borderRadius: 8,
+    borderWidth: 0,
     color: colors.darkGray,
     fontSize: 20,
-    padding: 16,
+    lineHeight: 24,
+    padding: 12,
   },
 
   // COMPONENTS
