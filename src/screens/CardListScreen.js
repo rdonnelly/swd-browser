@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
-  FlatList, KeyboardAvoidingView, StyleSheet, Text, TextInput, View,
+  FlatList, StyleSheet, Text, TextInput, View,
 } from 'react-native';
-import DeviceInfo from 'react-native-device-info';
 
 import CardListItem, { ITEM_HEIGHT } from '../components/CardListItem';
 import { base, colors } from '../styles';
@@ -93,7 +92,7 @@ class CardListScreen extends Component {
 
   static search(query) {
     if (query) {
-      cardDatabase.addFilter('search', card => card.name.search(new RegExp(query, 'i')) !== -1);
+      cardDatabase.addFilter('search', (card) => card.name.search(new RegExp(query, 'i')) !== -1);
     } else {
       cardDatabase.removeFilter('search');
     }
@@ -157,7 +156,7 @@ class CardListScreen extends Component {
   }
 
   renderListView = () => {
-    const keyExtractor = item => item.id;
+    const keyExtractor = (item) => item.id;
 
     return (
       <FlatList
@@ -222,21 +221,11 @@ class CardListScreen extends Component {
   }
 
   render() {
-    // keyboard height is not returned correctly for iPad
-    const isPad = DeviceInfo.getModel().indexOf('iPad') > -1;
-    const keyboardVerticalOffset = isPad ? 62 : 0;
-
     return (
-        <KeyboardAvoidingView
-          behavior={ 'padding' }
-          keyboardVerticalOffset={ keyboardVerticalOffset }
-          style={ styles.container }
-        >
-          <View style={ styles.container }>
-            { this.renderListView() }
-            { this.renderSearch() }
-          </View>
-        </KeyboardAvoidingView>
+      <View style={ styles.container }>
+        { this.renderListView() }
+        { this.renderSearch() }
+      </View>
     );
   }
 }
