@@ -1,8 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
-  Image, ScrollView, StyleSheet, Text, View,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import Html from 'react-native-render-html';
 import DeviceInfo from 'react-native-device-info';
 
@@ -16,6 +22,8 @@ import {
   types,
 } from '../data';
 import CardParser from '../utils/CardParser';
+import { setClipboard } from '../utils/Clipboard';
+import { shareImageUrl } from '../utils/Share';
 import defaultImageSrc from '../../assets/images/swd-texture.png';
 
 
@@ -271,6 +279,25 @@ class CardDetail extends Component {
     }
 
     return true;
+  }
+
+  handleCardTextLongPress = () => {
+    ReactNativeHapticFeedback.trigger('impactHeavy');
+
+    const cardText = CardParser.convertToText(this.props.card);
+
+    setClipboard(cardText);
+  }
+
+  handleImageLongPress = () => {
+    ReactNativeHapticFeedback.trigger('impactHeavy');
+
+    const {
+      id: cardId,
+    } = this.props.card;
+
+    const imageSrc = `https://swdestinydb.com/bundles/cards/en/${cardId.slice(0, 2)}/${cardId}.jpg`;
+    shareImageUrl(imageSrc);
   }
 
   renderCardName() {
@@ -554,14 +581,18 @@ class CardDetail extends Component {
     };
 
     return (
-      <View style={ styles.cardDetailsTextWrapper }>
+      <TouchableOpacity
+        activeOpacity={ 0.9 }
+        onLongPress={ this.handleCardTextLongPress }
+        style={ styles.cardDetailsTextWrapper }
+      >
         <Html
           html={ cardText }
           baseFontStyle={ styles.cardDetailsText }
           tagsStyles={ customTagStyles }
           renderers={ customRenderers }
         />
-      </View>
+      </TouchableOpacity>
     );
   }
 
@@ -651,7 +682,7 @@ class CardDetail extends Component {
           </View>
           <View style={ imageWrapperStyles }>
             <TouchableOpacity
-              activeOpacity={ 0.8 }
+              activeOpacity={ 0.9 }
               onLongPress={ this.handleImageLongPress }
             >
               <Image

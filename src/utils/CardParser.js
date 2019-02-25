@@ -28,6 +28,20 @@ const ICON_REPLACEMENTS = Object.freeze({
 });
 
 export default {
+  convertToText(card, full = false) {
+    const {
+      text: cardText,
+    } = card;
+
+    const formattedCardText = cardText.replace(/(<([^>]+)>)/igm, '');
+
+    if (full) {
+      return formattedCardText;
+    }
+
+    return formattedCardText;
+  },
+
   iconRenderer(htmlAttributes) {
     const iconName = htmlAttributes.name || null;
 
