@@ -1,19 +1,10 @@
-import React, { Component } from 'react';
-import { StatusBar } from 'react-native';
+import React from 'react';
 
 import TabNavigator from './navigation/TabNavigator';
 
 
-export default class App extends Component {
-  componentDidMount() {
-    setTimeout(() => {
-      StatusBar.setBarStyle('light-content');
-    }, 500);
-  }
+const App = () => (
+  <TabNavigator />
+);
 
-  render() {
-    return (
-      <TabNavigator />
-    );
-  }
-}
+export default App;
