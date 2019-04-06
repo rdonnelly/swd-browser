@@ -1,5 +1,3 @@
-import _difference from 'lodash/difference';
-import _without from 'lodash/without';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -11,6 +9,7 @@ import {
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 import FilterCloudItem from './FilterCloudItem';
+
 import { colors } from '../styles';
 
 
@@ -73,63 +72,88 @@ class FilterCloud extends Component {
     this.timeoutId = null;
 
     const initialValues = props.values !== null ?
-      props.values : this.props.options.map(option => option.code);
+      props.values :
+      this.props.options.reduce((values, option) => ({
+        [option.code]: true,
+        ...values,
+      }), {});
 
     this.state = {
-      initialValues,
-      values: initialValues,
+      values: { ...initialValues },
     };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (_difference(this.state.values, nextState.values).length) {
-      return true;
+    if (this.state.values === nextState.values) {
+      return false;
     }
-    if (_difference(nextState.values, this.state.values).length) {
-      return true;
+
+    return true;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('wooooo', this.state.values, prevState.values, this.state.values !== prevState.values);
+    if (this.state.values !== prevState.values) {
+      if (this.timeoutId) {
+        clearTimeout(this.timeoutId);
+      }
+
+      this.timeoutId = setTimeout(() => {
+        this.props.callback(this.props.setting, this.state.values);
+      }, INTERACTION_DELAY);
     }
-    return false;
   }
 
   updateValues = (nextValues) => {
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-    }
-
-    this.timeoutId = setTimeout(() => {
-      if (nextValues.length === this.props.options.length) {
-        this.props.offCallback(this.props.setting);
-      } else {
-        this.props.onCallback(this.props.setting, nextValues);
-      }
-    }, INTERACTION_DELAY);
-
     this.setState({
-      values: nextValues,
+      values: { ...nextValues },
     });
   }
 
-  handlePressItem = (code, value) => {
+  handlePressItem = (code) => {
     ReactNativeHapticFeedback.trigger('selection');
 
-    let nextValues = [...this.state.values];
-    if (value) {
-      if (this.props.radio) {
-        nextValues = [code];
-      } else {
-        nextValues.push(code);
-      }
-    } else if (!this.props.radio) {
-      nextValues = _without(nextValues, code);
-    }
+    this.setState((state) => {
+      const newValues = {
+        ...state.values,
+      };
 
-    this.updateValues(nextValues);
+      if (this.props.radio) {
+        Object.keys(newValues).forEach((key) => {
+          newValues[key] = false;
+        });
+
+        newValues[code] = true;
+      } else {
+        newValues[code] = !newValues[code];
+      }
+
+      return {
+        ...state,
+        values: newValues,
+      };
+    });
   }
 
   handleLongPressItem = (code) => {
     ReactNativeHapticFeedback.trigger('impactHeavy');
-    const nextValues = [code];
-    this.updateValues(nextValues);
+
+    this.setState((state) => {
+      const newValues = {
+        ...state.values,
+      };
+
+      Object.keys(newValues).forEach((key) => {
+        newValues[key] = false;
+      });
+
+      newValues[code] = true;
+
+      return {
+        ...state,
+        values: newValues,
+      };
+    });
   }
 
   selectAll = () => {
@@ -141,21 +165,45 @@ class FilterCloud extends Component {
   selectNone = () => {
     ReactNativeHapticFeedback.trigger('selection');
 
-    const nextValues = [];
-    this.updateValues(nextValues);
+    this.setState((state) => {
+      const newValues = {
+        ...state.values,
+      };
+
+      Object.keys(newValues).forEach((key) => {
+        newValues[key] = false;
+      });
+
+      return {
+        ...state,
+        values: newValues,
+      };
+    });
   }
 
   reset = () => {
-    const nextValues = [...this.state.initialValues];
-    this.updateValues(nextValues);
+    this.setState((state) => {
+      const newValues = {
+        ...state.values,
+      };
+
+      Object.keys(newValues).forEach((key) => {
+        newValues[key] = true;
+      });
+
+      return {
+        ...state,
+        values: newValues,
+      };
+    });
   }
 
   render() {
     const optionItems = this.props.options.map((option) => (
       <FilterCloudItem
         key={ `filterclouditem-${this.props.setting}-${option.code}` }
-        value={ this.state.values.includes(option.code) }
-        setting={ option.code }
+        code={ option.code }
+        value={ this.state.values[option.code] }
         label={ option.name }
         handlePress={ this.handlePressItem }
         handleLongPress={ this.handleLongPressItem }
@@ -202,8 +250,7 @@ FilterCloud.propTypes = {
 
   radio: PropTypes.bool,
 
-  onCallback: PropTypes.func,
-  offCallback: PropTypes.func,
+  callback: PropTypes.func,
 };
 
 export default FilterCloud;

@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
 
 class FilterCloudItem extends PureComponent {
   handlePress = () => {
-    this.props.handlePress(this.props.setting, !this.props.value);
+    this.props.handlePress(this.props.code);
   }
 
   handleLongPress = () => {
-    this.props.handleLongPress(this.props.setting);
+    this.props.handleLongPress(this.props.code);
   }
 
   render() {
@@ -63,9 +63,9 @@ class FilterCloudItem extends PureComponent {
 }
 
 FilterCloudItem.propTypes = {
-  value: PropTypes.bool.isRequired,
-  setting: PropTypes.string.isRequired,
+  code: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  value: PropTypes.bool.isRequired,
 
   handlePress: PropTypes.func.isRequired,
   handleLongPress: PropTypes.func.isRequired,

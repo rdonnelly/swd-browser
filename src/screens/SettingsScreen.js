@@ -17,6 +17,7 @@ import {
   subtypes,
   types,
 } from '../data';
+
 import { base, colors } from '../styles';
 
 const styles = StyleSheet.create({
@@ -88,28 +89,25 @@ class SettingsScreen extends Component {
 
   updateFilter = (setting, values) => {
     const key = `filter_${setting}`;
-    cardDatabase.addFilter(key, (card) => values.includes(card[setting]));
-  };
+    const predicate =
+      (card) => {
+        const filterValues = Object.keys(values).filter((k) => values[k]);
+        if (Array.isArray(card[setting])) {
+          if (values.length === 0) {
+            return false;
+          }
 
-  updateFilterList = (setting, values) => {
-    const key = `filter_${setting}`;
+          if (card[setting].length === 0 && filterValues.includes('none')) {
+            return true;
+          }
 
-    cardDatabase.addFilter(key, (card) => {
-      if (values.length === 0) {
-        return false;
-      }
+          return filterValues.some((value) => card[setting].includes(value));
+        }
 
-      if (card[setting].length === 0 && values.includes('none')) {
-        return true;
-      }
+        return filterValues.includes(card[setting]);
+      };
 
-      return values.some((value) => card[setting].includes(value));
-    });
-  };
-
-  removeFilter = (setting) => {
-    const key = `filter_${setting}`;
-    cardDatabase.removeFilter(key);
+    cardDatabase.addFilter(key, predicate);
   };
 
   removeAllFilters = () => {
@@ -151,8 +149,7 @@ class SettingsScreen extends Component {
         label={'Affiliation'}
         setting={'affiliation'}
         options={affiliations}
-        onCallback={this.updateFilter}
-        offCallback={this.removeFilter}
+        callback={this.updateFilter}
         ref={(component) => {
           this.affiliationCloud = component;
         }}
@@ -164,8 +161,7 @@ class SettingsScreen extends Component {
         label={'Faction'}
         setting={'faction'}
         options={factions}
-        onCallback={this.updateFilter}
-        offCallback={this.removeFilter}
+        callback={this.updateFilter}
         ref={(component) => {
           this.factionCloud = component;
         }}
@@ -177,8 +173,7 @@ class SettingsScreen extends Component {
         label={'Sets'}
         setting={'set'}
         options={sets}
-        onCallback={this.updateFilter}
-        offCallback={this.removeFilter}
+        callback={this.updateFilter}
         ref={(component) => {
           this.setCloud = component;
         }}
@@ -190,8 +185,7 @@ class SettingsScreen extends Component {
         label={'Types'}
         setting={'type'}
         options={types}
-        onCallback={this.updateFilter}
-        offCallback={this.removeFilter}
+        callback={this.updateFilter}
         ref={(component) => {
           this.typeCloud = component;
         }}
@@ -203,8 +197,7 @@ class SettingsScreen extends Component {
         label={'Subtypes'}
         setting={'subtypes'}
         options={subtypes}
-        onCallback={this.updateFilterList}
-        offCallback={this.removeFilter}
+        callback={this.updateFilter}
         ref={(component) => {
           this.subtypeCloud = component;
         }}
@@ -239,8 +232,7 @@ class SettingsScreen extends Component {
         label={'Keywords'}
         setting={'keywords'}
         options={keywordOptions}
-        onCallback={this.updateFilterList}
-        offCallback={this.removeFilter}
+        callback={this.updateFilter}
         ref={(component) => {
           this.keywordCloud = component;
         }}
@@ -252,8 +244,7 @@ class SettingsScreen extends Component {
         label={'Rarity'}
         setting={'rarity'}
         options={rarities}
-        onCallback={this.updateFilter}
-        offCallback={this.removeFilter}
+        callback={this.updateFilter}
         ref={(component) => {
           this.rarityCloud = component;
         }}
