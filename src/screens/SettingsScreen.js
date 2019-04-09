@@ -243,7 +243,7 @@ class SettingsScreen extends Component {
       <FilterCloud
         label={'Rarity'}
         setting={'rarity'}
-        options={rarities}
+        options={Object.values(rarities).reverse()}
         callback={this.updateFilter}
         ref={(component) => {
           this.rarityCloud = component;

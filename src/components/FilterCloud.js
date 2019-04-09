@@ -92,7 +92,6 @@ class FilterCloud extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('wooooo', this.state.values, prevState.values, this.state.values !== prevState.values);
     if (this.state.values !== prevState.values) {
       if (this.timeoutId) {
         clearTimeout(this.timeoutId);

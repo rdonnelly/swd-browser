@@ -11,9 +11,11 @@ import {
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import Html from 'react-native-render-html';
 import DeviceInfo from 'react-native-device-info';
+import Emoji from 'react-native-emoji';
 
+import CardDetailDie from './CardDetailDie';
+import CardDetailPills from './CardDetailPills';
 import SWDIcon from './SWDIcon';
-import { base, colors } from '../styles';
 
 import {
   cardDatabase,
@@ -25,6 +27,8 @@ import CardParser from '../utils/CardParser';
 import { setClipboard } from '../utils/Clipboard';
 import { shareImageUrl } from '../utils/Share';
 import defaultImageSrc from '../../assets/images/swd-texture.png';
+
+import { base, colors } from '../styles';
 
 
 const isTablet = DeviceInfo.isTablet();
@@ -83,7 +87,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 14,
   },
-  cardDetails: {
+  cardDetail: {
     paddingHorizontal: isTablet ? 24 : 16,
     paddingTop: 16,
     width: '100%',
@@ -91,95 +95,25 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
   },
-  cardDetailsInfo: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 16,
-    width: '100%',
+  cardDetailPillData: {
+    color: colors.darkGray,
+    fontSize: isTablet ? 18 : 16,
+    fontWeight: '900',
   },
-  cardDetailsInfoStat: {
-    backgroundColor: colors.lightGrayTranslucent,
-    borderRadius: 4,
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginRight: 6,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
+  cardDetailPillDataSmall: {
+    color: colors.darkGray,
+    fontSize: isTablet ? 13 : 10,
+    fontWeight: '900',
   },
-  cardDetailsInfoStatTitle: {
+  cardDetailPillTitle: {
     color: colors.darkGray,
     fontSize: isTablet ? 18 : 16,
     fontWeight: '600',
-    textAlign: 'center',
   },
-  cardDetailsInfoStatData: {
-    color: colors.darkGray,
-    fontSize: isTablet ? 18 : 16,
-    fontWeight: '700',
-    textAlign: 'center',
-  },
-  cardDetailsDice: {
-    alignItems: 'center',
-    backgroundColor: colors.lightGrayTranslucent,
-    borderRadius: 4,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 16,
-    maxWidth: '100%',
-    overflow: 'hidden',
-  },
-  cardDetailsDiceSide: {
-    alignItems: 'center',
-    flex: 1,
-    flexDirection: 'column',
-    height: isTablet ? 64 : 48,
-    justifyContent: 'center',
-    padding: 8,
-  },
-  cardDetailsDiceSideTop: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  cardDetailsDiceSideBottom: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  cardDetailsDiceSideElement: {
-    paddingRight: 1,
-  },
-  cardDetailsDiceSideIcon: {
-    color: colors.darkGray,
-    fontSize: isTablet ? 18 : 14,
-    lineHeight: isTablet ? 18 : 14,
-  },
-  cardDetailsDiceSideBottomIcon: {
-    color: colors.yellowDark,
-    fontSize: isTablet ? 12 : 11,
-    lineHeight: isTablet ? 12 : 11,
-  },
-  cardDetailsDiceSideText: {
-    color: colors.darkGray,
-    fontSize: isTablet ? 22 : 16,
-    lineHeight: isTablet ? 24 : 16,
-    fontWeight: '700',
-    marginTop: isTablet ? 2 : 3,
-  },
-  cardDetailsDiceSideBottomText: {
-    color: colors.yellowDark,
+  cardDetailPillTitleIcon: {
     fontSize: isTablet ? 16 : 14,
-    lineHeight: isTablet ? 18 : 14,
-    marginTop: isTablet ? 1 : 2,
   },
-  cardDetailsDiceSideBlankText: {
-    color: colors.red,
-  },
-  cardDetailsDiceSideModiferText: {
-    color: colors.blue,
-  },
-  cardDetailsType: {
+  cardDetailType: {
     alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -187,15 +121,15 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     width: '100%',
   },
-  cardDetailsTypeText: {
+  cardDetailTypeText: {
     color: colors.darkGray,
     fontSize: isTablet ? 20 : 16,
     fontWeight: '700',
   },
-  cardDetailsTypeTextIcon: {
+  cardDetailTypeTextIcon: {
     fontSize: isTablet ? 16 : 14,
   },
-  cardDetailsTextWrapper: {
+  cardDetailTextWrapper: {
     backgroundColor: colors.lightGrayTranslucent,
     borderRadius: 4,
     marginBottom: 16,
@@ -203,32 +137,16 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     width: '100%',
   },
-  cardDetailsText: {
+  cardDetailText: {
     color: colors.darkGray,
     fontSize: isTablet ? 20 : 17,
     fontWeight: '500',
     letterSpacing: isTablet ? -0.54 : -0.408,
   },
-  cardAdditionalInfoWrapper: {
-    alignItems: 'center',
-    backgroundColor: colors.lightGrayTranslucent,
-    borderRadius: 4,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    marginBottom: 16,
-    paddingHorizontal: 12,
-    paddingVertical: 16,
-    width: '100%',
-  },
-  cardAdditionalInfoItem: {
-    flexDirection: 'row',
-  },
-  cardAdditionalInfoText: {
-    color: colors.darkGray,
-  },
   cardImageWrapper: {
     backgroundColor: colors.white,
     height: 440,
+    marginBottom: 16,
     padding: 16,
     width: '100%',
   },
@@ -260,15 +178,63 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
+  holocronContainer: {
+    ...base.container,
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    marginBottom: 16,
+    flexDirection: 'row',
+  },
+  holocronFormat: {
+    alignItems: 'center',
+    backgroundColor: colors.lightGrayTranslucent,
+    borderRadius: 4,
+    flex: 1,
+    justifyContent: 'flex-start',
+    marginHorizontal: 4,
+    padding: 12,
+  },
+  holocronFormatTitle: {
+    flex: 1,
+    color: colors.grayDarkDark,
+    fontSize: isTablet ? 13 : 10,
+    fontWeight: '800',
+  },
+  holocronFormatData: {
+    flex: 1,
+    color: colors.darkGray,
+    fontSize: isTablet ? 16 : 14,
+    fontWeight: '700',
+  },
+  holocronFormatDataEmoji: {
+    fontSize: isTablet ? 13 : 11,
+    lineHeight: isTablet ? 18 : 16,
+  },
   cardAdditionalInfoContainer: {
     ...base.container,
-    backgroundColor: colors.lightGray,
-    paddingHorizontal: isTablet ? 24 : 16,
-    paddingTop: 16,
-    width: '100%',
     alignItems: 'center',
+    backgroundColor: colors.lightGray,
     flexDirection: 'column',
     justifyContent: 'center',
+    paddingHorizontal: isTablet ? 24 : 16,
+    width: '100%',
+  },
+  cardAdditionalInfoWrapper: {
+    alignItems: 'center',
+    backgroundColor: colors.lightGrayTranslucent,
+    borderRadius: 4,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginBottom: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 16,
+    width: '100%',
+  },
+  cardAdditionalInfoItem: {
+    flexDirection: 'row',
+  },
+  cardAdditionalInfoText: {
+    color: colors.darkGray,
   },
 });
 
@@ -348,14 +314,9 @@ class CardDetail extends Component {
 
   renderCardType() {
     const {
-      affiliation: cardAffiliation,
+      displayType: cardType,
       subtypes: cardSubtypes,
-      type: cardType,
     } = this.props.card;
-
-    const displayCardAffiliation =
-      affiliations.find((affiliation) => affiliation.code === cardAffiliation).name;
-    const displayCardType = types.find((type) => type.code === cardType).name;
 
     let displayCardSubtypes;
     if (cardSubtypes && cardSubtypes.length) {
@@ -372,18 +333,13 @@ class CardDetail extends Component {
     }
 
     return (
-      <View style={ styles.cardDetailsType }>
-        <Text style={ styles.cardDetailsTypeText }>
-          { displayCardType }
+      <View style={ styles.cardDetailType }>
+        <Text style={ styles.cardDetailTypeText }>
+          { cardType }
         </Text>
         { displayCardSubtypes ? (
-          <Text style={ styles.cardDetailsTypeText }>
+          <Text style={ styles.cardDetailTypeText }>
             { displayCardSubtypes }
-          </Text>) : null
-        }
-        { displayCardAffiliation ? (
-          <Text style={ styles.cardDetailsTypeText }>
-            &nbsp;&nbsp;&middot;  { displayCardAffiliation }
           </Text>) : null
         }
       </View>
@@ -395,170 +351,55 @@ class CardDetail extends Component {
       cost: cardCost,
       health: cardHealth,
       points: cardPoints,
+      pointsPerFormat: cardPointsPerFormat,
       hasBalance: cardHasBalance,
     } = this.props.card;
 
-    const costText = cardCost !== null ?
-      <View style={ styles.cardDetailsInfoStat }>
-        <Text style={ styles.cardDetailsInfoStatData }>
-          { cardCost }&nbsp;
-        </Text>
-        <SWDIcon type={ 'resource' } style={ styles.cardDetailsInfoStatTitle } />
-      </View> : null;
+    const pills = [];
 
-    const pointsText = cardPoints !== null ?
-      <View style={ styles.cardDetailsInfoStat }>
-        <Text style={ styles.cardDetailsInfoStatData }>
-          { cardPoints }
-        </Text>
-        { cardHasBalance &&
-          <Text style={ styles.cardDetailsInfoStatTitle }>
-            *
+    if (cardCost !== null) {
+      pills.push(
+        <Text>
+          <Text style={ styles.cardDetailPillData }>
+            { cardCost }&nbsp;
           </Text>
-        }
-        <Text style={ styles.cardDetailsInfoStatTitle }>
-          &nbsp;Points
-        </Text>
-      </View> : null;
-
-    const healthText = cardHealth !== null ?
-      <View style={ styles.cardDetailsInfoStat }>
-        <Text style={ styles.cardDetailsInfoStatData }>
-          { cardHealth }&nbsp;
-        </Text>
-        <Text style={ styles.cardDetailsInfoStatTitle }>
-          Health
-        </Text>
-      </View> : null;
-
-    return (
-      <View style={ styles.cardDetailsInfo }>
-        { costText }
-        { pointsText }
-        { healthText }
-      </View>
-    );
-  }
-
-  renderDiceSides() {
-    const {
-      id: cardId,
-      sides: cardSides,
-      hasDie: cardHasDie,
-    } = this.props.card;
-
-    if (!cardHasDie) {
-      return null;
+          <SWDIcon type={ 'resource' } style={[styles.cardDetailPillTitle, styles.cardDetailPillTitleIcon]} />
+        </Text>,
+      );
     }
 
-    const containerStyles = [styles.cardDetailsDiceSide];
-    const textTopStyles = [styles.cardDetailsDiceSideText];
-    const textBottomStyles = [
-      styles.cardDetailsDiceSideText, styles.cardDetailsDiceSideBottomText];
-    const iconTopStyles = [styles.cardDetailsDiceSideIcon];
-    const iconBottomStyles = [
-      styles.cardDetailsDiceSideIcon, styles.cardDetailsDiceSideBottomIcon];
-
-    const sides = cardSides.map((dieSide, index) => {
-      const parts = dieSide.match(/(?:(\+)?([0-9]|X)?(MD|RD|ID|F|Dr|Dc|Sh|R|Sp|\*|-)([0-9]?))/);
-
-      const [
-        , // eslint-disable-line comma-style
-        isModifier,
-        sideValue,
-        sideType,
-        sideCost,
-      ] = parts;
-
-      let iconType = '-';
-
-      switch (sideType) {
-        case 'R':
-          iconType = 'RESOURCE';
-          break;
-        case 'Sp':
-          iconType = 'SPECIAL';
-          break;
-        case 'Dc':
-          iconType = 'DISCARD';
-          break;
-        case 'Dr':
-          iconType = 'DISRUPT';
-          break;
-        case 'F':
-          iconType = 'FOCUS';
-          break;
-        case 'ID':
-          iconType = 'INDIRECT';
-          break;
-        case 'MD':
-          iconType = 'MELEE';
-          break;
-        case 'RD':
-          iconType = 'RANGED';
-          break;
-        case 'Sh':
-          iconType = 'SHIELD';
-          break;
-        case 'X':
-        default:
-          iconType = '-';
-      }
-
-      const isBlank = sideType === '-';
-      let displayValue = sideValue;
-      if (isBlank) {
-        displayValue = '—';
-      }
-
-      let extraIconStyles = null;
-      let extraTextStyles = null;
-      if (isBlank) {
-        extraIconStyles = styles.cardDetailsDiceSideBlankText;
-        extraTextStyles = styles.cardDetailsDiceSideBlankText;
-      } else if (isModifier) {
-        extraIconStyles = styles.cardDetailsDiceSideModiferText;
-        extraTextStyles = styles.cardDetailsDiceSideModiferText;
-      }
-
-      return (
-        <View style={ containerStyles } key={ `sides_${cardId}_${index}`}>
-          <View style={ styles.cardDetailsDiceSideTop }>
-            { isModifier ? (
-              <View style={ styles.cardDetailsDiceSideElement }>
-                <Text style={ [textTopStyles, extraTextStyles] }>
-                  +
-                </Text>
-              </View>) : null
-            }
-            <View style={ styles.cardDetailsDiceSideElement }>
-              <Text style={ [textTopStyles, extraTextStyles] }>
-                { displayValue }
-              </Text>
-            </View>
-            <View style={ styles.cardDetailsDiceSideElement }>
-              <SWDIcon type={ iconType } style={ [iconTopStyles, extraIconStyles] } />
-            </View>
-          </View>
-          { sideCost ? (
-            <View style={ styles.cardDetailsDiceSideBottom }>
-              <Text style={ textBottomStyles }>
-                { sideCost }
-              </Text>
-              <View style={ styles.cardDetailsDiceSideElement }>
-                <SWDIcon type={ 'RESOURCE' } style={ iconBottomStyles } />
-              </View>
-            </View>) : null
+    if (cardPoints !== null) {
+      pills.push(
+        <Text>
+          <Text style={ styles.cardDetailPillData }>
+            { cardPointsPerFormat.inf }
+          </Text>
+          { cardHasBalance &&
+            <Text style={ styles.cardDetailPillData }>
+              *
+            </Text>
           }
-        </View>
+          <Text style={ styles.cardDetailPillTitle }>
+            &nbsp;Points
+          </Text>
+        </Text>,
       );
-    });
+    }
 
-    return (
-      <View style={ styles.cardDetailsDice }>
-        { sides }
-      </View>
-    );
+    if (cardHealth !== null) {
+      pills.push(
+        <Text>
+          <Text style={ styles.cardDetailPillData }>
+            { cardHealth }&nbsp;
+          </Text>
+          <Text style={ styles.cardDetailPillTitle }>
+            Health
+          </Text>
+        </Text>,
+      );
+    }
+
+    return <CardDetailPills info={pills} />;
   }
 
   renderCardText() {
@@ -584,15 +425,122 @@ class CardDetail extends Component {
       <TouchableOpacity
         activeOpacity={ 0.9 }
         onLongPress={ this.handleCardTextLongPress }
-        style={ styles.cardDetailsTextWrapper }
+        style={ styles.cardDetailTextWrapper }
       >
         <Html
           html={ cardText }
-          baseFontStyle={ styles.cardDetailsText }
+          baseFontStyle={ styles.cardDetailText }
           tagsStyles={ customTagStyles }
           renderers={ customRenderers }
         />
       </TouchableOpacity>
+    );
+  }
+
+  renderCardDetailsBottom() {
+    const {
+      displayAffiliation: affiliation,
+      displayFaction: faction,
+      displayRarity: rarity,
+    } = this.props.card;
+
+    const pills = [];
+
+    if (affiliation !== null) {
+      pills.push(
+        <Text>
+          <Text style={ styles.cardDetailPillDataSmall }>
+            { affiliation }
+          </Text>
+        </Text>,
+      );
+    }
+
+    if (faction !== null) {
+      pills.push(
+        <Text>
+          <Text style={ styles.cardDetailPillDataSmall }>
+            { faction }
+          </Text>
+        </Text>,
+      );
+    }
+
+    if (rarity !== null) {
+      pills.push(
+        <Text>
+          <Text style={ styles.cardDetailPillDataSmall }>
+            { rarity }
+          </Text>
+        </Text>,
+      );
+    }
+
+    return <CardDetailPills info={pills} />;
+  }
+
+  renderHolocron() {
+    const {
+      formats: cardFormats,
+      points: cardPoints,
+      pointsPerFormat: cardPointsPerFormat,
+    } = this.props.card;
+
+    return (
+      <View style={ styles.holocronContainer }>
+        { cardPoints ?
+          <View style={ styles.holocronFormat }>
+            <Text style={ styles.holocronFormatTitle }>
+              PRINT
+            </Text>
+            <Text style={ styles.holocronFormatData }>
+              { cardPoints }
+            </Text>
+          </View> : null
+        }
+        <View style={ styles.holocronFormat }>
+          <Text style={ styles.holocronFormatTitle }>
+            INF
+          </Text>
+          <Text style={ styles.holocronFormatData }>
+            {
+              cardFormats.includes('INF') ?
+                cardPoints ?
+                  cardPointsPerFormat.inf :
+                  <Emoji name="white_check_mark" style={ styles.holocronFormatDataEmoji } /> :
+                <Emoji name="no_entry_sign" style={ styles.holocronFormatDataEmoji } />
+            }
+          </Text>
+        </View>
+        <View style={ styles.holocronFormat }>
+          <Text style={ styles.holocronFormatTitle }>
+            STD
+          </Text>
+          <Text style={ styles.holocronFormatData }>
+          {
+            cardFormats.includes('STD') ?
+              cardPoints ?
+                cardPointsPerFormat.std :
+                <Emoji name="white_check_mark" style={ styles.holocronFormatDataEmoji } /> :
+              <Emoji name="no_entry_sign" style={ styles.holocronFormatDataEmoji } />
+          }
+          </Text>
+        </View>
+        <View style={ styles.holocronFormat }>
+          <Text style={ styles.holocronFormatTitle }>
+            TRI
+          </Text>
+          <Text style={ styles.holocronFormatData }>
+          {
+            cardFormats.includes('TRI') ?
+              cardPoints ?
+                cardPointsPerFormat.tri :
+                <Emoji name="white_check_mark" style={ styles.holocronFormatDataEmoji } /> :
+              <Emoji name="no_entry_sign" style={ styles.holocronFormatDataEmoji } />
+          }
+          </Text>
+        </View>
+      </View>
     );
   }
 
@@ -616,7 +564,7 @@ class CardDetail extends Component {
               Reprint of&nbsp;
             </Text>
             <Text style={ styles.cardAdditionalInfoText }>
-              <SWDIcon type={ reprintCardSet } style={ styles.cardDetailsTypeTextIcon } />
+              <SWDIcon type={ reprintCardSet } style={ styles.cardDetailTypeTextIcon } />
               &nbsp;{ reprintCardSet }&nbsp;{ reprintCardPosition }
             </Text>
           </View>
@@ -648,6 +596,7 @@ class CardDetail extends Component {
   }
 
   render() {
+    const { card } = this.props;
     const {
       id: cardId,
       faction: cardFaction,
@@ -674,11 +623,12 @@ class CardDetail extends Component {
       <View style={ styles.container }>
         <ScrollView style={ styles.scrollView }>
           { this.renderCardName() }
-          <View style={ styles.cardDetails }>
+          <View style={ styles.cardDetail }>
             { this.renderCardType() }
             { this.renderCardDetailsInfo() }
             { this.renderCardText() }
-            { this.renderDiceSides() }
+            <CardDetailDie card={ card } />
+            { this.renderCardDetailsBottom() }
           </View>
           <View style={ imageWrapperStyles }>
             <TouchableOpacity
@@ -693,6 +643,7 @@ class CardDetail extends Component {
               />
             </TouchableOpacity>
           </View>
+          { this.renderHolocron() }
           { this.renderAdditionalInfo() }
         </ScrollView>
       </View>

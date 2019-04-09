@@ -1,9 +1,7 @@
 import _isInteger from 'lodash/isInteger';
-import formats from 'swdestinydb-json-data/formats.json';
-import starterPacks from 'swdestinydb-json-data/starterPacks.json';
 
+import { formats, rarities, starterPacks } from '../data';
 
-const infiniteFormat = formats.filter(format => format.code === 'INF').pop();
 
 class Card {
   constructor(card) {
@@ -42,6 +40,10 @@ class Card {
     return this.card.faction_code;
   }
 
+  get displayFaction() {
+    return this.card.faction_code.charAt(0).toUpperCase() + this.card.faction_code.slice(1);
+  }
+
   get type() {
     return this.card.type_code;
   }
@@ -71,11 +73,26 @@ class Card {
       return null;
     }
 
-    if (this.hasBalance) {
-      return infiniteFormat.data.balance[this.card.code];
-    }
-
     return this.card.points;
+  }
+
+  get formats() {
+    const sets = [];
+    Object.values(formats).forEach((format) => {
+      if (format.data.sets.includes(this.card.set_code)) {
+        sets.push(format.code);
+      }
+    });
+    return sets;
+  }
+
+  get pointsPerFormat() {
+    return {
+      printed: this.card.points,
+      inf: formats.INF.data.balance[this.card.code] || this.card.points,
+      std: formats.STD.data.balance[this.card.code] || this.card.points,
+      tri: formats.TRI.data.balance[this.card.code] || this.card.points,
+    };
   }
 
   get position() {
@@ -84,6 +101,10 @@ class Card {
 
   get rarity() {
     return this.card.rarity_code;
+  }
+
+  get displayRarity() {
+    return rarities[this.card.rarity_code].name;
   }
 
   get isUnique() {
@@ -103,7 +124,9 @@ class Card {
   }
 
   get hasBalance() {
-    return this.card.code in infiniteFormat.data.balance;
+    return this.card.code in formats.INF.data.balance ||
+      this.card.code in formats.STD.data.balance ||
+      this.card.code in formats.TRI.data.balance;
   }
 
   get reprintOf() {
@@ -112,8 +135,8 @@ class Card {
 
   get starterSets() {
     const starters = starterPacks
-      .filter(starter => this.card.code in starter.slots)
-      .map(starter => starter.name);
+      .filter((starter) => this.card.code in starter.slots)
+      .map((starter) => starter.name);
 
     return starters.length ? starters : null;
   }

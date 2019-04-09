@@ -17,6 +17,7 @@
     "react": "16.6.3",
     "react-native": "0.57.8",
     "react-native-device-info": "0.26.x",
+    "react-native-emoji": "^1.6.0",
     "react-native-haptic-feedback": "1.5.x",
     "react-native-render-html": "3.10.x",
     "react-native-safari-view": "2.1.x",

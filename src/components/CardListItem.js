@@ -110,8 +110,11 @@ class CardListItem extends Component {
     if (_isInteger(card.cost)) {
       cardData = card.cost;
     }
-    if (card.points) {
-      cardData = card.points;
+    if (card.pointsPerFormat) {
+      cardData = card.pointsPerFormat.inf;
+      if (card.hasBalance) {
+        cardData = `${cardData}*`;
+      }
     }
 
     const rowStyles = [styles.row];
