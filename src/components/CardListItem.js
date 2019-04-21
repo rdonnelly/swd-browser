@@ -107,10 +107,10 @@ class CardListItem extends Component {
       null;
 
     let cardData = '';
-    if (_isInteger(card.cost)) {
+    if (card.cost !== null) {
       cardData = card.cost;
     }
-    if (card.pointsPerFormat) {
+    if (card.points) {
       cardData = card.pointsPerFormat.inf;
       if (card.hasBalance) {
         cardData = `${cardData}*`;
