@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
-  Alert, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View,
+  Alert, Linking, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import SafariView from 'react-native-safari-view';
+import InAppBrowser from 'react-native-inappbrowser-reborn';
 
 import FilterCloud from '../components/FilterCloud';
 
@@ -59,14 +59,6 @@ class SettingsScreen extends Component {
   constructor(props) {
     super(props);
 
-    SafariView.addEventListener('onShow', () => {
-      StatusBar.setBarStyle('dark-content');
-    });
-
-    SafariView.addEventListener('onDismiss', () => {
-      StatusBar.setBarStyle('light-content');
-    });
-
     if (props.navigation) {
       props.navigation.setParams({
         resetScreen: this.resetScreen,
@@ -74,11 +66,29 @@ class SettingsScreen extends Component {
     }
   }
 
-  static visitWebpage() {
-    SafariView.show({
-      tintColor: colors.headerBackground,
-      url: 'http://rdonnelly.com',
-    });
+  static async visitWebpage() {
+    try {
+      const url = 'http://rdonnelly.com/swd-browser/';
+      if (await InAppBrowser.isAvailable()) {
+        StatusBar.setBarStyle('dark-content');
+        await InAppBrowser.open(url, {
+          // iOS Properties
+          dismissButtonStyle: 'done',
+          preferredBarTintColor: colors.headerTint,
+          preferredControlTintColor: colors.headerBackground,
+          readerMode: false,
+          // Android Properties
+          showTitle: true,
+          toolbarColor: colors.headerTint,
+          secondaryToolbarColor: colors.headerBackground,
+        });
+        StatusBar.setBarStyle('light-content');
+      } else {
+        Linking.openURL(url);
+      }
+    } catch (error) {
+      Alert.alert('Could Not Open Browser');
+    }
   }
 
   resetScreen = () => {
