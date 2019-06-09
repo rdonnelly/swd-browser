@@ -68,7 +68,7 @@ class SettingsScreen extends Component {
 
   static async visitWebpage() {
     try {
-      const url = 'http://rdonnelly.com/swd-browser/';
+      const url = 'https://rdonnelly.com/swd-browser/';
       if (await InAppBrowser.isAvailable()) {
         StatusBar.setBarStyle('dark-content');
         await InAppBrowser.open(url, {
@@ -79,8 +79,6 @@ class SettingsScreen extends Component {
           readerMode: false,
           // Android Properties
           showTitle: true,
-          toolbarColor: colors.headerTint,
-          secondaryToolbarColor: colors.headerBackground,
         });
         StatusBar.setBarStyle('light-content');
       } else {
