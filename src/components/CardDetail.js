@@ -19,9 +19,7 @@ import SWDIcon from './SWDIcon';
 
 import {
   cardDatabase,
-  affiliations,
   subtypes,
-  types,
 } from '../data';
 import CardParser from '../utils/CardParser';
 import { setClipboard } from '../utils/Clipboard';
@@ -507,8 +505,8 @@ class CardDetail extends Component {
               cardFormats.includes('INF') ?
                 cardPoints ?
                   cardPointsPerFormat.inf :
-                  <Emoji name="white_check_mark" style={ styles.holocronFormatDataEmoji } /> :
-                <Emoji name="no_entry_sign" style={ styles.holocronFormatDataEmoji } />
+                  <Emoji name="+1" style={ styles.holocronFormatDataEmoji } /> :
+                <Emoji name="no_entry" style={ styles.holocronFormatDataEmoji } />
             }
           </Text>
         </View>
@@ -521,8 +519,8 @@ class CardDetail extends Component {
             cardFormats.includes('STD') ?
               cardPoints ?
                 cardPointsPerFormat.std :
-                <Emoji name="white_check_mark" style={ styles.holocronFormatDataEmoji } /> :
-              <Emoji name="no_entry_sign" style={ styles.holocronFormatDataEmoji } />
+                <Emoji name="+1" style={ styles.holocronFormatDataEmoji } /> :
+              <Emoji name="no_entry" style={ styles.holocronFormatDataEmoji } />
           }
           </Text>
         </View>
@@ -535,8 +533,8 @@ class CardDetail extends Component {
             cardFormats.includes('TRI') ?
               cardPoints ?
                 cardPointsPerFormat.tri :
-                <Emoji name="white_check_mark" style={ styles.holocronFormatDataEmoji } /> :
-              <Emoji name="no_entry_sign" style={ styles.holocronFormatDataEmoji } />
+                <Emoji name="+1" style={ styles.holocronFormatDataEmoji } /> :
+              <Emoji name="no_entry" style={ styles.holocronFormatDataEmoji } />
           }
           </Text>
         </View>
