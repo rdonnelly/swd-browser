@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text } from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 import SWDIcon from '../components/SWDIcon';
@@ -54,6 +54,11 @@ const CardBrowserStack = createStackNavigator(
   },
 );
 
+const PlatformKeyboardAvoidingViewProps = Platform.select({
+  ios: () => ({ behavior: 'padding' }),
+  android: () => ({}),
+})();
+
 class KeyboardAvoidingCharacterStackNavigator extends PureComponent {
   static router = CardBrowserStack.router;
 
@@ -62,7 +67,7 @@ class KeyboardAvoidingCharacterStackNavigator extends PureComponent {
     const keyboardAvoidingViewStyle = { flex: 1 };
     return (
       <KeyboardAvoidingView
-        behavior={ 'padding' }
+        { ...PlatformKeyboardAvoidingViewProps }
         style={ keyboardAvoidingViewStyle }
       >
         <CardBrowserStack navigation={navigation} />
