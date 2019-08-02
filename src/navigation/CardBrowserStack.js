@@ -1,6 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { KeyboardAvoidingView, Platform, StyleSheet, Text } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 import SWDIcon from '../components/SWDIcon';
@@ -10,14 +16,22 @@ import { colors } from '../styles';
 
 const styles = StyleSheet.create({
   headerTitle: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginHorizontal: 16,
+  },
+  headerTitleSet: {
+    marginTop: 1,
+  },
+  headerTitleSetIcon: {
+    color: colors.headerTint,
+    fontSize: 15,
+  },
+  headerTitleText: {
     color: colors.headerTint,
     fontSize: 17,
     fontWeight: '700',
-    marginHorizontal: 16,
-    textAlign: 'center',
-  },
-  headerTitleIcon: {
-    fontSize: 15,
   },
 });
 
@@ -30,15 +44,17 @@ const CardBrowserStack = createStackNavigator(
       screen: CardDetailScreen,
       navigationOptions: ({ navigation }) => ({
         headerTitle: (
-          <Text style={styles.headerTitle}>
-            <SWDIcon type={ navigation.getParam('cardSet') } style={ styles.headerTitleIcon } />
-            &nbsp;
-            <Text>
+          <View style={ styles.headerTitle }>
+            <View style={ styles.headerTitleSet }>
+              <SWDIcon type={ navigation.getParam('cardSet') } style={ styles.headerTitleSetIcon } />
+            </View>
+            <Text style={ styles.headerTitleText }>
+              &nbsp;
               { navigation.getParam('cardSet') }
               &nbsp;
               { navigation.getParam('cardPosition') }
             </Text>
-          </Text>
+          </View>
         ),
       }),
     },

@@ -1,4 +1,3 @@
-import _isInteger from 'lodash/isInteger';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
@@ -7,7 +6,7 @@ import {
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 import SWDIcon from './SWDIcon';
-import { validateCode } from '../lib/SWDIconCodes';
+import { validateSetCode } from '../lib/SWDIconCodes';
 import { colors } from '../styles';
 
 export const ITEM_HEIGHT = 58;
@@ -58,16 +57,19 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   cardDetailsInfo: {
+    flexDirection: 'row',
     paddingVertical: 1,
+  },
+  cardDetailsInfoSet: {
+    marginTop: 2,
+  },
+  cardDetailsInfoSetIcon: {
+    color: colors.lightGrayDark,
+    fontSize: 11,
   },
   cardDetailsInfoText: {
     color: colors.gray,
     fontSize: 13,
-    fontWeight: '500',
-  },
-  cardDetailsInfoTextIcon: {
-    color: colors.lightGrayDark,
-    fontSize: 10,
     fontWeight: '500',
   },
   chevronWrapper: {
@@ -102,8 +104,8 @@ class CardListItem extends Component {
       onPressItem,
     } = this.props;
 
-    const setIcon = validateCode(card.set) ?
-      (<SWDIcon type={ card.set } font={ 'swdestiny' } style={ styles.cardDetailsInfoTextIcon } />) :
+    const setIcon = validateSetCode(card.set) ?
+      (<SWDIcon type={ card.set } style={ styles.cardDetailsInfoSetIcon } />) :
       null;
 
     let cardData = '';
@@ -147,8 +149,10 @@ class CardListItem extends Component {
               </Text>
             </View>
             <View style={ styles.cardDetailsInfo }>
+              <Text style={ styles.cardDetailsInfoSet }>
+                { setIcon }
+              </Text>
               <Text style={ styles.cardDetailsInfoText }>
-                { setIcon}
                 { setIcon && <Text>&nbsp;</Text>}
                 <Text>{ card.set }&nbsp;{ card.position }</Text>
                 <Text>&nbsp;&middot;&nbsp;{ card.displayType }</Text>
