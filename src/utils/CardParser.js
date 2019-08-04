@@ -25,19 +25,17 @@ const ICON_REPLACEMENTS = Object.freeze({
   WotF: '<icon name="wotf"></icon>',
   AtG: '<icon name="atg"></icon>',
   CONV: '<icon name="conv"></icon>',
+  AoN: '<icon name="aon"></icon>',
+  SoH: '<icon name="soh"></icon>',
 });
 
 export default {
-  convertToText(card, full = false) {
+  convertToText(card) {
     const {
       text: cardText,
     } = card;
 
     const formattedCardText = cardText.replace(/(<([^>]+)>)/igm, '');
-
-    if (full) {
-      return formattedCardText;
-    }
 
     return formattedCardText;
   },

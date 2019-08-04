@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   cardDetailsInfoSetIcon: {
-    color: colors.lightGrayDark,
-    fontSize: 11,
+    color: colors.gray,
+    fontSize: 12,
   },
   cardDetailsInfoText: {
     color: colors.gray,
