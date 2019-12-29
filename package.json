@@ -4,54 +4,50 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --simulator='iPhone 11 Pro'",
     "ipad": "react-native run-ios --simulator='iPad Pro (10.5-inch)'",
     "se": "react-native run-ios --simulator='iPhone SE'",
-    "xs": "react-native run-ios --simulator='iPhone Xs'",
+    "xs": "react-native run-ios",
     "start": "react-native start",
-    "lint": "./node_modules/eslint/bin/eslint.js *.js ./src",
+    "lint": "eslint .",
     "refresh": "rm -rf node_modules && yarn cache clean && yarn install",
     "test": "jest"
   },
   "dependencies": {
-    "@react-native-community/slider": "^1.0.4",
+    "@react-native-community/slider": "2.0.x",
     "lodash": "4.17.x",
     "prop-types": "15.7.x",
-    "react": "16.8.3",
-    "react-native": "0.59.5",
-    "react-native-device-info": "1.5.x",
-    "react-native-emoji": "^1.6.0",
-    "react-native-gesture-handler": "^1.1.0",
-    "react-native-haptic-feedback": "1.7.x",
-    "react-native-inappbrowser-reborn": "2.0.x",
+    "react": "16.9.0",
+    "react-native": "0.61.5",
+    "react-native-device-info": "5.4.x",
+    "react-native-emoji": "1.8.x",
+    "react-native-gesture-handler": "1.5.x",
+    "react-native-haptic-feedback": "1.8.x",
+    "react-native-inappbrowser-reborn": "3.3.x",
     "react-native-render-html": "4.1.x",
-    "react-native-screens": "^1.0.0-alpha.22",
-    "react-native-vector-icons": "6.4.x",
+    "react-native-screens": "^2.0.0-alpha.22",
+    "react-native-vector-icons": "6.6.x",
     "react-navigation": "3.8.x",
-    "rn-fetch-blob": "^0.10.15",
+    "rn-fetch-blob": "0.12.x",
     "swdestinydb-json-data": "https://github.com/rdonnelly/swdestinydb-json-data.git"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/runtime": "^7.4.3",
+    "@babel/core": "7.6.x",
+    "@babel/runtime": "7.6.x",
+    "@react-native-community/eslint-config": "^0.0.5",
     "babel-eslint": "10.0.x",
-    "babel-jest": "^24.7.1",
-    "eslint": "5.16.x",
+    "babel-jest": "24.9.x",
+    "eslint": "6.5.x",
     "eslint-config-airbnb-base": "13.1.x",
     "eslint-plugin-import": "2.17.x",
     "eslint-plugin-react": "7.12.x",
     "eslint-plugin-react-native": "3.6.x",
-    "jest": "^24.7.1",
-    "metro-react-native-babel-preset": "^0.53.1",
+    "jest": "24.9.x",
+    "metro-react-native-babel-preset": "^0.56.0",
     "prettier": "1.17.x",
-    "react-test-renderer": "16.8.3"
+    "react-test-renderer": "16.9.0"
   },
   "jest": {
     "preset": "react-native"
-  },
-  "rnpm": {
-    "assets": [
-      "./assets/fonts"
-    ]
   }
 }
