@@ -21,7 +21,6 @@
 		2DCD954D1E0B4F2C00145EB5 /* SWDBrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SWDBrowserTests.m */; };
 		50562A713CC2400C885D55A5 /* swdtypes.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EBA8AA942234B12BAD5412C /* swdtypes.ttf */; };
 		5906796AC8AEDED0C979EFF8 /* libPods-SWDBrowser-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C9CC37DFB9282726C47DC2 /* libPods-SWDBrowser-tvOSTests.a */; };
-		72FF4927B6F94309B34B8272 /* libRNDeviceInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4DF921C12CD4DADA5710DBD /* libRNDeviceInfo-tvOS.a */; };
 		950F039320D8959D00D5641A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 950F036920D8959D00D5641A /* LaunchScreen.storyboard */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
@@ -63,25 +62,15 @@
 		2D02E47B1E0B4A5D006451C7 /* SWDBrowser-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SWDBrowser-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* SWDBrowser-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SWDBrowser-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		466854F931A5494DB2BAFFDE /* libSafariViewManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSafariViewManager.a; sourceTree = "<group>"; };
 		47512C4426E5430BE0E4C812 /* Pods-SWDBrowser-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDBrowser-tvOS.release.xcconfig"; path = "Target Support Files/Pods-SWDBrowser-tvOS/Pods-SWDBrowser-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		5A10026F65E64C73B926FC6E /* libRNInAppBrowser.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNInAppBrowser.a; sourceTree = "<group>"; };
 		5A88F42E456281061B5B2F9F /* libPods-SWDBrowser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SWDBrowser.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EBA8AA942234B12BAD5412C /* swdtypes.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = swdtypes.ttf; path = ../assets/fonts/swdtypes.ttf; sourceTree = "<group>"; };
 		61C91E4AD86ABD813293CE9B /* libPods-SWDBrowserTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SWDBrowserTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67617DED69DA4EF29AC24502 /* swdsets.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = swdsets.ttf; path = ../assets/fonts/swdsets.ttf; sourceTree = "<group>"; };
-		6F1F97F146BC46D7AE3D2CC6 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		950F036920D8959D00D5641A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = SWDBrowser/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95A6CF7272D75F4D10862712 /* Pods-SWDBrowser-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDBrowser-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-SWDBrowser-tvOSTests/Pods-SWDBrowser-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		9A61EA79199A48BABC2A600A /* libRNReactNativeHapticFeedback.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNReactNativeHapticFeedback.a; sourceTree = "<group>"; };
-		A1707B43F8E04342B5FF5AF5 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
-		A4DF921C12CD4DADA5710DBD /* libRNDeviceInfo-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNDeviceInfo-tvOS.a"; sourceTree = "<group>"; };
 		A98B2F555CEF8B800B9A3889 /* Pods-SWDBrowserTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDBrowserTests.release.xcconfig"; path = "Target Support Files/Pods-SWDBrowserTests/Pods-SWDBrowserTests.release.xcconfig"; sourceTree = "<group>"; };
 		B828CC2CC2293B31EBF11F70 /* libPods-SWDBrowser-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SWDBrowser-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C05446977B7A47D5BECA68F8 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
-		E3FE02D51A7E417A85A458BB /* libRNCSlider.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCSlider.a; sourceTree = "<group>"; };
-		E4F47FD97C4147A9B5846DDA /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
-		E7579483F4474CC2AF1A5FBF /* libRNScreens.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNScreens.a; sourceTree = "<group>"; };
 		E831A604969D06FCD1D77CFA /* Pods-SWDBrowser-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDBrowser-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-SWDBrowser-tvOS/Pods-SWDBrowser-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -112,7 +101,6 @@
 			files = (
 				ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */,
-				72FF4927B6F94309B34B8272 /* libRNDeviceInfo-tvOS.a in Frameworks */,
 				0515918F0A90C85E3FE023B3 /* libPods-SWDBrowser-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,7 +193,6 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				4629BCF5ADE546DCA37788A7 /* Resources */,
-				95CFF2B0206BE37D00D24D30 /* Recovered References */,
 				10096B3853ECD624744D4E8E /* Pods */,
 			);
 			indentWidth = 2;
@@ -222,23 +209,6 @@
 				2D02E4901E0B4A5D006451C7 /* SWDBrowser-tvOSTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		95CFF2B0206BE37D00D24D30 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				C05446977B7A47D5BECA68F8 /* libRNDeviceInfo.a */,
-				466854F931A5494DB2BAFFDE /* libSafariViewManager.a */,
-				6F1F97F146BC46D7AE3D2CC6 /* libRNVectorIcons.a */,
-				A4DF921C12CD4DADA5710DBD /* libRNDeviceInfo-tvOS.a */,
-				E7579483F4474CC2AF1A5FBF /* libRNScreens.a */,
-				9A61EA79199A48BABC2A600A /* libRNReactNativeHapticFeedback.a */,
-				A1707B43F8E04342B5FF5AF5 /* libRNGestureHandler.a */,
-				E4F47FD97C4147A9B5846DDA /* libRNFetchBlob.a */,
-				E3FE02D51A7E417A85A458BB /* libRNCSlider.a */,
-				5A10026F65E64C73B926FC6E /* libRNInAppBrowser.a */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +238,7 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SWDBrowser" */;
 			buildPhases = (
 				3D0EEF3EBD4CA930AC14F66C /* [CP] Check Pods Manifest.lock */,
+				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
@@ -288,6 +259,7 @@
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SWDBrowser-tvOS" */;
 			buildPhases = (
 				C55914091B0AC180E0D5F894 /* [CP] Check Pods Manifest.lock */,
+				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
 				2D02E4791E0B4A5D006451C7 /* Resources */,
@@ -419,7 +391,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -571,6 +543,44 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SWDBrowser/Pods-SWDBrowser-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FD10A7F022414F080027D42C /* Start Packager */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Start Packager";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FD10A7F122414F3F0027D42C /* Start Packager */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Start Packager";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -720,7 +730,7 @@
 			baseConfigurationReference = F1E3278BFEF524EE429C9A51 /* Pods-SWDBrowser.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 59;
+				CURRENT_PROJECT_VERSION = 61;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = EZ4AQB6GC7;
 				HEADER_SEARCH_PATHS = (
@@ -738,7 +748,7 @@
 				INFOPLIST_FILE = SWDBrowser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.5.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -756,7 +766,7 @@
 			baseConfigurationReference = 21C892FB4DCE69CF8D05FD84 /* Pods-SWDBrowser.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 59;
+				CURRENT_PROJECT_VERSION = 61;
 				DEVELOPMENT_TEAM = EZ4AQB6GC7;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -773,7 +783,7 @@
 				INFOPLIST_FILE = SWDBrowser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.5.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
