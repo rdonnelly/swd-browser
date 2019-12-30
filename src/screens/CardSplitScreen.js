@@ -48,29 +48,33 @@ class CardSplitScreen extends Component {
     }
 
     this.setState({ selectedCardId: null });
-  }
+  };
 
   selectCard = (cardId) => {
     this.setState({
       selectedCardId: cardId,
     });
-  }
+  };
 
   render() {
     return (
-      <View style={ styles.container }>
-        <View style={ styles.containerList }>
+      <View style={styles.container}>
+        <View style={styles.containerList}>
           <CardListScreen
-            ref={ (component) => { this.listScreen = component; } }
-            selectCard={ this.selectCard }
-            selectedCardId={ this.state.selectedCardId }
+            ref={(component) => {
+              this.listScreen = component;
+            }}
+            selectCard={this.selectCard}
+            selectedCardId={this.state.selectedCardId}
           />
         </View>
-        <View style={ styles.containerDetails }>
+        <View style={styles.containerDetails}>
           <CardDetailScreen
-            ref={ (component) => { this.detailScreen = component; } }
-            selectCard={ this.selectCard }
-            selectedCardId={ this.state.selectedCardId }
+            ref={(component) => {
+              this.detailScreen = component;
+            }}
+            selectCard={this.selectCard}
+            selectedCardId={this.state.selectedCardId}
           />
         </View>
       </View>

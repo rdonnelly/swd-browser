@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import {
-  StyleSheet, Text, TouchableOpacity, View,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 import SWDIcon from './SWDIcon';
@@ -72,8 +70,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '500',
   },
-  chevronWrapper: {
-  },
+  chevronWrapper: {},
   chevron: {
     color: colors.lightGrayDark,
     marginTop: 2,
@@ -82,7 +79,6 @@ const styles = StyleSheet.create({
     color: colors.brand,
   },
 });
-
 
 class CardListItem extends Component {
   shouldComponentUpdate(nextProps) {
@@ -98,15 +94,11 @@ class CardListItem extends Component {
   }
 
   render() {
-    const {
-      card,
-      isSelected,
-      onPressItem,
-    } = this.props;
+    const { card, isSelected, onPressItem } = this.props;
 
-    const setIcon = validateSetCode(card.set) ?
-      (<SWDIcon type={ card.set } style={ styles.cardDetailsInfoSetIcon } />) :
-      null;
+    const setIcon = validateSetCode(card.set) ? (
+      <SWDIcon type={card.set} style={styles.cardDetailsInfoSetIcon} />
+    ) : null;
 
     let cardData = '';
     if (card.cost !== null) {
@@ -127,42 +119,44 @@ class CardListItem extends Component {
     }
 
     const iconGlyphStyles = [styles.cardIconGlyph];
-    const colorString = `card${card.faction.charAt(0).toUpperCase() + card.faction.slice(1)}`;
+    const colorString = `card${card.faction.charAt(0).toUpperCase() +
+      card.faction.slice(1)}`;
     iconGlyphStyles.push({ color: colors[colorString] });
 
     return (
-      <View style={ rowStyles }>
+      <View style={rowStyles}>
         <TouchableOpacity
-          onPress={ () => onPressItem(card) }
-          style={ styles.rowTappable }
+          onPress={() => onPressItem(card)}
+          style={styles.rowTappable}
         >
-          <View style={ styles.cardIcon }>
-            <SWDIcon type={ card.type } style={ iconGlyphStyles } />
+          <View style={styles.cardIcon}>
+            <SWDIcon type={card.type} style={iconGlyphStyles} />
           </View>
-          <View style={ styles.cardDetails }>
-            <View style={ styles.cardDetailsName }>
-              <Text
-                style={ styles.cardDetailsNameText }
-                numberOfLines={ 1 }
-              >
-                { card.name }
+          <View style={styles.cardDetails}>
+            <View style={styles.cardDetailsName}>
+              <Text style={styles.cardDetailsNameText} numberOfLines={1}>
+                {card.name}
               </Text>
             </View>
-            <View style={ styles.cardDetailsInfo }>
-              <Text style={ styles.cardDetailsInfoSet }>
-                { setIcon }
-              </Text>
-              <Text style={ styles.cardDetailsInfoText }>
-                { setIcon && <Text>&nbsp;</Text>}
-                <Text>{ card.set }&nbsp;{ card.position }</Text>
-                <Text>&nbsp;&middot;&nbsp;{ card.displayType }</Text>
-                <Text>&nbsp;&middot;&nbsp;{ card.displayAffiliation }</Text>
-                { cardData !== '' && <Text>&nbsp;&middot;&nbsp;{ cardData }</Text> }
+            <View style={styles.cardDetailsInfo}>
+              <Text style={styles.cardDetailsInfoSet}>{setIcon}</Text>
+              <Text style={styles.cardDetailsInfoText}>
+                {setIcon && <Text>&nbsp;</Text>}
+                <Text>
+                  {card.set}&nbsp;{card.position}
+                </Text>
+                <Text>&nbsp;&middot;&nbsp;{card.displayType}</Text>
+                <Text>&nbsp;&middot;&nbsp;{card.displayAffiliation}</Text>
+                {cardData !== '' && <Text>&nbsp;&middot;&nbsp;{cardData}</Text>}
               </Text>
             </View>
           </View>
-          <View style={ styles.chevronWrapper }>
-            <FontAwesome5Icon name={ 'chevron-right' } size={ 16 } style={ chevronStyles } />
+          <View style={styles.chevronWrapper}>
+            <FontAwesome5Icon
+              name={'chevron-right'}
+              size={16}
+              style={chevronStyles}
+            />
           </View>
         </TouchableOpacity>
       </View>

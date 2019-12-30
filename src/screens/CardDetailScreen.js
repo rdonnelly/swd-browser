@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import {
-  Dimensions, ScrollView, StyleSheet, View,
-} from 'react-native';
+import { Dimensions, ScrollView, StyleSheet, View } from 'react-native';
 import _get from 'lodash/get';
 
 import CardDetail from '../components/CardDetail';
@@ -10,13 +8,11 @@ import { base } from '../styles';
 
 import { cardDatabase } from '../data';
 
-
 const styles = StyleSheet.create({
   container: {
     ...base.container,
   },
 });
-
 
 class CardDetailScreen extends Component {
   constructor(props) {
@@ -50,11 +46,14 @@ class CardDetailScreen extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.cardId === nextState.cardId &&
-        this.state.scrollEnabled === nextState.scrollEnabled &&
-        this.state.scrollerAdjustmentCardIndex === nextState.scrollerAdjustmentCardIndex &&
-        this.state.scrollContentWidth === nextState.scrollContentWidth &&
-        this.state.viewWidth === nextState.viewWidth) {
+    if (
+      this.state.cardId === nextState.cardId &&
+      this.state.scrollEnabled === nextState.scrollEnabled &&
+      this.state.scrollerAdjustmentCardIndex ===
+        nextState.scrollerAdjustmentCardIndex &&
+      this.state.scrollContentWidth === nextState.scrollContentWidth &&
+      this.state.viewWidth === nextState.viewWidth
+    ) {
       return false;
     }
 
@@ -119,7 +118,7 @@ class CardDetailScreen extends Component {
         cardSet: selectedCard.set,
       });
     }
-  }
+  };
 
   handleLayout = (event) => {
     const width = _get(event, 'nativeEvent.layout.width', null);
@@ -129,7 +128,7 @@ class CardDetailScreen extends Component {
         viewWidth: width,
       });
     }
-  }
+  };
 
   handleMomentumScrollEnd = (event) => {
     const scrollOffset = event.nativeEvent.contentOffset.x;
@@ -144,7 +143,10 @@ class CardDetailScreen extends Component {
 
     // left
     if (this.state.scrollOffset > scrollOffset) {
-      const newCardIndex = Math.max(this.state.cardIndex - 1, this.state.minIndex);
+      const newCardIndex = Math.max(
+        this.state.cardIndex - 1,
+        this.state.minIndex,
+      );
       const newListIndex = Math.max(this.state.listIndex - 1, 0);
 
       const nextState = {
@@ -173,8 +175,14 @@ class CardDetailScreen extends Component {
 
     // right
     if (this.state.scrollOffset < scrollOffset) {
-      const newCardIndex = Math.min(this.state.cardIndex + 1, this.state.maxIndex);
-      const newListIndex = Math.min(this.state.listIndex + 1, this.state.list.length - 1);
+      const newCardIndex = Math.min(
+        this.state.cardIndex + 1,
+        this.state.maxIndex,
+      );
+      const newListIndex = Math.min(
+        this.state.listIndex + 1,
+        this.state.list.length - 1,
+      );
 
       const nextState = {
         cardId: cardDatabase.get(newCardIndex).id,
@@ -188,7 +196,10 @@ class CardDetailScreen extends Component {
       };
 
       // add a card to the right
-      if (newCardIndex < this.state.maxIndex && newListIndex === this.state.list.length - 1) {
+      if (
+        newCardIndex < this.state.maxIndex &&
+        newListIndex === this.state.list.length - 1
+      ) {
         nextState.list = [...this.state.list, newCardIndex];
         nextState.scrollerAdjustmentCardIndex = newCardIndex + 1;
         nextState.scrollEnabled = false;
@@ -198,7 +209,7 @@ class CardDetailScreen extends Component {
         this.updateSelectedCard(newCardIndex);
       });
     }
-  }
+  };
 
   handleContentSizeChange = (contentWidth) => {
     const newList = this.state.list;
@@ -209,14 +220,18 @@ class CardDetailScreen extends Component {
     if (contentWidthDiff) {
       scrollOffset = this.state.listIndex * this.state.viewWidth;
 
-      if (this.state.scrollDirection === 'left' &&
-          this.state.scrollerAdjustmentCardIndex !== null) {
+      if (
+        this.state.scrollDirection === 'left' &&
+        this.state.scrollerAdjustmentCardIndex !== null
+      ) {
         newList.shift();
         newList.unshift(this.state.scrollerAdjustmentCardIndex);
       }
 
-      if (this.state.scrollDirection === 'right' &&
-          this.state.scrollerAdjustmentCardIndex) {
+      if (
+        this.state.scrollDirection === 'right' &&
+        this.state.scrollerAdjustmentCardIndex
+      ) {
         newList.pop();
         newList.push(this.state.scrollerAdjustmentCardIndex);
       }
@@ -239,46 +254,45 @@ class CardDetailScreen extends Component {
 
       scrollerAdjustmentCardIndex: null,
     });
-  }
+  };
 
   renderCard = (cardIndex, listIndex) => {
     const card = cardDatabase.get(cardIndex);
 
     return (
       <View
-        key={ `page-${card.id}-${listIndex}`}
+        key={`page-${card.id}-${listIndex}`}
         style={{ width: this.state.viewWidth }}
       >
-        <CardDetail card={ card } />
+        <CardDetail card={card} />
       </View>
     );
-  }
+  };
 
   render() {
     return (
-      <View
-        onLayout={ this.handleLayout }
-        style={ styles.container }
-      >
-        { this.state.cardId &&
+      <View onLayout={this.handleLayout} style={styles.container}>
+        {this.state.cardId && (
           <ScrollView
-            ref={ (component) => { this.scrollView = component; } }
-            horizontal={ true }
-            pagingEnabled={ true }
-            showsHorizontalScrollIndicator={ false }
-            showsVerticalScrollIndicator={ false }
-            scrollEnabled={ this.state.scrollEnabled }
-            scrollsToTop={ false }
-            removeClippedSubviews={ true }
-            automaticallyAdjustContentInsets={ false }
-            onMomentumScrollEnd={ this.handleMomentumScrollEnd }
-            onContentSizeChange={ this.handleContentSizeChange }
-            scrollEventThrottle={ 0 }
+            ref={(component) => {
+              this.scrollView = component;
+            }}
+            horizontal={true}
+            pagingEnabled={true}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            scrollEnabled={this.state.scrollEnabled}
+            scrollsToTop={false}
+            removeClippedSubviews={true}
+            automaticallyAdjustContentInsets={false}
+            onMomentumScrollEnd={this.handleMomentumScrollEnd}
+            onContentSizeChange={this.handleContentSizeChange}
+            scrollEventThrottle={0}
             contentOffset={{ x: this.state.scrollOffset, y: 0 }}
           >
-            { this.state.list.map(this.renderCard) }
+            {this.state.list.map(this.renderCard)}
           </ScrollView>
-        }
+        )}
       </View>
     );
   }

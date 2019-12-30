@@ -31,8 +31,8 @@ class KeyboardAvoidingCharacterStackNavigator extends PureComponent {
     const keyboardAvoidingViewStyle = { flex: 1 };
     return (
       <KeyboardAvoidingView
-        behavior={ 'padding' }
-        style={ keyboardAvoidingViewStyle }
+        behavior={'padding'}
+        style={keyboardAvoidingViewStyle}
       >
         <CardBrowserSplitStack navigation={navigation} />
       </KeyboardAvoidingView>

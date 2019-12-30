@@ -15,9 +15,7 @@ export default function setup() {
     }
 
     render() {
-      return (
-        <App />
-      );
+      return <App />;
     }
   }
 

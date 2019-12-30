@@ -1,14 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import {
-  FlatList, StyleSheet, Text, TextInput, View,
-} from 'react-native';
+import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import CardListItem, { ITEM_HEIGHT } from '../components/CardListItem';
 import { base, colors } from '../styles';
 
 import { cardDatabase } from '../data';
-
 
 const styles = StyleSheet.create({
   container: {
@@ -92,7 +89,10 @@ class CardListScreen extends Component {
 
   static search(query) {
     if (query) {
-      cardDatabase.addFilter('search', (card) => card.name.search(new RegExp(query, 'i')) !== -1);
+      cardDatabase.addFilter(
+        'search',
+        (card) => card.name.search(new RegExp(query, 'i')) !== -1,
+      );
     } else {
       cardDatabase.removeFilter('search');
     }
@@ -102,7 +102,7 @@ class CardListScreen extends Component {
     if (this.listView) {
       this.listView.scrollToOffset(0);
     }
-  }
+  };
 
   handlePressItem = (card) => {
     if (this.props.selectCard) {
@@ -110,37 +110,34 @@ class CardListScreen extends Component {
     }
 
     if (this.props.navigation) {
-      this.props.navigation.navigate(
-        'CardsDetail',
-        {
-          cardId: card.id,
-          cardPosition: card.position,
-          cardSet: card.set,
-        },
-      );
+      this.props.navigation.navigate('CardsDetail', {
+        cardId: card.id,
+        cardPosition: card.position,
+        cardSet: card.set,
+      });
     }
-  }
+  };
 
   handleBlurFromSearch = (event) => {
     const query = event.nativeEvent.text;
     this.setUpDataSource(query);
-  }
+  };
 
   handleSubmitFromSearch = (event) => {
     const query = event.nativeEvent.text;
     CardListScreen.search(query);
-  }
+  };
 
   handleChangeFromSearch = (event) => {
     const query = event.nativeEvent.text;
     if (!query) {
       CardListScreen.search(query);
     }
-  }
+  };
 
   handleScrollBeginDrag = () => {
     this.searchInput.blur();
-  }
+  };
 
   renderItem = ({ item }) => {
     const { selectedCardId } = this.props;
@@ -148,60 +145,64 @@ class CardListScreen extends Component {
 
     return (
       <CardListItem
-        card={ item }
-        isSelected={ isSelected }
-        onPressItem={ this.handlePressItem }
+        card={item}
+        isSelected={isSelected}
+        onPressItem={this.handlePressItem}
       />
     );
-  }
+  };
 
   renderListView = () => {
     const keyExtractor = (item) => item.id;
 
     return (
       <FlatList
-        ref={ (component) => { this.listView = component; } }
-        style={ styles.list }
-        data={ this.state.cards }
+        ref={(component) => {
+          this.listView = component;
+        }}
+        style={styles.list}
+        data={this.state.cards}
         extraData={{
           cards: this.state.cards,
           selectedCardId: this.props.selectedCardId,
         }}
-        renderItem={ this.renderItem }
-        keyExtractor={ keyExtractor }
-        getItemLayout={ CardListScreen.getItemLayout }
-        ListFooterComponent={ this.renderFooter }
-        ListEmptyComponent={ this.renderEmpty }
-        contentContainerStyle={ styles.listContent }
-        updateCellsBatchingPeriod={ 100 }
-        windowSize={ 35 }
-        onScrollBeginDrag={ this.handleScrollBeginDrag }
+        renderItem={this.renderItem}
+        keyExtractor={keyExtractor}
+        getItemLayout={CardListScreen.getItemLayout}
+        ListFooterComponent={this.renderFooter}
+        ListEmptyComponent={this.renderEmpty}
+        contentContainerStyle={styles.listContent}
+        updateCellsBatchingPeriod={100}
+        windowSize={35}
+        onScrollBeginDrag={this.handleScrollBeginDrag}
       />
     );
-  }
+  };
 
   renderEmpty = () => (
-    <View style={ styles.empty }>
-      <Text style={ styles.emptyHeader }>No Cards Found</Text>
-      <Text style={ styles.emptyMessage }>
+    <View style={styles.empty}>
+      <Text style={styles.emptyHeader}>No Cards Found</Text>
+      <Text style={styles.emptyMessage}>
         Try changing your search term or adjusting your settings
       </Text>
     </View>
   );
 
   renderSearch = () => (
-    <View style={ styles.floatingControls }>
+    <View style={styles.floatingControls}>
       <TextInput
-        style={ styles.floatingControlsInput }
-        autoCapitalize={ 'none' }
-        autoCorrect={ false }
-        clearButtonMode={ 'always' }
-        placeholder={ 'Search' }
-        placeholderColor={ colors.lightGrayDark }
-        ref={ (component) => { this.searchInput = component; } }
-        returnKeyType={ 'search' }
-        onSubmitEditing={ this.handleSubmitFromSearch }
-        onChange={ this.handleChangeFromSearch }
+        style={styles.floatingControlsInput}
+        autoCapitalize={'none'}
+        autoCorrect={false}
+        clearButtonMode={'always'}
+        placeholder={'Search'}
+        placeholderColor={colors.lightGrayDark}
+        ref={(component) => {
+          this.searchInput = component;
+        }}
+        returnKeyType={'search'}
+        onSubmitEditing={this.handleSubmitFromSearch}
+        onChange={this.handleChangeFromSearch}
       />
     </View>
   );
@@ -212,19 +213,20 @@ class CardListScreen extends Component {
     }
 
     return (
-      <View style={ styles.footer }>
-        <Text style={ styles.footerText }>
-          Showing { this.state.cards.length } Card{ this.state.cards.length === 1 ? '' : 's' }
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>
+          Showing {this.state.cards.length} Card
+          {this.state.cards.length === 1 ? '' : 's'}
         </Text>
       </View>
     );
-  }
+  };
 
   render() {
     return (
-      <View style={ styles.container }>
-        { this.renderListView() }
-        { this.renderSearch() }
+      <View style={styles.container}>
+        {this.renderListView()}
+        {this.renderSearch()}
       </View>
     );
   }

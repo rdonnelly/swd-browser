@@ -2,7 +2,6 @@ import _isInteger from 'lodash/isInteger';
 
 import { formats, rarities, starterPacks } from '../data';
 
-
 class Card {
   constructor(card) {
     this.card = card;
@@ -33,7 +32,10 @@ class Card {
   }
 
   get displayAffiliation() {
-    return this.card.affiliation_code.charAt(0).toUpperCase() + this.card.affiliation_code.slice(1);
+    return (
+      this.card.affiliation_code.charAt(0).toUpperCase() +
+      this.card.affiliation_code.slice(1)
+    );
   }
 
   get faction() {
@@ -41,7 +43,10 @@ class Card {
   }
 
   get displayFaction() {
-    return this.card.faction_code.charAt(0).toUpperCase() + this.card.faction_code.slice(1);
+    return (
+      this.card.faction_code.charAt(0).toUpperCase() +
+      this.card.faction_code.slice(1)
+    );
   }
 
   get type() {
@@ -49,7 +54,9 @@ class Card {
   }
 
   get displayType() {
-    return this.card.type_code.charAt(0).toUpperCase() + this.card.type_code.slice(1);
+    return (
+      this.card.type_code.charAt(0).toUpperCase() + this.card.type_code.slice(1)
+    );
   }
 
   get subtypes() {
@@ -124,9 +131,11 @@ class Card {
   }
 
   get hasBalance() {
-    return this.card.code in formats.INF.data.balance ||
+    return (
+      this.card.code in formats.INF.data.balance ||
       this.card.code in formats.STD.data.balance ||
-      this.card.code in formats.TRI.data.balance;
+      this.card.code in formats.TRI.data.balance
+    );
   }
 
   get reprintOf() {

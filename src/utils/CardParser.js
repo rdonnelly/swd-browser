@@ -3,7 +3,6 @@ import React from 'react';
 import SWDIcon from '../components/SWDIcon';
 import { colors } from '../styles';
 
-
 const ICON_REPLACEMENTS = Object.freeze({
   blank: '<icon name="blank"></icon>',
   discard: '<icon name="discard"></icon>',
@@ -31,11 +30,9 @@ const ICON_REPLACEMENTS = Object.freeze({
 
 export default {
   convertToText(card) {
-    const {
-      text: cardText,
-    } = card;
+    const { text: cardText } = card;
 
-    const formattedCardText = cardText.replace(/(<([^>]+)>)/igm, '');
+    const formattedCardText = cardText.replace(/(<([^>]+)>)/gim, '');
 
     return formattedCardText;
   },
@@ -48,19 +45,16 @@ export default {
 
     const style = { color: colors.primary };
 
-    return (
-      <SWDIcon
-        type={ iconName }
-        key={ `html-icon-${rand}` }
-        style={ style }
-      />
-    );
+    return <SWDIcon type={iconName} key={`html-icon-${rand}`} style={style} />;
   },
 
   replaceIconPlaceholders(text) {
     let newText = text;
     Object.keys(ICON_REPLACEMENTS).forEach((key) => {
-      newText = newText.replace(new RegExp(`\\[${key}\\]`, 'gi'), ICON_REPLACEMENTS[key]);
+      newText = newText.replace(
+        new RegExp(`\\[${key}\\]`, 'gi'),
+        ICON_REPLACEMENTS[key],
+      );
     });
 
     return newText;

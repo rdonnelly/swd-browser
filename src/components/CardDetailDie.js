@@ -83,22 +83,16 @@ class CardDetailDie extends PureComponent {
 
     const containerStyles = [styles.dieSide];
     const textTopStyles = [styles.dieSideText];
-    const textBottomStyles = [
-      styles.dieSideText, styles.dieSideBottomText];
+    const textBottomStyles = [styles.dieSideText, styles.dieSideBottomText];
     const iconTopStyles = [styles.dieSideIcon];
-    const iconBottomStyles = [
-      styles.dieSideIcon, styles.dieSideBottomIcon];
+    const iconBottomStyles = [styles.dieSideIcon, styles.dieSideBottomIcon];
 
     const sides = cardSides.map((dieSide, index) => {
-      const parts = dieSide.match(/(?:(\+)?([0-9]|X)?(MD|RD|ID|F|Dr|Dc|Sh|R|Sp|\*|-)([0-9]?))/);
+      const parts = dieSide.match(
+        /(?:(\+)?([0-9]|X)?(MD|RD|ID|F|Dr|Dc|Sh|R|Sp|\*|-)([0-9]?))/,
+      );
 
-      const [
-        , // eslint-disable-line comma-style
-        isModifier,
-        sideValue,
-        sideType,
-        sideCost,
-      ] = parts;
+      const [, isModifier, sideValue, sideType, sideCost] = parts;
 
       let iconType = '-';
 
@@ -152,43 +146,38 @@ class CardDetailDie extends PureComponent {
       }
 
       return (
-        <View style={ containerStyles } key={ `sides_${cardId}_${index}`}>
-          <View style={ styles.dieSideTop }>
-            { isModifier ? (
-              <View style={ styles.dieSideElement }>
-                <Text style={ [textTopStyles, extraTextStyles] }>
-                  +
-                </Text>
-              </View>) : null
-            }
-            <View style={ styles.dieSideElement }>
-              <Text style={ [textTopStyles, extraTextStyles] }>
-                { displayValue }
+        <View style={containerStyles} key={`sides_${cardId}_${index}`}>
+          <View style={styles.dieSideTop}>
+            {isModifier ? (
+              <View style={styles.dieSideElement}>
+                <Text style={[textTopStyles, extraTextStyles]}>+</Text>
+              </View>
+            ) : null}
+            <View style={styles.dieSideElement}>
+              <Text style={[textTopStyles, extraTextStyles]}>
+                {displayValue}
               </Text>
             </View>
-            <View style={ styles.dieSideElement }>
-              <SWDIcon type={ iconType } style={ [iconTopStyles, extraIconStyles] } />
+            <View style={styles.dieSideElement}>
+              <SWDIcon
+                type={iconType}
+                style={[iconTopStyles, extraIconStyles]}
+              />
             </View>
           </View>
-          { sideCost ? (
-            <View style={ styles.dieSideBottom }>
-              <Text style={ textBottomStyles }>
-                { sideCost }
-              </Text>
-              <View style={ styles.dieSideElement }>
-                <SWDIcon type={ 'RESOURCE' } style={ iconBottomStyles } />
+          {sideCost ? (
+            <View style={styles.dieSideBottom}>
+              <Text style={textBottomStyles}>{sideCost}</Text>
+              <View style={styles.dieSideElement}>
+                <SWDIcon type={'RESOURCE'} style={iconBottomStyles} />
               </View>
-            </View>) : null
-          }
+            </View>
+          ) : null}
         </View>
       );
     });
 
-    return (
-      <View style={ styles.container }>
-        { sides }
-      </View>
-    );
+    return <View style={styles.container}>{sides}</View>;
   }
 }
 

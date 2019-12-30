@@ -7,14 +7,11 @@ import DeviceInfo from 'react-native-device-info';
 import SettingsStack from './SettingsStack';
 import { colors } from '../styles';
 
-
 const routeConfiguration = {
   Cards: {
-    screen: DeviceInfo.isTablet() ?
-      // eslint-disable-next-line global-require
-      require('./CardBrowserSplitStack').default :
-      // eslint-disable-next-line global-require
-      require('./CardBrowserStack').default,
+    screen: DeviceInfo.isTablet()
+      ? require('./CardBrowserSplitStack').default
+      : require('./CardBrowserStack').default,
     path: 'cards',
   },
   Settings: {
@@ -27,7 +24,6 @@ const tabNavigatorConfig = {
   initialRouteName: 'Cards',
   backBehavior: 'none',
   defaultNavigationOptions: ({ navigation }) => ({
-    // eslint-disable-next-line react/prop-types, react/display-name
     tabBarIcon: ({ tintColor }) => {
       const { routeName } = navigation.state;
       let iconName;
@@ -40,20 +36,17 @@ const tabNavigatorConfig = {
       const iconStyle = { marginTop: 4 };
 
       return (
-        <Icon
-          name={ iconName }
-          size={ 24 }
-          color={ tintColor }
-          style={ iconStyle }
-        />
+        <Icon name={iconName} size={24} color={tintColor} style={iconStyle} />
       );
     },
     tabBarOnPress: ({ navigation: tabNavigation, defaultHandler }) => {
       if (tabNavigation.isFocused() && tabNavigation.state.index === 0) {
         const stackNavigation = _get(tabNavigation, 'state.routes[0]');
-        if (stackNavigation &&
-            stackNavigation.params &&
-            stackNavigation.params.resetScreen) {
+        if (
+          stackNavigation &&
+          stackNavigation.params &&
+          stackNavigation.params.resetScreen
+        ) {
           stackNavigation.params.resetScreen();
         }
       } else {
@@ -69,7 +62,6 @@ const tabNavigatorConfig = {
     },
   },
 };
-
 
 const TabNavigator = createBottomTabNavigator(
   routeConfiguration,

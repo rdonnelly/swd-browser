@@ -1,7 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
-  Alert, Linking, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View,
+  Alert,
+  Linking,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import InAppBrowser from 'react-native-inappbrowser-reborn';
@@ -97,55 +104,61 @@ class SettingsScreen extends Component {
 
   updateFilter = (setting, values) => {
     const key = `filter_${setting}`;
-    const predicate =
-      (card) => {
-        const filterValues = Object.keys(values).filter((k) => values[k]);
-        if (Array.isArray(card[setting])) {
-          if (values.length === 0) {
-            return false;
-          }
-
-          if (card[setting].length === 0 && filterValues.includes('none')) {
-            return true;
-          }
-
-          return filterValues.some((value) => card[setting].includes(value));
+    const predicate = (card) => {
+      const filterValues = Object.keys(values).filter((k) => values[k]);
+      if (Array.isArray(card[setting])) {
+        if (values.length === 0) {
+          return false;
         }
 
-        return filterValues.includes(card[setting]);
-      };
+        if (card[setting].length === 0 && filterValues.includes('none')) {
+          return true;
+        }
+
+        return filterValues.some((value) => card[setting].includes(value));
+      }
+
+      return filterValues.includes(card[setting]);
+    };
 
     cardDatabase.addFilter(key, predicate);
   };
 
   removeAllFilters = () => {
-    Alert.alert('Reset Filters?', 'This will reset all filters. Are you sure you want to continue?', [
-      { text: 'Cancel' },
-      {
-        text: 'Reset',
-        onPress: () => {
-          ReactNativeHapticFeedback.trigger('impactHeavy');
+    Alert.alert(
+      'Reset Filters?',
+      'This will reset all filters. Are you sure you want to continue?',
+      [
+        { text: 'Cancel' },
+        {
+          text: 'Reset',
+          onPress: () => {
+            ReactNativeHapticFeedback.trigger('impactHeavy');
 
-          cardDatabase.removeAllFilters();
+            cardDatabase.removeAllFilters();
 
-          this.affiliationCloud.reset();
-          this.factionCloud.reset();
-          this.setCloud.reset();
-          this.typeCloud.reset();
-          this.subtypeCloud.reset();
-          this.keywordCloud.reset();
-          this.rarityCloud.reset();
+            this.affiliationCloud.reset();
+            this.factionCloud.reset();
+            this.setCloud.reset();
+            this.typeCloud.reset();
+            this.subtypeCloud.reset();
+            this.keywordCloud.reset();
+            this.rarityCloud.reset();
 
-          this.resetScreen();
+            this.resetScreen();
+          },
+          style: 'destructive',
         },
-        style: 'destructive',
-      },
-    ]);
+      ],
+    );
   };
 
   renderReset = () => (
     <View style={styles.floatingControls}>
-      <TouchableOpacity onPress={this.removeAllFilters} style={styles.floatingControlsButton}>
+      <TouchableOpacity
+        onPress={this.removeAllFilters}
+        style={styles.floatingControlsButton}
+      >
         <Text style={styles.floatingControlsButtonText}>Reset Filters</Text>
       </TouchableOpacity>
     </View>
@@ -279,8 +292,8 @@ class SettingsScreen extends Component {
             <Text style={styles.disclaimerText}>
               The information presented in this app about Star Wars Destiny,
               both literal and graphical, is copyrighted by Fantasy Flight
-              Games. This app is not produced by, endorsed by, supported by,
-              or affiliated with Fantasy Flight Games.
+              Games. This app is not produced by, endorsed by, supported by, or
+              affiliated with Fantasy Flight Games.
             </Text>
           </View>
 

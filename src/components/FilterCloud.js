@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 import FilterCloudItem from './FilterCloudItem';
 
 import { colors } from '../styles';
-
 
 const INTERACTION_DELAY = 750;
 
@@ -71,12 +65,16 @@ class FilterCloud extends Component {
 
     this.timeoutId = null;
 
-    const initialValues = props.values !== null ?
-      props.values :
-      this.props.options.reduce((values, option) => ({
-        [option.code]: true,
-        ...values,
-      }), {});
+    const initialValues =
+      props.values !== null
+        ? props.values
+        : this.props.options.reduce(
+            (values, option) => ({
+              [option.code]: true,
+              ...values,
+            }),
+            {},
+          );
 
     this.state = {
       values: { ...initialValues },
@@ -107,7 +105,7 @@ class FilterCloud extends Component {
     this.setState({
       values: { ...nextValues },
     });
-  }
+  };
 
   handlePressItem = (code) => {
     ReactNativeHapticFeedback.trigger('selection');
@@ -132,7 +130,7 @@ class FilterCloud extends Component {
         values: newValues,
       };
     });
-  }
+  };
 
   handleLongPressItem = (code) => {
     ReactNativeHapticFeedback.trigger('impactHeavy');
@@ -153,13 +151,13 @@ class FilterCloud extends Component {
         values: newValues,
       };
     });
-  }
+  };
 
   selectAll = () => {
     ReactNativeHapticFeedback.trigger('selection');
 
     this.reset();
-  }
+  };
 
   selectNone = () => {
     ReactNativeHapticFeedback.trigger('selection');
@@ -178,7 +176,7 @@ class FilterCloud extends Component {
         values: newValues,
       };
     });
-  }
+  };
 
   reset = () => {
     this.setState((state) => {
@@ -195,46 +193,36 @@ class FilterCloud extends Component {
         values: newValues,
       };
     });
-  }
+  };
 
   render() {
     const optionItems = this.props.options.map((option) => (
       <FilterCloudItem
-        key={ `filterclouditem-${this.props.setting}-${option.code}` }
-        code={ option.code }
-        value={ this.state.values[option.code] }
-        label={ option.name }
-        handlePress={ this.handlePressItem }
-        handleLongPress={ this.handleLongPressItem }
+        key={`filterclouditem-${this.props.setting}-${option.code}`}
+        code={option.code}
+        value={this.state.values[option.code]}
+        label={option.name}
+        handlePress={this.handlePressItem}
+        handleLongPress={this.handleLongPressItem}
       />
     ));
 
     return (
-      <View style={ styles.container }>
-        <View style={ styles.header }>
-          <View style={ styles.labelWrapper }>
-            <Text style={ styles.label }>
-              { this.props.label }
-            </Text>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.labelWrapper}>
+            <Text style={styles.label}>{this.props.label}</Text>
           </View>
-          <View style={ styles.controlsWrapper }>
-            <TouchableOpacity
-              onPress={ this.selectAll }
-              style={ styles.control }
-            >
-              <Text style={ styles.controlText }>All</Text>
+          <View style={styles.controlsWrapper}>
+            <TouchableOpacity onPress={this.selectAll} style={styles.control}>
+              <Text style={styles.controlText}>All</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={ this.selectNone }
-              style={ styles.control }
-            >
-              <Text style={ styles.controlText }>None</Text>
+            <TouchableOpacity onPress={this.selectNone} style={styles.control}>
+              <Text style={styles.controlText}>None</Text>
             </TouchableOpacity>
           </View>
         </View>
-        <View style={ styles.optionsWrapper }>
-          { optionItems }
-        </View>
+        <View style={styles.optionsWrapper}>{optionItems}</View>
       </View>
     );
   }

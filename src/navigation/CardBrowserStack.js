@@ -44,15 +44,18 @@ const CardBrowserStack = createStackNavigator(
       screen: CardDetailScreen,
       navigationOptions: ({ navigation }) => ({
         headerTitle: (
-          <View style={ styles.headerTitle }>
-            <View style={ styles.headerTitleSet }>
-              <SWDIcon type={ navigation.getParam('cardSet') } style={ styles.headerTitleSetIcon } />
+          <View style={styles.headerTitle}>
+            <View style={styles.headerTitleSet}>
+              <SWDIcon
+                type={navigation.getParam('cardSet')}
+                style={styles.headerTitleSetIcon}
+              />
             </View>
-            <Text style={ styles.headerTitleText }>
+            <Text style={styles.headerTitleText}>
               &nbsp;
-              { navigation.getParam('cardSet') }
+              {navigation.getParam('cardSet')}
               &nbsp;
-              { navigation.getParam('cardPosition') }
+              {navigation.getParam('cardPosition')}
             </Text>
           </View>
         ),
@@ -83,8 +86,8 @@ class KeyboardAvoidingCharacterStackNavigator extends PureComponent {
     const keyboardAvoidingViewStyle = { flex: 1 };
     return (
       <KeyboardAvoidingView
-        { ...PlatformKeyboardAvoidingViewProps }
-        style={ keyboardAvoidingViewStyle }
+        {...PlatformKeyboardAvoidingViewProps}
+        style={keyboardAvoidingViewStyle}
       >
         <CardBrowserStack navigation={navigation} />
       </KeyboardAvoidingView>

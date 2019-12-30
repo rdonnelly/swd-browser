@@ -17,17 +17,13 @@ import CardDetailDie from './CardDetailDie';
 import CardDetailPills from './CardDetailPills';
 import SWDIcon from './SWDIcon';
 
-import {
-  cardDatabase,
-  subtypes,
-} from '../data';
+import { cardDatabase, subtypes } from '../data';
 import CardParser from '../utils/CardParser';
 import { setClipboard } from '../utils/Clipboard';
 import { shareImageUrl } from '../utils/Share';
 import defaultImageSrc from '../../assets/images/swd-texture.png';
 
 import { base, colors } from '../styles';
-
 
 const isTablet = DeviceInfo.isTablet();
 
@@ -251,18 +247,19 @@ class CardDetail extends Component {
     const cardText = CardParser.convertToText(this.props.card);
 
     setClipboard(cardText);
-  }
+  };
 
   handleImageLongPress = () => {
     ReactNativeHapticFeedback.trigger('impactHeavy');
 
-    const {
-      id: cardId,
-    } = this.props.card;
+    const { id: cardId } = this.props.card;
 
-    const imageSrc = `https://swdestinydb.com/bundles/cards/en/${cardId.slice(0, 2)}/${cardId}.jpg`;
+    const imageSrc = `https://swdestinydb.com/bundles/cards/en/${cardId.slice(
+      0,
+      2,
+    )}/${cardId}.jpg`;
     shareImageUrl(imageSrc);
-  }
+  };
 
   renderCardName() {
     const {
@@ -289,57 +286,50 @@ class CardDetail extends Component {
 
     const uniqueIcon = cardIsUnique ? (
       <Text>
-        <SWDIcon type={ 'unique' } style={ styles.cardTitleIcon } />&nbsp;
+        <SWDIcon type={'unique'} style={styles.cardTitleIcon} />
+        &nbsp;
       </Text>
     ) : null;
 
     return (
-      <View style={ [styles.cardTitleWrapper, colorStyles] }>
-        <View style={ styles.cardTitleInner }>
-          <Text style={ styles.cardTitleName }>
-            { uniqueIcon }
-            { cardTitle }
+      <View style={[styles.cardTitleWrapper, colorStyles]}>
+        <View style={styles.cardTitleInner}>
+          <Text style={styles.cardTitleName}>
+            {uniqueIcon}
+            {cardTitle}
           </Text>
-          { cardSubtitle ? (
-            <Text style={ styles.cardTitleSubtitle }>
-              { cardSubtitle }
-            </Text>) : null
-          }
+          {cardSubtitle ? (
+            <Text style={styles.cardTitleSubtitle}>{cardSubtitle}</Text>
+          ) : null}
         </View>
       </View>
     );
   }
 
   renderCardType() {
-    const {
-      displayType: cardType,
-      subtypes: cardSubtypes,
-    } = this.props.card;
+    const { displayType: cardType, subtypes: cardSubtypes } = this.props.card;
 
     let displayCardSubtypes;
     if (cardSubtypes && cardSubtypes.length) {
-      displayCardSubtypes = cardSubtypes
-        .map((cardSubtype) => {
-          const displayCardSubtype = subtypes.find((subtype) => subtype.code === cardSubtype).name;
+      displayCardSubtypes = cardSubtypes.map((cardSubtype) => {
+        const displayCardSubtype = subtypes.find(
+          (subtype) => subtype.code === cardSubtype,
+        ).name;
 
-          return (
-            <Text key={ `subtype_${cardSubtype}`}>
-              &nbsp;&nbsp;&middot;  { displayCardSubtype }
-            </Text>
-          );
-        });
+        return (
+          <Text key={`subtype_${cardSubtype}`}>
+            &nbsp;&nbsp;&middot; {displayCardSubtype}
+          </Text>
+        );
+      });
     }
 
     return (
-      <View style={ styles.cardDetailType }>
-        <Text style={ styles.cardDetailTypeText }>
-          { cardType }
-        </Text>
-        { displayCardSubtypes ? (
-          <Text style={ styles.cardDetailTypeText }>
-            { displayCardSubtypes }
-          </Text>) : null
-        }
+      <View style={styles.cardDetailType}>
+        <Text style={styles.cardDetailTypeText}>{cardType}</Text>
+        {displayCardSubtypes ? (
+          <Text style={styles.cardDetailTypeText}>{displayCardSubtypes}</Text>
+        ) : null}
       </View>
     );
   }
@@ -358,10 +348,11 @@ class CardDetail extends Component {
     if (cardCost !== null) {
       pills.push(
         <Text>
-          <Text style={ styles.cardDetailPillData }>
-            { cardCost }&nbsp;
-          </Text>
-          <SWDIcon type={ 'resource' } style={[styles.cardDetailPillTitle, styles.cardDetailPillTitleIcon]} />
+          <Text style={styles.cardDetailPillData}>{cardCost}&nbsp;</Text>
+          <SWDIcon
+            type={'resource'}
+            style={[styles.cardDetailPillTitle, styles.cardDetailPillTitleIcon]}
+          />
         </Text>,
       );
     }
@@ -369,17 +360,11 @@ class CardDetail extends Component {
     if (cardPoints !== null) {
       pills.push(
         <Text>
-          <Text style={ styles.cardDetailPillData }>
-            { cardPointsPerFormat.inf }
+          <Text style={styles.cardDetailPillData}>
+            {cardPointsPerFormat.inf}
           </Text>
-          { cardHasBalance &&
-            <Text style={ styles.cardDetailPillData }>
-              *
-            </Text>
-          }
-          <Text style={ styles.cardDetailPillTitle }>
-            &nbsp;Points
-          </Text>
+          {cardHasBalance && <Text style={styles.cardDetailPillData}>*</Text>}
+          <Text style={styles.cardDetailPillTitle}>&nbsp;Points</Text>
         </Text>,
       );
     }
@@ -387,12 +372,8 @@ class CardDetail extends Component {
     if (cardHealth !== null) {
       pills.push(
         <Text>
-          <Text style={ styles.cardDetailPillData }>
-            { cardHealth }&nbsp;
-          </Text>
-          <Text style={ styles.cardDetailPillTitle }>
-            Health
-          </Text>
+          <Text style={styles.cardDetailPillData}>{cardHealth}&nbsp;</Text>
+          <Text style={styles.cardDetailPillTitle}>Health</Text>
         </Text>,
       );
     }
@@ -421,15 +402,15 @@ class CardDetail extends Component {
 
     return (
       <TouchableOpacity
-        activeOpacity={ 0.9 }
-        onLongPress={ this.handleCardTextLongPress }
-        style={ styles.cardDetailTextWrapper }
+        activeOpacity={0.9}
+        onLongPress={this.handleCardTextLongPress}
+        style={styles.cardDetailTextWrapper}
       >
         <Html
-          html={ cardText }
-          baseFontStyle={ styles.cardDetailText }
-          tagsStyles={ customTagStyles }
-          renderers={ customRenderers }
+          html={cardText}
+          baseFontStyle={styles.cardDetailText}
+          tagsStyles={customTagStyles}
+          renderers={customRenderers}
         />
       </TouchableOpacity>
     );
@@ -447,9 +428,7 @@ class CardDetail extends Component {
     if (affiliation !== null) {
       pills.push(
         <Text>
-          <Text style={ styles.cardDetailPillDataSmall }>
-            { affiliation }
-          </Text>
+          <Text style={styles.cardDetailPillDataSmall}>{affiliation}</Text>
         </Text>,
       );
     }
@@ -457,9 +436,7 @@ class CardDetail extends Component {
     if (faction !== null) {
       pills.push(
         <Text>
-          <Text style={ styles.cardDetailPillDataSmall }>
-            { faction }
-          </Text>
+          <Text style={styles.cardDetailPillDataSmall}>{faction}</Text>
         </Text>,
       );
     }
@@ -467,9 +444,7 @@ class CardDetail extends Component {
     if (rarity !== null) {
       pills.push(
         <Text>
-          <Text style={ styles.cardDetailPillDataSmall }>
-            { rarity }
-          </Text>
+          <Text style={styles.cardDetailPillDataSmall}>{rarity}</Text>
         </Text>,
       );
     }
@@ -485,57 +460,53 @@ class CardDetail extends Component {
     } = this.props.card;
 
     return (
-      <View style={ styles.holocronContainer }>
-        { cardPoints ?
-          <View style={ styles.holocronFormat }>
-            <Text style={ styles.holocronFormatTitle }>
-              PRINT
-            </Text>
-            <Text style={ styles.holocronFormatData }>
-              { cardPoints }
-            </Text>
-          </View> : null
-        }
-        <View style={ styles.holocronFormat }>
-          <Text style={ styles.holocronFormatTitle }>
-            INF
-          </Text>
-          <Text style={ styles.holocronFormatData }>
-            {
-              cardFormats.includes('INF') ?
-                cardPoints ?
-                  cardPointsPerFormat.inf :
-                  <Emoji name="+1" style={ styles.holocronFormatDataEmoji } /> :
-                <Emoji name="no_entry" style={ styles.holocronFormatDataEmoji } />
-            }
+      <View style={styles.holocronContainer}>
+        {cardPoints ? (
+          <View style={styles.holocronFormat}>
+            <Text style={styles.holocronFormatTitle}>PRINT</Text>
+            <Text style={styles.holocronFormatData}>{cardPoints}</Text>
+          </View>
+        ) : null}
+        <View style={styles.holocronFormat}>
+          <Text style={styles.holocronFormatTitle}>INF</Text>
+          <Text style={styles.holocronFormatData}>
+            {cardFormats.includes('INF') ? (
+              cardPoints ? (
+                cardPointsPerFormat.inf
+              ) : (
+                <Emoji name="+1" style={styles.holocronFormatDataEmoji} />
+              )
+            ) : (
+              <Emoji name="no_entry" style={styles.holocronFormatDataEmoji} />
+            )}
           </Text>
         </View>
-        <View style={ styles.holocronFormat }>
-          <Text style={ styles.holocronFormatTitle }>
-            STD
-          </Text>
-          <Text style={ styles.holocronFormatData }>
-          {
-            cardFormats.includes('STD') ?
-              cardPoints ?
-                cardPointsPerFormat.std :
-                <Emoji name="+1" style={ styles.holocronFormatDataEmoji } /> :
-              <Emoji name="no_entry" style={ styles.holocronFormatDataEmoji } />
-          }
+        <View style={styles.holocronFormat}>
+          <Text style={styles.holocronFormatTitle}>STD</Text>
+          <Text style={styles.holocronFormatData}>
+            {cardFormats.includes('STD') ? (
+              cardPoints ? (
+                cardPointsPerFormat.std
+              ) : (
+                <Emoji name="+1" style={styles.holocronFormatDataEmoji} />
+              )
+            ) : (
+              <Emoji name="no_entry" style={styles.holocronFormatDataEmoji} />
+            )}
           </Text>
         </View>
-        <View style={ styles.holocronFormat }>
-          <Text style={ styles.holocronFormatTitle }>
-            TRI
-          </Text>
-          <Text style={ styles.holocronFormatData }>
-          {
-            cardFormats.includes('TRI') ?
-              cardPoints ?
-                cardPointsPerFormat.tri :
-                <Emoji name="+1" style={ styles.holocronFormatDataEmoji } /> :
-              <Emoji name="no_entry" style={ styles.holocronFormatDataEmoji } />
-          }
+        <View style={styles.holocronFormat}>
+          <Text style={styles.holocronFormatTitle}>TRI</Text>
+          <Text style={styles.holocronFormatData}>
+            {cardFormats.includes('TRI') ? (
+              cardPoints ? (
+                cardPointsPerFormat.tri
+              ) : (
+                <Emoji name="+1" style={styles.holocronFormatDataEmoji} />
+              )
+            ) : (
+              <Emoji name="no_entry" style={styles.holocronFormatDataEmoji} />
+            )}
           </Text>
         </View>
       </View>
@@ -555,52 +526,58 @@ class CardDetail extends Component {
       const reprintCardPosition = reprintCard.position;
       const reprintCardSet = reprintCard.set;
 
-      views.push((
-        <View style={ styles.cardAdditionalInfoWrapper } key={ 'additional-info-reprint' }>
-          <View style={ styles.cardAdditionalInfoItem }>
-            <Text style={ styles.cardAdditionalInfoText }>
-              Reprint of&nbsp;
-            </Text>
-            <Text style={ styles.cardAdditionalInfoText }>
-              <SWDIcon type={ reprintCardSet } style={ styles.cardDetailTypeTextIcon } />
-              &nbsp;{ reprintCardSet }&nbsp;{ reprintCardPosition }
+      views.push(
+        <View
+          style={styles.cardAdditionalInfoWrapper}
+          key={'additional-info-reprint'}
+        >
+          <View style={styles.cardAdditionalInfoItem}>
+            <Text style={styles.cardAdditionalInfoText}>Reprint of&nbsp;</Text>
+            <Text style={styles.cardAdditionalInfoText}>
+              <SWDIcon
+                type={reprintCardSet}
+                style={styles.cardDetailTypeTextIcon}
+              />
+              &nbsp;{reprintCardSet}&nbsp;{reprintCardPosition}
             </Text>
           </View>
-        </View>
-      ));
+        </View>,
+      );
     }
 
     if (cardStarterSets && cardStarterSets.length) {
-      views.push((
-        <View style={ styles.cardAdditionalInfoWrapper } key={ 'additional-info-starters' }>
-          { cardStarterSets.map((starterName) => <View
-              style={ styles.cardAdditionalInfoItem }
-              key={ `found-in-starter-${starterName}` }
+      views.push(
+        <View
+          style={styles.cardAdditionalInfoWrapper}
+          key={'additional-info-starters'}
+        >
+          {cardStarterSets.map((starterName) => (
+            <View
+              style={styles.cardAdditionalInfoItem}
+              key={`found-in-starter-${starterName}`}
             >
-              <Text style={ styles.cardAdditionalInfoText }>
-                Found In { starterName }
+              <Text style={styles.cardAdditionalInfoText}>
+                Found In {starterName}
               </Text>
-            </View>)
-          }
-        </View>
-      ));
+            </View>
+          ))}
+        </View>,
+      );
     }
 
     return views.length ? (
-      <View style={ styles.cardAdditionalInfoContainer }>
-        { views }
-      </View>
+      <View style={styles.cardAdditionalInfoContainer}>{views}</View>
     ) : null;
   }
 
   render() {
     const { card } = this.props;
-    const {
-      id: cardId,
-      faction: cardFaction,
-    } = this.props.card;
+    const { id: cardId, faction: cardFaction } = this.props.card;
 
-    const imageSrc = `https://swdestinydb.com/bundles/cards/en/${cardId.slice(0, 2)}/${cardId}.jpg`;
+    const imageSrc = `https://swdestinydb.com/bundles/cards/en/${cardId.slice(
+      0,
+      2,
+    )}/${cardId}.jpg`;
 
     const imageWrapperStyles = [styles.cardImageWrapper];
     switch (cardFaction) {
@@ -618,31 +595,31 @@ class CardDetail extends Component {
     }
 
     return (
-      <View style={ styles.container }>
-        <ScrollView style={ styles.scrollView }>
-          { this.renderCardName() }
-          <View style={ styles.cardDetail }>
-            { this.renderCardType() }
-            { this.renderCardDetailsInfo() }
-            { this.renderCardText() }
-            <CardDetailDie card={ card } />
-            { this.renderCardDetailsBottom() }
+      <View style={styles.container}>
+        <ScrollView style={styles.scrollView}>
+          {this.renderCardName()}
+          <View style={styles.cardDetail}>
+            {this.renderCardType()}
+            {this.renderCardDetailsInfo()}
+            {this.renderCardText()}
+            <CardDetailDie card={card} />
+            {this.renderCardDetailsBottom()}
           </View>
-          <View style={ imageWrapperStyles }>
+          <View style={imageWrapperStyles}>
             <TouchableOpacity
-              activeOpacity={ 0.9 }
-              onLongPress={ this.handleImageLongPress }
+              activeOpacity={0.9}
+              onLongPress={this.handleImageLongPress}
             >
               <Image
-                style={ styles.cardImage }
-                resizeMode='contain'
+                style={styles.cardImage}
+                resizeMode="contain"
                 source={{ uri: imageSrc }}
-                defaultSource={ defaultImageSrc }
+                defaultSource={defaultImageSrc}
               />
             </TouchableOpacity>
           </View>
-          { this.renderHolocron() }
-          { this.renderAdditionalInfo() }
+          {this.renderHolocron()}
+          {this.renderAdditionalInfo()}
         </ScrollView>
       </View>
     );

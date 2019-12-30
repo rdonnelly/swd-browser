@@ -37,19 +37,13 @@ class CardDetailPills extends PureComponent {
       }
 
       return (
-        <View key={ `pill_${i}` } style={ pillStyles }>
-          <Text>
-            { content }
-          </Text>
+        <View key={`pill_${i}`} style={pillStyles}>
+          <Text>{content}</Text>
         </View>
       );
     });
 
-    return (
-      <View style={ styles.container }>
-        { pills }
-      </View>
-    );
+    return <View style={styles.container}>{pills}</View>;
   }
 }
 
