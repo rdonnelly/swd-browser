@@ -7,11 +7,10 @@
     "ios": "react-native run-ios --simulator='iPhone 11 Pro'",
     "ipad": "react-native run-ios --simulator='iPad Pro (10.5-inch)'",
     "se": "react-native run-ios --simulator='iPhone SE'",
-    "xs": "react-native run-ios",
     "start": "react-native start",
     "lint": "eslint .",
     "refresh": "rm -rf node_modules && yarn cache clean && yarn install",
-    "test": "jest"
+    "test": "jest --passWithNoTests"
   },
   "dependencies": {
     "@react-native-community/slider": "2.0.x",
@@ -24,21 +23,21 @@
     "react-native-gesture-handler": "1.5.x",
     "react-native-haptic-feedback": "1.8.x",
     "react-native-inappbrowser-reborn": "3.3.x",
-    "react-native-render-html": "^4.2.0",
+    "react-native-render-html": "4.2.x",
     "react-native-screens": "^2.0.0-alpha.22",
     "react-native-vector-icons": "6.6.x",
-    "react-native-webview": "^8.0.2",
+    "react-native-webview": "8.0.x",
     "react-navigation": "3.8.x",
     "rn-fetch-blob": "0.12.x",
     "swdestinydb-json-data": "https://github.com/rdonnelly/swdestinydb-json-data.git"
   },
   "devDependencies": {
-    "@babel/core": "7.6.x",
-    "@babel/runtime": "7.6.x",
+    "@babel/core": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
-    "babel-jest": "24.9.x",
-    "eslint": "6.5.x",
-    "jest": "24.9.x",
+    "babel-jest": "^24.9.x",
+    "eslint": "^6.8.0",
+    "jest": "^24.9.x",
     "metro-react-native-babel-preset": "^0.56.0",
     "react-test-renderer": "16.9.0"
   },
