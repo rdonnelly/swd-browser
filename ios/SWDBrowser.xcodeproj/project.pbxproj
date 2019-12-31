@@ -17,7 +17,6 @@
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* SWDBrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SWDBrowserTests.m */; };
 		50562A713CC2400C885D55A5 /* swdtypes.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EBA8AA942234B12BAD5412C /* swdtypes.ttf */; };
 		5906796AC8AEDED0C979EFF8 /* libPods-SWDBrowser-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C9CC37DFB9282726C47DC2 /* libPods-SWDBrowser-tvOSTests.a */; };
@@ -61,7 +60,6 @@
 		21C892FB4DCE69CF8D05FD84 /* Pods-SWDBrowser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDBrowser.release.xcconfig"; path = "Target Support Files/Pods-SWDBrowser/Pods-SWDBrowser.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* SWDBrowser-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SWDBrowser-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* SWDBrowser-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SWDBrowser-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		47512C4426E5430BE0E4C812 /* Pods-SWDBrowser-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDBrowser-tvOS.release.xcconfig"; path = "Target Support Files/Pods-SWDBrowser-tvOS/Pods-SWDBrowser-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		5A88F42E456281061B5B2F9F /* libPods-SWDBrowser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SWDBrowser.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EBA8AA942234B12BAD5412C /* swdtypes.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = swdtypes.ttf; path = ../assets/fonts/swdtypes.ttf; sourceTree = "<group>"; };
@@ -100,7 +98,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */,
-				2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */,
 				0515918F0A90C85E3FE023B3 /* libPods-SWDBrowser-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,7 +164,6 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				5A88F42E456281061B5B2F9F /* libPods-SWDBrowser.a */,
 				B828CC2CC2293B31EBF11F70 /* libPods-SWDBrowser-tvOS.a */,
 				12C9CC37DFB9282726C47DC2 /* libPods-SWDBrowser-tvOSTests.a */,
@@ -730,7 +726,7 @@
 			baseConfigurationReference = F1E3278BFEF524EE429C9A51 /* Pods-SWDBrowser.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 62;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = EZ4AQB6GC7;
 				HEADER_SEARCH_PATHS = (
@@ -766,7 +762,7 @@
 			baseConfigurationReference = 21C892FB4DCE69CF8D05FD84 /* Pods-SWDBrowser.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 62;
 				DEVELOPMENT_TEAM = EZ4AQB6GC7;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

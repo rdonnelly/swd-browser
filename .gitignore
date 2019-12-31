@@ -63,3 +63,6 @@ haul-debug.log
 
 # CocoaPods
 /ios/Pods/
+
+# Build Scripts
+ios/exportOptions.plist
