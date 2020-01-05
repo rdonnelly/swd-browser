@@ -5140,7 +5140,7 @@ react-native-vector-icons@6.6.x:
     prop-types "^15.6.2"
     yargs "^13.2.2"
 
-react-native-webview@^8.0.2:
+react-native-webview@8.0.x:
   version "8.0.2"
   resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-8.0.2.tgz#1afac4cd859ab24141490e105d1a27e18e3984a9"
   integrity sha512-Higfj0CCPM9N76S3rQsKHKS8Rw5QA7h7UENrREmMarEN/2saZJ+ko0aIVYOlEJ4P9ZhhRLNH/3mWvzmT4spncw==
@@ -5938,7 +5938,7 @@ supports-color@^6.1.0:
 
 "swdestinydb-json-data@https://github.com/rdonnelly/swdestinydb-json-data.git":
   version "1.0.0"
-  resolved "https://github.com/rdonnelly/swdestinydb-json-data.git#982e2969d83e02185802b517d69494558dad3a41"
+  resolved "https://github.com/rdonnelly/swdestinydb-json-data.git#75350ce6dc83f58323bdf682588850aaa6fb187d"
   dependencies:
     lodash "^4.13.1"
 
