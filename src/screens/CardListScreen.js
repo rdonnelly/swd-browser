@@ -196,7 +196,7 @@ class CardListScreen extends Component {
         autoCorrect={false}
         clearButtonMode={'always'}
         placeholder={'Search'}
-        placeholderColor={colors.lightGrayDark}
+        placeholderTextColor={colors.gray}
         ref={(component) => {
           this.searchInput = component;
         }}
