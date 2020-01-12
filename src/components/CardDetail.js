@@ -313,7 +313,7 @@ class CardDetail extends Component {
     if (cardSubtypes && cardSubtypes.length) {
       displayCardSubtypes = cardSubtypes.map((cardSubtype) => {
         const displayCardSubtype = subtypes.find(
-          (subtype) => subtype.code === cardSubtype,
+          (subtype) => subtype.code === cardSubtype.toLowerCase(),
         ).name;
 
         return (

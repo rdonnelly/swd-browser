@@ -1,6 +1,6 @@
 import _get from 'lodash/get';
 import React from 'react';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/Entypo';
 import DeviceInfo from 'react-native-device-info';
 

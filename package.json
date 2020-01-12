@@ -13,6 +13,7 @@
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
+    "@react-native-community/masked-view": "^0.1.5",
     "@react-native-community/slider": "2.0.x",
     "lodash": "4.17.x",
     "prop-types": "15.7.x",
@@ -23,11 +24,15 @@
     "react-native-gesture-handler": "1.5.x",
     "react-native-haptic-feedback": "1.8.x",
     "react-native-inappbrowser-reborn": "3.3.x",
+    "react-native-reanimated": "^1.4.0",
     "react-native-render-html": "4.2.x",
+    "react-native-safe-area-context": "^0.6.2",
     "react-native-screens": "^2.0.0-alpha.22",
     "react-native-vector-icons": "6.6.x",
     "react-native-webview": "8.0.x",
-    "react-navigation": "3.8.x",
+    "react-navigation": "^4.0.10",
+    "react-navigation-stack": "^2.0.14",
+    "react-navigation-tabs": "^2.7.0",
     "rn-fetch-blob": "0.12.x",
     "swdestinydb-json-data": "https://github.com/rdonnelly/swdestinydb-json-data.git"
   },

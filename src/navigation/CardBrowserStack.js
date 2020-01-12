@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import SWDIcon from '../components/SWDIcon';
 import CardListScreen from '../screens/CardListScreen';
@@ -43,7 +43,7 @@ const CardBrowserStack = createStackNavigator(
     CardsDetail: {
       screen: CardDetailScreen,
       navigationOptions: ({ navigation }) => ({
-        headerTitle: (
+        headerTitle: () => (
           <View style={styles.headerTitle}>
             <View style={styles.headerTitleSet}>
               <SWDIcon

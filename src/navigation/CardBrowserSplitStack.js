@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { KeyboardAvoidingView } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import CardSplitScreen from '../screens/CardSplitScreen';
 import { colors } from '../styles';
