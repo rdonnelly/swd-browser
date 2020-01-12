@@ -10,7 +10,10 @@
     "start": "react-native start",
     "lint": "eslint .",
     "refresh": "rm -rf node_modules && yarn cache clean && yarn install",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "build:push": "scripts/build.sh push",
+    "build:getVersion": "scripts/build.sh getVersion",
+    "build:setVersion": "scripts/build.sh setVersion"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.5",
