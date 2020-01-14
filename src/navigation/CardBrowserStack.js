@@ -74,7 +74,7 @@ const CardBrowserStack = createStackNavigator(
 );
 
 const PlatformKeyboardAvoidingViewProps = Platform.select({
-  ios: () => ({ behavior: 'padding' }),
+  ios: () => ({ behavior: 'height' }),
   android: () => ({}),
 })();
 
