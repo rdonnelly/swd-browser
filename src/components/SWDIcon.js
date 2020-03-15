@@ -26,7 +26,7 @@ class SWDIcon extends PureComponent {
     let code = null;
     if (validateSetCode(testType)) {
       code = _get(setIconCodes, type.toUpperCase());
-      fontStyle.fontFamily = 'swdsets';
+      fontStyle.fontFamily = 'SWDestiny';
     }
     if (validateTypeCode(testType)) {
       code = _get(typeIconCodes, type.toUpperCase());

@@ -38,9 +38,11 @@ export const setCodes = {
   AoN: '0054',
   AON: '0054',
   ALLIES_OF_NECESSITY: '0054',
-  SoH: '006B',
-  SOH: '006B',
-  SPARK_OF_HOPE: '006B',
+  SoH: '0055',
+  SOH: '0055',
+  SPARK_OF_HOPE: '0055',
+  CM: '0056',
+  COVERT_MISSIONS: '0056',
 };
 
 export const typeCodes = {
