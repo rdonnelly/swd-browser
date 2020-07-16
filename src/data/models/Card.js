@@ -103,7 +103,7 @@ class Card {
   }
 
   get position() {
-    return this.card.position;
+    return this.card.code.slice(2).replace(/^0+/, '');
   }
 
   get rarity() {
