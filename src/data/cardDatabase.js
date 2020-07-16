@@ -27,6 +27,7 @@ class CardDatabase {
         require('swdestinydb-json-data/set/AoN.json'),
         require('swdestinydb-json-data/set/SoH.json'),
         require('swdestinydb-json-data/set/CM.json'),
+        require('swdestinydb-json-data/set/TR.json'),
       )
       .map((card) => new Card(card));
 
